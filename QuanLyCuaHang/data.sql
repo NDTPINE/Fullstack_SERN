@@ -623,5 +623,66 @@ FROM(dbo.Goods
         ON dbo.Inputs.Input = InputInfo.InputInfos
 ORDER BY YEAR(dbo.Inputs.DateIn),
          MONTH(dbo.Inputs.DateIn);
-
+GO	
 -- View of the List of output
+CREATE VIEW v_ListOutput
+AS 
+SELECT TOP 100 PERCENT
+	dbo.Outputs.Output AS [Mã phiếu xuất],
+	CONVERT(CHAR(10),dbo.Outputs.DateOut,103) AS Ngày,
+	MONTH(dbo.Outputs.DateOut) AS Tháng,
+	YEAR(dbo.Outputs.DateOut) AS Năm,
+	Good AS [Tên hàng],
+	NumberOutput AS [Số lượng xuất],
+	PricesOutput AS [Giá xuất],
+	Tax AS [Thuế],
+	((Tax/100)*NumberOutput*PricesOutput + NumberOutput*PricesOutput) AS [Thành tiền]
+FROM (dbo.Goods INNER JOIN dbo.OutputInfo ON Goods.Good = OutputInfo.Goods) INNER JOIN dbo.Outputs ON dbo.Outputs.Output = OutputInfos
+ORDER BY YEAR(dbo.Outputs.DateOut),MONTH(dbo.Outputs.DateOut)
+GO
+
+-- View of the Revenue (Doanh thu)
+CREATE VIEW v_Revenue
+AS
+SELECT 
+	TOP 100 PERCENT MONTH(inputs.DateIn) AS [Tháng], YEAR(Inputs.DateIn) AS [Năm],
+	SUM(InputInfo.Tax/100*NumberInput*PricesInput + NumberInput*PricesInput) AS [Tổng nhập],
+	SUM(dbo.OutputInfo.Tax/100*NumberOutput*PricesOutput + NumberOutput*PricesOutput) AS [Tổng xuất],
+	(SUM(dbo.OutputInfo.Tax/100*NumberOutput*PricesOutput + NumberOutput*PricesOutput) -SUM(InputInfo.Tax/100*NumberInput*PricesInput + NumberInput*PricesInput)) AS [Doanh thu],
+	tinhtrang = CASE
+		WHEN (SUM(NumberOutput*PricesOutput) - SUM(NumberInput*PricesInput) < 0) THEN N'Lỗ'
+		WHEN (SUM(NumberOutput*PricesOutput) - SUM(NumberInput*PricesInput) = 0) THEN N'Hòa'
+		WHEN (SUM(NumberOutput*PricesOutput) - SUM(NumberInput*PricesInput) > 0) THEN N'Lời'
+	END
+FROM dbo.Inputs,dbo.InputInfo,dbo.OutputInfo,dbo.Outputs WHERE MONTH(inputs.DateIn) = MONTH(dbo.Outputs.DateOut) AND YEAR(dbo.Inputs.DateIn) = YEAR(outputs.DateOut)
+GROUP BY MONTH(inputs.DateIn), YEAR(dbo.Inputs.DateIn)
+ORDER BY YEAR(dbo.Inputs.DateIn), MONTH(inputs.DateIn) ASC
+GO
+
+-- View of the Input
+CREATE	VIEW v_Input
+AS 
+SELECT staffs.NameSta AS [Tên nhân viên], Supliers.NameSup AS [Nhà cung cấp], Supliers.AddressSup AS [Địa chỉ NCC], Supliers.Phone AS [Điện Thoại],
+		Supliers.Email AS [Email], inputs.Input AS [Mã phiếu nhập], CONVERT(CHAR(10),inputs.DateIn,103) AS [Ngày nhập], goods.NameGoo AS [Tên hàng],
+		dbo.Goods.Statuss AS [Mô tả],dbo.Goods.Unit AS [Đơn vị tính], InputInfo.Tax AS [Thuế nhập], (dbo.InputInfo.NumberInput*PricesInput*InputInfo.Tax/100) AS [Tiền thuế],
+		(NumberInput*PricesInput) + (dbo.InputInfo.NumberInput*PricesInput*InputInfo.Tax/100) AS [Tổng giá trị]
+FROM (((dbo.Goods INNER JOIN dbo.InputInfo ON	goods.Good = dbo.InputInfo.Goods) INNER JOIN dbo.Inputs
+	ON Inputs.Input = InputInfo.InputInfos) INNER JOIN dbo.Supliers
+	ON dbo.Supliers.Suplier = inputs.Supliers) INNER JOIN dbo.Staffs 
+	ON Staffs.Staff = Inputs.Staffs
+
+-- View of the Output
+CREATE VIEW v_Output
+AS 
+SELECT staffs.NameSta AS [Tên nhân viên], dbo.Customers.NameCus AS [Tên khách hàng], dbo.Customers.Adress	 AS [Địa chỉ khách hàng], dbo.Customers.Phone AS [Điện Thoại],
+		dbo.Customers.Email AS [Email], dbo.Outputs.Output AS [Mã phiếu xuất], CONVERT(CHAR(10),dbo.Outputs.DateOut,103) AS [Ngày xuất], goods.NameGoo AS [Tên hàng],
+		dbo.Goods.Statuss AS [Mô tả],dbo.Goods.Unit AS [Đơn vị tính], dbo.OutputInfo.Tax AS [Thuế xuất], (dbo.OutputInfo.NumberOutput*PricesOutput*OutputInfo.Tax/100) AS [Tiền thuế],
+		(dbo.OutputInfo.NumberOutput*PricesOutput) + (dbo.OutputInfo.NumberOutput*PricesOutput*OutputInfo.Tax/100) AS [Tổng giá trị]
+FROM (((dbo.Goods INNER JOIN dbo.OutputInfo ON	goods.Good = dbo.OutputInfo.Goods) INNER JOIN dbo.Outputs
+	ON Outputs.Output = OutputInfo.OutputInfos) INNER JOIN dbo.Customers
+	ON dbo.Customers.Customer = dbo.Outputs.Customers) INNER JOIN dbo.Staffs 
+	ON Staffs.Staff = dbo.Outputs.Staffs
+GO
+
+-- CREATE THE TRIGGER
+
