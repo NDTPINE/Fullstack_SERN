@@ -108,7 +108,7 @@ GO
 CREATE TABLE Users
 (
     Account NVARCHAR(50) NOT NULL PRIMARY KEY,
-    Passwords NVARCHAR NOT NULL,
+    Passwords NVARCHAR(MAX) NOT NULL, CHECK(Passwords > 8),
     Phone NVARCHAR(20),
     AddressUser NVARCHAR(50) NOT NULL,
     Email NVARCHAR(50),
@@ -801,3 +801,38 @@ BEGIN
 END
 GO
 
+--Insert User
+INSERT INTO dbo.Users
+(
+    Account,
+    Passwords,
+    Phone,
+    AddressUser,
+    Email,
+    Permission
+)
+VALUES
+(   N'admin', -- Account - nvarchar(50)
+    N'123456789', -- Passwords - nvarchar(max)
+    N'123456789', -- Phone - nvarchar(20)
+    N'Tp HCM', -- AddressUser - nvarchar(50)
+    N'123@gmail.com', -- Email - nvarchar(50)
+    N'admin'  -- Permission - nvarchar(50)
+    )
+INSERT INTO dbo.Users
+(
+    Account,
+    Passwords,
+    Phone,
+    AddressUser,
+    Email,
+    Permission
+)
+VALUES
+(   N'staff', -- Account - nvarchar(50)
+    N'12345678', -- Passwords - nvarchar(max)
+    N'123456789', -- Phone - nvarchar(20)
+    N'Tp HCM', -- AddressUser - nvarchar(50)
+    N'123@gmail.com', -- Email - nvarchar(50)
+    N'staff'  -- Permission - nvarchar(50)
+    )
