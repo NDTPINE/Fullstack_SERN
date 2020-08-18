@@ -685,4 +685,119 @@ FROM (((dbo.Goods INNER JOIN dbo.OutputInfo ON	goods.Good = dbo.OutputInfo.Goods
 GO
 
 -- CREATE THE TRIGGER
+	--Trigger for InputInfo
+	--Trigger to Add the number good
+CREATE TRIGGER TG_Insert_InputInfo ON dbo.InputInfo
+FOR	INSERT
+AS
+UPDATE dbo.Goods SET Goods.Numbers = goods.Numbers + Inserted.NumberInput
+	FROM dbo.Goods INNER JOIN Inserted ON Inserted.Goods = Goods.Good
+GO	
+	--Trigger to Update the number good
+CREATE TRIGGER TG_Update_InputInfo ON dbo.InputInfo
+FOR UPDATE
+AS
+IF UPDATE(NumberInput)
+BEGIN
+	DECLARE @good NVARCHAR(50)
+	DECLARE @numberinput INT	
+	DECLARE contro CURSOR FOR 
+		SELECT Inserted.Goods, Inserted.NumberInput - Deleted.NumberInput AS NumberInput
+		FROM Inserted INNER JOIN Deleted ON Deleted.Goods = Inserted.Goods AND Deleted.InputInfos = Inserted.InputInfos
+	OPEN contro
+	FETCH NEXT FROM contro INTO @good,@numberinput
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		UPDATE dbo.Goods SET Numbers = Numbers + @numberinput WHERE goods.Good = @good
+		FETCH NEXT FROM contro INTO @good, @numberinput
+	END
+	CLOSE contro
+	DEALLOCATE contro
+END
+GO	
+	-- Trigger to Delete the number good
+CREATE TRIGGER TG_Delete_InputInfo ON dbo.InputInfo
+FOR DELETE
+AS
+IF UPDATE(NumberInput)
+BEGIN
+	DECLARE @good NVARCHAR(50)
+	DECLARE @numberinput INT	
+	DECLARE contro CURSOR FOR 
+		SELECT Deleted.Goods, Deleted.NumberInput AS NumberInput
+		FROM Deleted
+	OPEN contro
+	FETCH NEXT FROM contro INTO @good,@numberinput
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		UPDATE dbo.Goods SET Numbers = Numbers - @numberinput WHERE goods.Good = @good
+		FETCH NEXT FROM contro INTO @good, @numberinput
+	END
+	CLOSE contro
+	DEALLOCATE contro
+END
+GO
+
+--Trigger for OutputInfo
+	--Trigger to Add the number good
+CREATE TRIGGER TG_Insert_OutputInfo ON dbo.OutputInfo
+FOR	INSERT
+AS
+UPDATE dbo.Goods SET Goods.Numbers = goods.Numbers - Inserted.NumberOutput
+	FROM dbo.Goods INNER JOIN Inserted ON Inserted.Goods = Goods.Good
+GO	
+	--Trigger to Update the number good
+CREATE TRIGGER TG_Update_OutputInfo ON dbo.OutputInfo
+FOR UPDATE
+AS
+IF UPDATE(NumberOutput)
+BEGIN
+	DECLARE @good NVARCHAR(50)
+	DECLARE @numberoutput INT
+	DECLARE @loi nvarchar(100)
+	DECLARE contro CURSOR FOR 
+		SELECT Inserted.Goods, Inserted.NumberOutput - Deleted.NumberOutput AS Numberoutput
+		FROM Inserted INNER JOIN Deleted ON Deleted.Goods = Inserted.Goods AND Deleted.OutputInfos = Inserted.OutputInfos
+	IF (@numberoutput > (SELECT Numbers FROM Inserted,dbo.Goods WHERE goods.Good = Inserted.Goods))
+	BEGIN 
+		SET @loi = N'Số lượng xuất lớn hơn số lượng tồn kho, không thể xuất'
+		RAISERROR(@loi,16,1)
+		RETURN
+	END
+	ELSE
+	BEGIN	
+		OPEN contro
+		FETCH NEXT FROM contro INTO @good,@numberoutput
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			UPDATE dbo.Goods SET Numbers = Numbers - @numberoutput WHERE goods.Good = @good
+			FETCH NEXT FROM contro INTO @good, @numberoutput
+		END
+		CLOSE contro
+		DEALLOCATE contro
+	END
+END	
+GO	
+	-- Trigger to Delete the number good
+CREATE TRIGGER TG_Delete_OutputInfo ON dbo.OutputInfo
+FOR DELETE
+AS
+IF UPDATE(NumberOutput)
+BEGIN
+	DECLARE @good NVARCHAR(50)
+	DECLARE @numberoutput INT	
+	DECLARE contro CURSOR FOR 
+		SELECT Deleted.Goods, Deleted.NumberOutput AS Numberoutput
+		FROM Deleted
+	OPEN contro
+	FETCH NEXT FROM contro INTO @good,@numberoutput
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		UPDATE dbo.Goods SET Numbers = Numbers + @numberoutput WHERE goods.Good = @good
+		FETCH NEXT FROM contro INTO @good, @numberoutput
+	END
+	CLOSE contro
+	DEALLOCATE contro
+END
+GO
 
