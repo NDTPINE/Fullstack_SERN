@@ -13,7 +13,8 @@
          TextOptions.TextFormattingMode="Ideal"
          TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="MainWindow" Height="600" Width="450" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        x:Name="LoginWindow"
+        Title="Login Window" Height="600" Width="450" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
             <GradientStop Color="Black" Offset="0"/>
@@ -41,7 +42,7 @@
             </DockPanel>
             <DockPanel HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Image Source="../Image/logo.png" Width="40" Height="40"></Image>
-                <TextBlock Margin="5" FontSize="20">Login window</TextBlock>
+                <TextBlock Margin="5" FontSize="20" Text="{Binding ElementName=LoginWindow, Path=Title}"></TextBlock>
             </DockPanel>
 
             <Separator Margin="-5" VerticalAlignment="Bottom" />
@@ -62,12 +63,12 @@
                 <Button x:Name="Login"  Margin="5 30 5 5" Width="120" Height="30" Click="Login_Click"
     Style="{DynamicResource MaterialDesignRaisedButton}"
     materialDesign:ShadowAssist.ShadowDepth="Depth4">
-                    Đăng nhập
+                    Login
                 </Button>
                 <Button Margin="5 30 5 5" Width="120" Height="30" Click="Cancel_Click"
     Style="{DynamicResource MaterialDesignRaisedButton}"
     materialDesign:ShadowAssist.ShadowDepth="Depth4">
-                    Thoát
+                    Exit
                 </Button>
             </DockPanel>
         </StackPanel>
