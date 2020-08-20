@@ -131,21 +131,20 @@
                     </Button>
                     <Button Margin="5 20 20 5"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                    Width="150"  
-                    ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
-                        _DASH BOARD
+                    Width="150"  >
+                        _HỆ THỐNG
                     </Button>
                     <Button Margin="5 25 20 5"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     Width="150"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
-                        _DASH BOARD
+                        _DANH MỤC
                     </Button>
                     <Button Margin="5 25 20 5"
                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                     Width="150"
                     ToolTip="Resource name: MaterialDesignRaisedLightDarkButton">
-                        _DASH BOARD
+                        _BÁO CÁO
                     </Button>
                 </StackPanel>
             </Grid>
