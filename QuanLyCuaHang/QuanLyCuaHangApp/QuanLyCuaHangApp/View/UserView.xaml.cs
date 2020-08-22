@@ -21,13 +21,18 @@ namespace QuanLyCuaHangApp.View
     {
         public DashBoard()
         {
-           
+            InitializeComponent();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Bạn có muốn thoát ", "Thông báo", MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.OK);
-            if ((int)result == 1) this.Close();
-        }
+            if ((int)result == 1)
+            { 
+                this.Close();
+                Login log = new Login();
+                log.Show();
+            }
+        }   
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

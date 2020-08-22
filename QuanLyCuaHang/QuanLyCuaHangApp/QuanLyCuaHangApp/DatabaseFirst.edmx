@@ -1,0 +1,1409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLCuaHangAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Customer" />
+          </Key>
+          <Property Name="Customer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameCus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Goods">
+          <Key>
+            <PropertyRef Name="Good" />
+          </Key>
+          <Property Name="Good" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameGoo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Producer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Numbers" Type="int" Nullable="false" />
+          <Property Name="Warranty" Type="nvarchar" MaxLength="100" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="50" />
+          <Property Name="Statuss" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InputInfo">
+          <Key>
+            <PropertyRef Name="InputInfos" />
+            <PropertyRef Name="Goods" />
+          </Key>
+          <Property Name="InputInfos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Goods" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberInput" Type="int" Nullable="false" />
+          <Property Name="PricesInput" Type="real" Nullable="false" />
+          <Property Name="Tax" Type="real" />
+        </EntityType>
+        <EntityType Name="Inputs">
+          <Key>
+            <PropertyRef Name="Input" />
+          </Key>
+          <Property Name="Input" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateIn" Type="datetime" Nullable="false" />
+          <Property Name="Staffs" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Supliers" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OutputInfo">
+          <Key>
+            <PropertyRef Name="OutputInfos" />
+            <PropertyRef Name="Goods" />
+          </Key>
+          <Property Name="OutputInfos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Goods" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumberOutput" Type="int" Nullable="false" />
+          <Property Name="PricesOutput" Type="real" Nullable="false" />
+          <Property Name="Tax" Type="real" />
+        </EntityType>
+        <EntityType Name="Outputs">
+          <Key>
+            <PropertyRef Name="Output" />
+          </Key>
+          <Property Name="Output" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateOut" Type="datetime" Nullable="false" />
+          <Property Name="Staffs" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Customers" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staffs">
+          <Key>
+            <PropertyRef Name="Staff" />
+          </Key>
+          <Property Name="Staff" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameSta" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="YearBirth" Type="int" Nullable="false" />
+          <Property Name="Sex" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="AddressSta" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salary" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supliers">
+          <Key>
+            <PropertyRef Name="Suplier" />
+          </Key>
+          <Property Name="Suplier" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NameSup" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AddressSup" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Passwords" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+          <Property Name="AddressUser" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Permission" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLCuaHangApp.dbo.v_Input' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_Input">
+          <Key>
+            <PropertyRef Name="Tên nhân viên" />
+            <PropertyRef Name="Nhà cung cấp" />
+            <PropertyRef Name="Địa chỉ NCC" />
+            <PropertyRef Name="Mã phiếu nhập" />
+            <PropertyRef Name="Tên hàng" />
+          </Key>
+          <Property Name="Tên nhân viên" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nhà cung cấp" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Địa chỉ NCC" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Điện Thoại" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mã phiếu nhập" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ngày nhập" Type="char" MaxLength="10" />
+          <Property Name="Tên hàng" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mô tả" Type="nvarchar" MaxLength="50" />
+          <Property Name="Đơn vị tính" Type="nvarchar" MaxLength="50" />
+          <Property Name="Thuế nhập" Type="real" />
+          <Property Name="Tiền thuế" Type="real" />
+          <Property Name="Tổng giá trị" Type="real" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListInput' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_ListInput">
+          <Key>
+            <PropertyRef Name="Mã phiếu nhập" />
+            <PropertyRef Name="Tên hàng" />
+            <PropertyRef Name="Số lượng" />
+            <PropertyRef Name="Đơn giá nhập" />
+          </Key>
+          <Property Name="Mã phiếu nhập" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tháng" Type="int" />
+          <Property Name="Năm" Type="int" />
+          <Property Name="Ngày" Type="char" MaxLength="10" />
+          <Property Name="Tên hàng" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Số lượng" Type="int" Nullable="false" />
+          <Property Name="Đơn giá nhập" Type="real" Nullable="false" />
+          <Property Name="Thuế" Type="real" />
+          <Property Name="Thành tiền" Type="real" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_ListOutput">
+          <Key>
+            <PropertyRef Name="Mã phiếu xuất" />
+            <PropertyRef Name="Tên hàng" />
+            <PropertyRef Name="Số lượng xuất" />
+            <PropertyRef Name="Giá xuất" />
+          </Key>
+          <Property Name="Mã phiếu xuất" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ngày" Type="char" MaxLength="10" />
+          <Property Name="Tháng" Type="int" />
+          <Property Name="Năm" Type="int" />
+          <Property Name="Tên hàng" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Số lượng xuất" Type="int" Nullable="false" />
+          <Property Name="Giá xuất" Type="real" Nullable="false" />
+          <Property Name="Thuế" Type="real" />
+          <Property Name="Thành tiền" Type="real" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'QLCuaHangApp.dbo.v_Output' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="v_Output">
+          <Key>
+            <PropertyRef Name="Tên nhân viên" />
+            <PropertyRef Name="Tên khách hàng" />
+            <PropertyRef Name="Địa chỉ khách hàng" />
+            <PropertyRef Name="Mã phiếu xuất" />
+            <PropertyRef Name="Tên hàng" />
+          </Key>
+          <Property Name="Tên nhân viên" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Tên khách hàng" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Địa chỉ khách hàng" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Điện Thoại" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mã phiếu xuất" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ngày xuất" Type="char" MaxLength="10" />
+          <Property Name="Tên hàng" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mô tả" Type="nvarchar" MaxLength="50" />
+          <Property Name="Đơn vị tính" Type="nvarchar" MaxLength="50" />
+          <Property Name="Thuế xuất" Type="real" />
+          <Property Name="Tiền thuế" Type="real" />
+          <Property Name="Tổng giá trị" Type="real" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'QLCuaHangApp.dbo.v_Revenue' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="v_Revenue">
+          <Property Name="Tháng" Type="int" />
+          <Property Name="Năm" Type="int" />
+          <Property Name="Tổng nhập" Type="float" />
+          <Property Name="Tổng xuất" Type="float" />
+          <Property Name="Doanh thu" Type="float" />
+          <Property Name="tinhtrang" Type="nvarchar" MaxLength="3" />
+        </EntityType>-->
+        <Association Name="FK__InputInfo__Goods__46E78A0C">
+          <End Role="Goods" Type="Self.Goods" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InputInfo" Type="Self.InputInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="Good" />
+            </Principal>
+            <Dependent Role="InputInfo">
+              <PropertyRef Name="Goods" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InputInfo__Input__47DBAE45">
+          <End Role="Inputs" Type="Self.Inputs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InputInfo" Type="Self.InputInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inputs">
+              <PropertyRef Name="Input" />
+            </Principal>
+            <Dependent Role="InputInfo">
+              <PropertyRef Name="InputInfos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inputs__Staffs__3F466844">
+          <End Role="Staffs" Type="Self.Staffs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inputs" Type="Self.Inputs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staffs">
+              <PropertyRef Name="Staff" />
+            </Principal>
+            <Dependent Role="Inputs">
+              <PropertyRef Name="Staffs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inputs__Supliers__403A8C7D">
+          <End Role="Supliers" Type="Self.Supliers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inputs" Type="Self.Inputs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supliers">
+              <PropertyRef Name="Suplier" />
+            </Principal>
+            <Dependent Role="Inputs">
+              <PropertyRef Name="Supliers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OutputInf__Goods__4AB81AF0">
+          <End Role="Goods" Type="Self.Goods" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OutputInfo" Type="Self.OutputInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="Good" />
+            </Principal>
+            <Dependent Role="OutputInfo">
+              <PropertyRef Name="Goods" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OutputInf__Outpu__4BAC3F29">
+          <End Role="Outputs" Type="Self.Outputs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OutputInfo" Type="Self.OutputInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Outputs">
+              <PropertyRef Name="Output" />
+            </Principal>
+            <Dependent Role="OutputInfo">
+              <PropertyRef Name="OutputInfos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outputs__Custome__440B1D61">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Outputs" Type="Self.Outputs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Customer" />
+            </Principal>
+            <Dependent Role="Outputs">
+              <PropertyRef Name="Customers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outputs__Staffs__4316F928">
+          <End Role="Staffs" Type="Self.Staffs" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Outputs" Type="Self.Outputs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staffs">
+              <PropertyRef Name="Staff" />
+            </Principal>
+            <Dependent Role="Outputs">
+              <PropertyRef Name="Staffs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="Sp_Delete_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Customer" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Delete_Good" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Good" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Delete_Input" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Input" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Delete_InputInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="InputInfos" Type="nvarchar" Mode="In" />
+          <Parameter Name="Goods" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Delete_Output" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Output" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Delete_OutputInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OutputInfos" Type="nvarchar" Mode="In" />
+          <Parameter Name="Goods" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Delete_Staff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staff" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Delete_Suplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Suplier" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Sp_Insert_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Customer" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameCus" Type="nvarchar" Mode="In" />
+          <Parameter Name="Adress" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Insert_Good" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Good" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameGoo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Producer" Type="nvarchar" Mode="In" />
+          <Parameter Name="Numbers" Type="int" Mode="In" />
+          <Parameter Name="Warranty" Type="nvarchar" Mode="In" />
+          <Parameter Name="Unit" Type="nvarchar" Mode="In" />
+          <Parameter Name="Statuss" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Insert_Input" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Input" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateIn" Type="datetime" Mode="In" />
+          <Parameter Name="Staffs" Type="nvarchar" Mode="In" />
+          <Parameter Name="Supliers" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Insert_InputInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="InputInfos" Type="nvarchar" Mode="In" />
+          <Parameter Name="Goods" Type="nvarchar" Mode="In" />
+          <Parameter Name="NumberInput" Type="int" Mode="In" />
+          <Parameter Name="PricesInput" Type="real" Mode="In" />
+          <Parameter Name="Tax" Type="real" Mode="In" />
+        </Function>
+        <Function Name="Sp_Insert_Output" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Output" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateOut" Type="datetime" Mode="In" />
+          <Parameter Name="Staffs" Type="nvarchar" Mode="In" />
+          <Parameter Name="Customers" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Insert_OutputInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OutputInfos" Type="nvarchar" Mode="In" />
+          <Parameter Name="Goods" Type="nvarchar" Mode="In" />
+          <Parameter Name="NumberOutput" Type="int" Mode="In" />
+          <Parameter Name="PricesOutput" Type="real" Mode="In" />
+          <Parameter Name="Tax" Type="real" Mode="In" />
+        </Function>
+        <Function Name="Sp_Insert_Staff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staff" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameSta" Type="nvarchar" Mode="In" />
+          <Parameter Name="YearBirth" Type="int" Mode="In" />
+          <Parameter Name="Sex" Type="char" Mode="In" />
+          <Parameter Name="AddressSta" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Position" Type="nvarchar" Mode="In" />
+          <Parameter Name="Salary" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Insert_Suplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Suplier" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameSup" Type="nvarchar" Mode="In" />
+          <Parameter Name="AddressSup" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Update_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Customer" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameCus" Type="nvarchar" Mode="In" />
+          <Parameter Name="Adress" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Update_Good" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Good" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameGoo" Type="nvarchar" Mode="In" />
+          <Parameter Name="Producer" Type="nvarchar" Mode="In" />
+          <Parameter Name="Numbers" Type="int" Mode="In" />
+          <Parameter Name="Warranty" Type="nvarchar" Mode="In" />
+          <Parameter Name="Unit" Type="nvarchar" Mode="In" />
+          <Parameter Name="Statuss" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Update_Input" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Input" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateIn" Type="datetime" Mode="In" />
+          <Parameter Name="Staffs" Type="nvarchar" Mode="In" />
+          <Parameter Name="Supliers" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Update_InputInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="InputInfos" Type="nvarchar" Mode="In" />
+          <Parameter Name="Goods" Type="nvarchar" Mode="In" />
+          <Parameter Name="NumberInput" Type="int" Mode="In" />
+          <Parameter Name="PricesInput" Type="real" Mode="In" />
+          <Parameter Name="Tax" Type="real" Mode="In" />
+        </Function>
+        <Function Name="Sp_Update_Output" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Output" Type="nvarchar" Mode="In" />
+          <Parameter Name="DateOut" Type="datetime" Mode="In" />
+          <Parameter Name="Staffs" Type="nvarchar" Mode="In" />
+          <Parameter Name="Customers" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Update_OutputInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OutputInfos" Type="nvarchar" Mode="In" />
+          <Parameter Name="Goods" Type="nvarchar" Mode="In" />
+          <Parameter Name="NumberOutput" Type="int" Mode="In" />
+          <Parameter Name="PricesOutput" Type="real" Mode="In" />
+          <Parameter Name="Tax" Type="real" Mode="In" />
+        </Function>
+        <Function Name="Sp_Update_Staff" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Staff" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameSta" Type="nvarchar" Mode="In" />
+          <Parameter Name="YearBirth" Type="int" Mode="In" />
+          <Parameter Name="Sex" Type="char" Mode="In" />
+          <Parameter Name="AddressSta" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Position" Type="nvarchar" Mode="In" />
+          <Parameter Name="Salary" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_Update_Suplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Suplier" Type="nvarchar" Mode="In" />
+          <Parameter Name="NameSup" Type="nvarchar" Mode="In" />
+          <Parameter Name="AddressSup" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="QLCuaHangAppModelStoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Goods" EntityType="Self.Goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InputInfo" EntityType="Self.InputInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inputs" EntityType="Self.Inputs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OutputInfo" EntityType="Self.OutputInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Outputs" EntityType="Self.Outputs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staffs" EntityType="Self.Staffs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supliers" EntityType="Self.Supliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="v_Input" EntityType="Self.v_Input" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Input].[Tên nhân viên] AS [Tên nhân viên], 
+    [v_Input].[Nhà cung cấp] AS [Nhà cung cấp], 
+    [v_Input].[Địa chỉ NCC] AS [Địa chỉ NCC], 
+    [v_Input].[Điện Thoại] AS [Điện Thoại], 
+    [v_Input].[Email] AS [Email], 
+    [v_Input].[Mã phiếu nhập] AS [Mã phiếu nhập], 
+    [v_Input].[Ngày nhập] AS [Ngày nhập], 
+    [v_Input].[Tên hàng] AS [Tên hàng], 
+    [v_Input].[Mô tả] AS [Mô tả], 
+    [v_Input].[Đơn vị tính] AS [Đơn vị tính], 
+    [v_Input].[Thuế nhập] AS [Thuế nhập], 
+    [v_Input].[Tiền thuế] AS [Tiền thuế], 
+    [v_Input].[Tổng giá trị] AS [Tổng giá trị]
+    FROM [dbo].[v_Input] AS [v_Input]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_ListInput" EntityType="Self.v_ListInput" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_ListInput].[Mã phiếu nhập] AS [Mã phiếu nhập], 
+    [v_ListInput].[Tháng] AS [Tháng], 
+    [v_ListInput].[Năm] AS [Năm], 
+    [v_ListInput].[Ngày] AS [Ngày], 
+    [v_ListInput].[Tên hàng] AS [Tên hàng], 
+    [v_ListInput].[Số lượng] AS [Số lượng], 
+    [v_ListInput].[Đơn giá nhập] AS [Đơn giá nhập], 
+    [v_ListInput].[Thuế] AS [Thuế], 
+    [v_ListInput].[Thành tiền] AS [Thành tiền]
+    FROM [dbo].[v_ListInput] AS [v_ListInput]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_ListOutput" EntityType="Self.v_ListOutput" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_ListOutput].[Mã phiếu xuất] AS [Mã phiếu xuất], 
+    [v_ListOutput].[Ngày] AS [Ngày], 
+    [v_ListOutput].[Tháng] AS [Tháng], 
+    [v_ListOutput].[Năm] AS [Năm], 
+    [v_ListOutput].[Tên hàng] AS [Tên hàng], 
+    [v_ListOutput].[Số lượng xuất] AS [Số lượng xuất], 
+    [v_ListOutput].[Giá xuất] AS [Giá xuất], 
+    [v_ListOutput].[Thuế] AS [Thuế], 
+    [v_ListOutput].[Thành tiền] AS [Thành tiền]
+    FROM [dbo].[v_ListOutput] AS [v_ListOutput]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_Output" EntityType="Self.v_Output" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_Output].[Tên nhân viên] AS [Tên nhân viên], 
+    [v_Output].[Tên khách hàng] AS [Tên khách hàng], 
+    [v_Output].[Địa chỉ khách hàng] AS [Địa chỉ khách hàng], 
+    [v_Output].[Điện Thoại] AS [Điện Thoại], 
+    [v_Output].[Email] AS [Email], 
+    [v_Output].[Mã phiếu xuất] AS [Mã phiếu xuất], 
+    [v_Output].[Ngày xuất] AS [Ngày xuất], 
+    [v_Output].[Tên hàng] AS [Tên hàng], 
+    [v_Output].[Mô tả] AS [Mô tả], 
+    [v_Output].[Đơn vị tính] AS [Đơn vị tính], 
+    [v_Output].[Thuế xuất] AS [Thuế xuất], 
+    [v_Output].[Tiền thuế] AS [Tiền thuế], 
+    [v_Output].[Tổng giá trị] AS [Tổng giá trị]
+    FROM [dbo].[v_Output] AS [v_Output]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__InputInfo__Goods__46E78A0C" Association="Self.FK__InputInfo__Goods__46E78A0C">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="InputInfo" EntitySet="InputInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InputInfo__Input__47DBAE45" Association="Self.FK__InputInfo__Input__47DBAE45">
+            <End Role="Inputs" EntitySet="Inputs" />
+            <End Role="InputInfo" EntitySet="InputInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inputs__Staffs__3F466844" Association="Self.FK__Inputs__Staffs__3F466844">
+            <End Role="Staffs" EntitySet="Staffs" />
+            <End Role="Inputs" EntitySet="Inputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inputs__Supliers__403A8C7D" Association="Self.FK__Inputs__Supliers__403A8C7D">
+            <End Role="Supliers" EntitySet="Supliers" />
+            <End Role="Inputs" EntitySet="Inputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OutputInf__Goods__4AB81AF0" Association="Self.FK__OutputInf__Goods__4AB81AF0">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="OutputInfo" EntitySet="OutputInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OutputInf__Outpu__4BAC3F29" Association="Self.FK__OutputInf__Outpu__4BAC3F29">
+            <End Role="Outputs" EntitySet="Outputs" />
+            <End Role="OutputInfo" EntitySet="OutputInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outputs__Custome__440B1D61" Association="Self.FK__Outputs__Custome__440B1D61">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Outputs" EntitySet="Outputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outputs__Staffs__4316F928" Association="Self.FK__Outputs__Staffs__4316F928">
+            <End Role="Staffs" EntitySet="Staffs" />
+            <End Role="Outputs" EntitySet="Outputs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLCuaHangAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Customer1" />
+          </Key>
+          <Property Name="Customer1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameCus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Outputs" Relationship="Self.FK__Outputs__Custome__440B1D61" FromRole="Customers" ToRole="Outputs" />
+        </EntityType>
+        <EntityType Name="Good">
+          <Key>
+            <PropertyRef Name="Good1" />
+          </Key>
+          <Property Name="Good1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameGoo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Producer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Numbers" Type="Int32" Nullable="false" />
+          <Property Name="Warranty" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Statuss" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InputInfoes" Relationship="Self.FK__InputInfo__Goods__46E78A0C" FromRole="Goods" ToRole="InputInfo" />
+          <NavigationProperty Name="OutputInfoes" Relationship="Self.FK__OutputInf__Goods__4AB81AF0" FromRole="Goods" ToRole="OutputInfo" />
+        </EntityType>
+        <EntityType Name="InputInfo">
+          <Key>
+            <PropertyRef Name="InputInfos" />
+            <PropertyRef Name="Goods" />
+          </Key>
+          <Property Name="InputInfos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Goods" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberInput" Type="Int32" Nullable="false" />
+          <Property Name="PricesInput" Type="Single" Nullable="false" />
+          <Property Name="Tax" Type="Single" />
+          <NavigationProperty Name="Good" Relationship="Self.FK__InputInfo__Goods__46E78A0C" FromRole="InputInfo" ToRole="Goods" />
+          <NavigationProperty Name="Input" Relationship="Self.FK__InputInfo__Input__47DBAE45" FromRole="InputInfo" ToRole="Inputs" />
+        </EntityType>
+        <EntityType Name="Input">
+          <Key>
+            <PropertyRef Name="Input1" />
+          </Key>
+          <Property Name="Input1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateIn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Staffs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Supliers" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="InputInfoes" Relationship="Self.FK__InputInfo__Input__47DBAE45" FromRole="Inputs" ToRole="InputInfo" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK__Inputs__Staffs__3F466844" FromRole="Inputs" ToRole="Staffs" />
+          <NavigationProperty Name="Suplier" Relationship="Self.FK__Inputs__Supliers__403A8C7D" FromRole="Inputs" ToRole="Supliers" />
+        </EntityType>
+        <EntityType Name="OutputInfo">
+          <Key>
+            <PropertyRef Name="OutputInfos" />
+            <PropertyRef Name="Goods" />
+          </Key>
+          <Property Name="OutputInfos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Goods" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberOutput" Type="Int32" Nullable="false" />
+          <Property Name="PricesOutput" Type="Single" Nullable="false" />
+          <Property Name="Tax" Type="Single" />
+          <NavigationProperty Name="Good" Relationship="Self.FK__OutputInf__Goods__4AB81AF0" FromRole="OutputInfo" ToRole="Goods" />
+          <NavigationProperty Name="Output" Relationship="Self.FK__OutputInf__Outpu__4BAC3F29" FromRole="OutputInfo" ToRole="Outputs" />
+        </EntityType>
+        <EntityType Name="Output">
+          <Key>
+            <PropertyRef Name="Output1" />
+          </Key>
+          <Property Name="Output1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Staffs" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Customers" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Outputs__Custome__440B1D61" FromRole="Outputs" ToRole="Customers" />
+          <NavigationProperty Name="OutputInfoes" Relationship="Self.FK__OutputInf__Outpu__4BAC3F29" FromRole="Outputs" ToRole="OutputInfo" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK__Outputs__Staffs__4316F928" FromRole="Outputs" ToRole="Staffs" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Staff1" />
+          </Key>
+          <Property Name="Staff1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameSta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="YearBirth" Type="Int32" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="AddressSta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Inputs" Relationship="Self.FK__Inputs__Staffs__3F466844" FromRole="Staffs" ToRole="Inputs" />
+          <NavigationProperty Name="Outputs" Relationship="Self.FK__Outputs__Staffs__4316F928" FromRole="Staffs" ToRole="Outputs" />
+        </EntityType>
+        <EntityType Name="Suplier">
+          <Key>
+            <PropertyRef Name="Suplier1" />
+          </Key>
+          <Property Name="Suplier1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NameSup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddressSup" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Inputs" Relationship="Self.FK__Inputs__Supliers__403A8C7D" FromRole="Supliers" ToRole="Inputs" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Passwords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="AddressUser" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Permission" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_Input">
+          <Key>
+            <PropertyRef Name="Tên_nhân_viên" />
+            <PropertyRef Name="Nhà_cung_cấp" />
+            <PropertyRef Name="Địa_chỉ_NCC" />
+            <PropertyRef Name="Mã_phiếu_nhập" />
+            <PropertyRef Name="Tên_hàng" />
+          </Key>
+          <Property Name="Tên_nhân_viên" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nhà_cung_cấp" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Địa_chỉ_NCC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Điện_Thoại" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mã_phiếu_nhập" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ngày_nhập" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Tên_hàng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mô_tả" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Đơn_vị_tính" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Thuế_nhập" Type="Single" />
+          <Property Name="Tiền_thuế" Type="Single" />
+          <Property Name="Tổng_giá_trị" Type="Single" />
+        </EntityType>
+        <EntityType Name="v_ListInput">
+          <Key>
+            <PropertyRef Name="Mã_phiếu_nhập" />
+            <PropertyRef Name="Tên_hàng" />
+            <PropertyRef Name="Số_lượng" />
+            <PropertyRef Name="Đơn_giá_nhập" />
+          </Key>
+          <Property Name="Mã_phiếu_nhập" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tháng" Type="Int32" />
+          <Property Name="Năm" Type="Int32" />
+          <Property Name="Ngày" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Tên_hàng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Số_lượng" Type="Int32" Nullable="false" />
+          <Property Name="Đơn_giá_nhập" Type="Single" Nullable="false" />
+          <Property Name="Thuế" Type="Single" />
+          <Property Name="Thành_tiền" Type="Single" />
+        </EntityType>
+        <EntityType Name="v_ListOutput">
+          <Key>
+            <PropertyRef Name="Mã_phiếu_xuất" />
+            <PropertyRef Name="Tên_hàng" />
+            <PropertyRef Name="Số_lượng_xuất" />
+            <PropertyRef Name="Giá_xuất" />
+          </Key>
+          <Property Name="Mã_phiếu_xuất" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ngày" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Tháng" Type="Int32" />
+          <Property Name="Năm" Type="Int32" />
+          <Property Name="Tên_hàng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Số_lượng_xuất" Type="Int32" Nullable="false" />
+          <Property Name="Giá_xuất" Type="Single" Nullable="false" />
+          <Property Name="Thuế" Type="Single" />
+          <Property Name="Thành_tiền" Type="Single" />
+        </EntityType>
+        <EntityType Name="v_Output">
+          <Key>
+            <PropertyRef Name="Tên_nhân_viên" />
+            <PropertyRef Name="Tên_khách_hàng" />
+            <PropertyRef Name="Địa_chỉ_khách_hàng" />
+            <PropertyRef Name="Mã_phiếu_xuất" />
+            <PropertyRef Name="Tên_hàng" />
+          </Key>
+          <Property Name="Tên_nhân_viên" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tên_khách_hàng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Địa_chỉ_khách_hàng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Điện_Thoại" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mã_phiếu_xuất" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ngày_xuất" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Tên_hàng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mô_tả" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Đơn_vị_tính" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Thuế_xuất" Type="Single" />
+          <Property Name="Tiền_thuế" Type="Single" />
+          <Property Name="Tổng_giá_trị" Type="Single" />
+        </EntityType>
+        <Association Name="FK__Outputs__Custome__440B1D61">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Outputs" Type="Self.Output" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Customer1" />
+            </Principal>
+            <Dependent Role="Outputs">
+              <PropertyRef Name="Customers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InputInfo__Goods__46E78A0C">
+          <End Role="Goods" Type="Self.Good" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InputInfo" Type="Self.InputInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="Good1" />
+            </Principal>
+            <Dependent Role="InputInfo">
+              <PropertyRef Name="Goods" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OutputInf__Goods__4AB81AF0">
+          <End Role="Goods" Type="Self.Good" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OutputInfo" Type="Self.OutputInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Goods">
+              <PropertyRef Name="Good1" />
+            </Principal>
+            <Dependent Role="OutputInfo">
+              <PropertyRef Name="Goods" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__InputInfo__Input__47DBAE45">
+          <End Role="Inputs" Type="Self.Input" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="InputInfo" Type="Self.InputInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inputs">
+              <PropertyRef Name="Input1" />
+            </Principal>
+            <Dependent Role="InputInfo">
+              <PropertyRef Name="InputInfos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inputs__Staffs__3F466844">
+          <End Role="Staffs" Type="Self.Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inputs" Type="Self.Input" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staffs">
+              <PropertyRef Name="Staff1" />
+            </Principal>
+            <Dependent Role="Inputs">
+              <PropertyRef Name="Staffs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inputs__Supliers__403A8C7D">
+          <End Role="Supliers" Type="Self.Suplier" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Inputs" Type="Self.Input" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supliers">
+              <PropertyRef Name="Suplier1" />
+            </Principal>
+            <Dependent Role="Inputs">
+              <PropertyRef Name="Supliers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OutputInf__Outpu__4BAC3F29">
+          <End Role="Outputs" Type="Self.Output" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="OutputInfo" Type="Self.OutputInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Outputs">
+              <PropertyRef Name="Output1" />
+            </Principal>
+            <Dependent Role="OutputInfo">
+              <PropertyRef Name="OutputInfos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outputs__Staffs__4316F928">
+          <End Role="Staffs" Type="Self.Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Outputs" Type="Self.Output" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staffs">
+              <PropertyRef Name="Staff1" />
+            </Principal>
+            <Dependent Role="Outputs">
+              <PropertyRef Name="Staffs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLCuaHangAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Goods" EntityType="Self.Good" />
+          <EntitySet Name="InputInfoes" EntityType="Self.InputInfo" />
+          <EntitySet Name="Inputs" EntityType="Self.Input" />
+          <EntitySet Name="OutputInfoes" EntityType="Self.OutputInfo" />
+          <EntitySet Name="Outputs" EntityType="Self.Output" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="Supliers" EntityType="Self.Suplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="v_Input" EntityType="Self.v_Input" />
+          <EntitySet Name="v_ListInput" EntityType="Self.v_ListInput" />
+          <EntitySet Name="v_ListOutput" EntityType="Self.v_ListOutput" />
+          <EntitySet Name="v_Output" EntityType="Self.v_Output" />
+          <AssociationSet Name="FK__Outputs__Custome__440B1D61" Association="Self.FK__Outputs__Custome__440B1D61">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Outputs" EntitySet="Outputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InputInfo__Goods__46E78A0C" Association="Self.FK__InputInfo__Goods__46E78A0C">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="InputInfo" EntitySet="InputInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OutputInf__Goods__4AB81AF0" Association="Self.FK__OutputInf__Goods__4AB81AF0">
+            <End Role="Goods" EntitySet="Goods" />
+            <End Role="OutputInfo" EntitySet="OutputInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__InputInfo__Input__47DBAE45" Association="Self.FK__InputInfo__Input__47DBAE45">
+            <End Role="Inputs" EntitySet="Inputs" />
+            <End Role="InputInfo" EntitySet="InputInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inputs__Staffs__3F466844" Association="Self.FK__Inputs__Staffs__3F466844">
+            <End Role="Staffs" EntitySet="Staffs" />
+            <End Role="Inputs" EntitySet="Inputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inputs__Supliers__403A8C7D" Association="Self.FK__Inputs__Supliers__403A8C7D">
+            <End Role="Supliers" EntitySet="Supliers" />
+            <End Role="Inputs" EntitySet="Inputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OutputInf__Outpu__4BAC3F29" Association="Self.FK__OutputInf__Outpu__4BAC3F29">
+            <End Role="Outputs" EntitySet="Outputs" />
+            <End Role="OutputInfo" EntitySet="OutputInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outputs__Staffs__4316F928" Association="Self.FK__Outputs__Staffs__4316F928">
+            <End Role="Staffs" EntitySet="Staffs" />
+            <End Role="Outputs" EntitySet="Outputs" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Delete_Customer">
+          <Parameter Name="Customer" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Delete_Good">
+          <Parameter Name="Good" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Delete_Input">
+          <Parameter Name="Input" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Delete_InputInfo">
+            <Parameter Name="InputInfos" Mode="In" Type="String" />
+            <Parameter Name="Goods" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Delete_Output">
+          <Parameter Name="Output" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Delete_OutputInfo">
+            <Parameter Name="OutputInfos" Mode="In" Type="String" />
+            <Parameter Name="Goods" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Delete_Staff">
+          <Parameter Name="Staff" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Delete_Suplier">
+          <Parameter Name="Suplier" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(QLCuaHangAppModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(QLCuaHangAppModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Insert_Customer">
+            <Parameter Name="Customer" Mode="In" Type="String" />
+            <Parameter Name="NameCus" Mode="In" Type="String" />
+            <Parameter Name="Adress" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Insert_Good">
+            <Parameter Name="Good" Mode="In" Type="String" />
+            <Parameter Name="NameGoo" Mode="In" Type="String" />
+            <Parameter Name="Producer" Mode="In" Type="String" />
+            <Parameter Name="Numbers" Mode="In" Type="Int32" />
+            <Parameter Name="Warranty" Mode="In" Type="String" />
+            <Parameter Name="Unit" Mode="In" Type="String" />
+            <Parameter Name="Statuss" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Insert_Input">
+            <Parameter Name="Input" Mode="In" Type="String" />
+            <Parameter Name="DateIn" Mode="In" Type="DateTime" />
+            <Parameter Name="Staffs" Mode="In" Type="String" />
+            <Parameter Name="Supliers" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Insert_InputInfo">
+            <Parameter Name="InputInfos" Mode="In" Type="String" />
+            <Parameter Name="Goods" Mode="In" Type="String" />
+            <Parameter Name="NumberInput" Mode="In" Type="Int32" />
+            <Parameter Name="PricesInput" Mode="In" Type="Single" />
+            <Parameter Name="Tax" Mode="In" Type="Single" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Insert_Output">
+            <Parameter Name="Output" Mode="In" Type="String" />
+            <Parameter Name="DateOut" Mode="In" Type="DateTime" />
+            <Parameter Name="Staffs" Mode="In" Type="String" />
+            <Parameter Name="Customers" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Insert_OutputInfo">
+            <Parameter Name="OutputInfos" Mode="In" Type="String" />
+            <Parameter Name="Goods" Mode="In" Type="String" />
+            <Parameter Name="NumberOutput" Mode="In" Type="Int32" />
+            <Parameter Name="PricesOutput" Mode="In" Type="Single" />
+            <Parameter Name="Tax" Mode="In" Type="Single" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Insert_Staff">
+            <Parameter Name="Staff" Mode="In" Type="String" />
+            <Parameter Name="NameSta" Mode="In" Type="String" />
+            <Parameter Name="YearBirth" Mode="In" Type="Int32" />
+            <Parameter Name="Sex" Mode="In" Type="String" />
+            <Parameter Name="AddressSta" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Position" Mode="In" Type="String" />
+            <Parameter Name="Salary" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Insert_Suplier">
+            <Parameter Name="Suplier" Mode="In" Type="String" />
+            <Parameter Name="NameSup" Mode="In" Type="String" />
+            <Parameter Name="AddressSup" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Update_Customer">
+            <Parameter Name="Customer" Mode="In" Type="String" />
+            <Parameter Name="NameCus" Mode="In" Type="String" />
+            <Parameter Name="Adress" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Update_Good">
+            <Parameter Name="Good" Mode="In" Type="String" />
+            <Parameter Name="NameGoo" Mode="In" Type="String" />
+            <Parameter Name="Producer" Mode="In" Type="String" />
+            <Parameter Name="Numbers" Mode="In" Type="Int32" />
+            <Parameter Name="Warranty" Mode="In" Type="String" />
+            <Parameter Name="Unit" Mode="In" Type="String" />
+            <Parameter Name="Statuss" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Update_Input">
+            <Parameter Name="Input" Mode="In" Type="String" />
+            <Parameter Name="DateIn" Mode="In" Type="DateTime" />
+            <Parameter Name="Staffs" Mode="In" Type="String" />
+            <Parameter Name="Supliers" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Update_InputInfo">
+            <Parameter Name="InputInfos" Mode="In" Type="String" />
+            <Parameter Name="Goods" Mode="In" Type="String" />
+            <Parameter Name="NumberInput" Mode="In" Type="Int32" />
+            <Parameter Name="PricesInput" Mode="In" Type="Single" />
+            <Parameter Name="Tax" Mode="In" Type="Single" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Update_Output">
+            <Parameter Name="Output" Mode="In" Type="String" />
+            <Parameter Name="DateOut" Mode="In" Type="DateTime" />
+            <Parameter Name="Staffs" Mode="In" Type="String" />
+            <Parameter Name="Customers" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Update_OutputInfo">
+            <Parameter Name="OutputInfos" Mode="In" Type="String" />
+            <Parameter Name="Goods" Mode="In" Type="String" />
+            <Parameter Name="NumberOutput" Mode="In" Type="Int32" />
+            <Parameter Name="PricesOutput" Mode="In" Type="Single" />
+            <Parameter Name="Tax" Mode="In" Type="Single" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Update_Staff">
+            <Parameter Name="Staff" Mode="In" Type="String" />
+            <Parameter Name="NameSta" Mode="In" Type="String" />
+            <Parameter Name="YearBirth" Mode="In" Type="Int32" />
+            <Parameter Name="Sex" Mode="In" Type="String" />
+            <Parameter Name="AddressSta" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Position" Mode="In" Type="String" />
+            <Parameter Name="Salary" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_Update_Suplier">
+            <Parameter Name="Suplier" Mode="In" Type="String" />
+            <Parameter Name="NameSup" Mode="In" Type="String" />
+            <Parameter Name="AddressSup" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLCuaHangAppModelStoreContainer" CdmEntityContainer="QLCuaHangAppEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Customer1" ColumnName="Customer" />
+                <ScalarProperty Name="NameCus" ColumnName="NameCus" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Goods">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.Good">
+              <MappingFragment StoreEntitySet="Goods">
+                <ScalarProperty Name="Good1" ColumnName="Good" />
+                <ScalarProperty Name="NameGoo" ColumnName="NameGoo" />
+                <ScalarProperty Name="Producer" ColumnName="Producer" />
+                <ScalarProperty Name="Numbers" ColumnName="Numbers" />
+                <ScalarProperty Name="Warranty" ColumnName="Warranty" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Statuss" ColumnName="Statuss" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InputInfoes">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.InputInfo">
+              <MappingFragment StoreEntitySet="InputInfo">
+                <ScalarProperty Name="InputInfos" ColumnName="InputInfos" />
+                <ScalarProperty Name="Goods" ColumnName="Goods" />
+                <ScalarProperty Name="NumberInput" ColumnName="NumberInput" />
+                <ScalarProperty Name="PricesInput" ColumnName="PricesInput" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inputs">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.Input">
+              <MappingFragment StoreEntitySet="Inputs">
+                <ScalarProperty Name="Input1" ColumnName="Input" />
+                <ScalarProperty Name="DateIn" ColumnName="DateIn" />
+                <ScalarProperty Name="Staffs" ColumnName="Staffs" />
+                <ScalarProperty Name="Supliers" ColumnName="Supliers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OutputInfoes">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.OutputInfo">
+              <MappingFragment StoreEntitySet="OutputInfo">
+                <ScalarProperty Name="OutputInfos" ColumnName="OutputInfos" />
+                <ScalarProperty Name="Goods" ColumnName="Goods" />
+                <ScalarProperty Name="NumberOutput" ColumnName="NumberOutput" />
+                <ScalarProperty Name="PricesOutput" ColumnName="PricesOutput" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Outputs">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.Output">
+              <MappingFragment StoreEntitySet="Outputs">
+                <ScalarProperty Name="Output1" ColumnName="Output" />
+                <ScalarProperty Name="DateOut" ColumnName="DateOut" />
+                <ScalarProperty Name="Staffs" ColumnName="Staffs" />
+                <ScalarProperty Name="Customers" ColumnName="Customers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.Staff">
+              <MappingFragment StoreEntitySet="Staffs">
+                <ScalarProperty Name="Staff1" ColumnName="Staff" />
+                <ScalarProperty Name="NameSta" ColumnName="NameSta" />
+                <ScalarProperty Name="YearBirth" ColumnName="YearBirth" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="AddressSta" ColumnName="AddressSta" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Supliers">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.Suplier">
+              <MappingFragment StoreEntitySet="Supliers">
+                <ScalarProperty Name="Suplier1" ColumnName="Suplier" />
+                <ScalarProperty Name="NameSup" ColumnName="NameSup" />
+                <ScalarProperty Name="AddressSup" ColumnName="AddressSup" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Passwords" ColumnName="Passwords" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="AddressUser" ColumnName="AddressUser" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Input">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.v_Input">
+              <MappingFragment StoreEntitySet="v_Input">
+                <ScalarProperty Name="Tên_nhân_viên" ColumnName="Tên nhân viên" />
+                <ScalarProperty Name="Nhà_cung_cấp" ColumnName="Nhà cung cấp" />
+                <ScalarProperty Name="Địa_chỉ_NCC" ColumnName="Địa chỉ NCC" />
+                <ScalarProperty Name="Điện_Thoại" ColumnName="Điện Thoại" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mã_phiếu_nhập" ColumnName="Mã phiếu nhập" />
+                <ScalarProperty Name="Ngày_nhập" ColumnName="Ngày nhập" />
+                <ScalarProperty Name="Tên_hàng" ColumnName="Tên hàng" />
+                <ScalarProperty Name="Mô_tả" ColumnName="Mô tả" />
+                <ScalarProperty Name="Đơn_vị_tính" ColumnName="Đơn vị tính" />
+                <ScalarProperty Name="Thuế_nhập" ColumnName="Thuế nhập" />
+                <ScalarProperty Name="Tiền_thuế" ColumnName="Tiền thuế" />
+                <ScalarProperty Name="Tổng_giá_trị" ColumnName="Tổng giá trị" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_ListInput">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.v_ListInput">
+              <MappingFragment StoreEntitySet="v_ListInput">
+                <ScalarProperty Name="Mã_phiếu_nhập" ColumnName="Mã phiếu nhập" />
+                <ScalarProperty Name="Tháng" ColumnName="Tháng" />
+                <ScalarProperty Name="Năm" ColumnName="Năm" />
+                <ScalarProperty Name="Ngày" ColumnName="Ngày" />
+                <ScalarProperty Name="Tên_hàng" ColumnName="Tên hàng" />
+                <ScalarProperty Name="Số_lượng" ColumnName="Số lượng" />
+                <ScalarProperty Name="Đơn_giá_nhập" ColumnName="Đơn giá nhập" />
+                <ScalarProperty Name="Thuế" ColumnName="Thuế" />
+                <ScalarProperty Name="Thành_tiền" ColumnName="Thành tiền" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_ListOutput">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.v_ListOutput">
+              <MappingFragment StoreEntitySet="v_ListOutput">
+                <ScalarProperty Name="Mã_phiếu_xuất" ColumnName="Mã phiếu xuất" />
+                <ScalarProperty Name="Ngày" ColumnName="Ngày" />
+                <ScalarProperty Name="Tháng" ColumnName="Tháng" />
+                <ScalarProperty Name="Năm" ColumnName="Năm" />
+                <ScalarProperty Name="Tên_hàng" ColumnName="Tên hàng" />
+                <ScalarProperty Name="Số_lượng_xuất" ColumnName="Số lượng xuất" />
+                <ScalarProperty Name="Giá_xuất" ColumnName="Giá xuất" />
+                <ScalarProperty Name="Thuế" ColumnName="Thuế" />
+                <ScalarProperty Name="Thành_tiền" ColumnName="Thành tiền" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_Output">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.v_Output">
+              <MappingFragment StoreEntitySet="v_Output">
+                <ScalarProperty Name="Tên_nhân_viên" ColumnName="Tên nhân viên" />
+                <ScalarProperty Name="Tên_khách_hàng" ColumnName="Tên khách hàng" />
+                <ScalarProperty Name="Địa_chỉ_khách_hàng" ColumnName="Địa chỉ khách hàng" />
+                <ScalarProperty Name="Điện_Thoại" ColumnName="Điện Thoại" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mã_phiếu_xuất" ColumnName="Mã phiếu xuất" />
+                <ScalarProperty Name="Ngày_xuất" ColumnName="Ngày xuất" />
+                <ScalarProperty Name="Tên_hàng" ColumnName="Tên hàng" />
+                <ScalarProperty Name="Mô_tả" ColumnName="Mô tả" />
+                <ScalarProperty Name="Đơn_vị_tính" ColumnName="Đơn vị tính" />
+                <ScalarProperty Name="Thuế_xuất" ColumnName="Thuế xuất" />
+                <ScalarProperty Name="Tiền_thuế" ColumnName="Tiền thuế" />
+                <ScalarProperty Name="Tổng_giá_trị" ColumnName="Tổng giá trị" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="QLCuaHangAppModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="QLCuaHangAppModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="Sp_Delete_Customer" FunctionName="QLCuaHangAppModel.Store.Sp_Delete_Customer" />
+          <FunctionImportMapping FunctionImportName="Sp_Delete_Good" FunctionName="QLCuaHangAppModel.Store.Sp_Delete_Good" />
+          <FunctionImportMapping FunctionImportName="Sp_Delete_Input" FunctionName="QLCuaHangAppModel.Store.Sp_Delete_Input" />
+          <FunctionImportMapping FunctionImportName="Sp_Delete_InputInfo" FunctionName="QLCuaHangAppModel.Store.Sp_Delete_InputInfo" />
+          <FunctionImportMapping FunctionImportName="Sp_Delete_Output" FunctionName="QLCuaHangAppModel.Store.Sp_Delete_Output" />
+          <FunctionImportMapping FunctionImportName="Sp_Delete_OutputInfo" FunctionName="QLCuaHangAppModel.Store.Sp_Delete_OutputInfo" />
+          <FunctionImportMapping FunctionImportName="Sp_Delete_Staff" FunctionName="QLCuaHangAppModel.Store.Sp_Delete_Staff" />
+          <FunctionImportMapping FunctionImportName="Sp_Delete_Suplier" FunctionName="QLCuaHangAppModel.Store.Sp_Delete_Suplier" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="QLCuaHangAppModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="QLCuaHangAppModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLCuaHangAppModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="QLCuaHangAppModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="QLCuaHangAppModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Sp_Insert_Customer" FunctionName="QLCuaHangAppModel.Store.Sp_Insert_Customer" />
+          <FunctionImportMapping FunctionImportName="Sp_Insert_Good" FunctionName="QLCuaHangAppModel.Store.Sp_Insert_Good" />
+          <FunctionImportMapping FunctionImportName="Sp_Insert_Input" FunctionName="QLCuaHangAppModel.Store.Sp_Insert_Input" />
+          <FunctionImportMapping FunctionImportName="Sp_Insert_InputInfo" FunctionName="QLCuaHangAppModel.Store.Sp_Insert_InputInfo" />
+          <FunctionImportMapping FunctionImportName="Sp_Insert_Output" FunctionName="QLCuaHangAppModel.Store.Sp_Insert_Output" />
+          <FunctionImportMapping FunctionImportName="Sp_Insert_OutputInfo" FunctionName="QLCuaHangAppModel.Store.Sp_Insert_OutputInfo" />
+          <FunctionImportMapping FunctionImportName="Sp_Insert_Staff" FunctionName="QLCuaHangAppModel.Store.Sp_Insert_Staff" />
+          <FunctionImportMapping FunctionImportName="Sp_Insert_Suplier" FunctionName="QLCuaHangAppModel.Store.Sp_Insert_Suplier" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="QLCuaHangAppModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="Sp_Update_Customer" FunctionName="QLCuaHangAppModel.Store.Sp_Update_Customer" />
+          <FunctionImportMapping FunctionImportName="Sp_Update_Good" FunctionName="QLCuaHangAppModel.Store.Sp_Update_Good" />
+          <FunctionImportMapping FunctionImportName="Sp_Update_Input" FunctionName="QLCuaHangAppModel.Store.Sp_Update_Input" />
+          <FunctionImportMapping FunctionImportName="Sp_Update_InputInfo" FunctionName="QLCuaHangAppModel.Store.Sp_Update_InputInfo" />
+          <FunctionImportMapping FunctionImportName="Sp_Update_Output" FunctionName="QLCuaHangAppModel.Store.Sp_Update_Output" />
+          <FunctionImportMapping FunctionImportName="Sp_Update_OutputInfo" FunctionName="QLCuaHangAppModel.Store.Sp_Update_OutputInfo" />
+          <FunctionImportMapping FunctionImportName="Sp_Update_Staff" FunctionName="QLCuaHangAppModel.Store.Sp_Update_Staff" />
+          <FunctionImportMapping FunctionImportName="Sp_Update_Suplier" FunctionName="QLCuaHangAppModel.Store.Sp_Update_Suplier" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="QLCuaHangAppModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
