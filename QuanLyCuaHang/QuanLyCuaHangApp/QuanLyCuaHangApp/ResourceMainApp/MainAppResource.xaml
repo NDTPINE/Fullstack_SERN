@@ -3,4 +3,13 @@
                     xmlns:viewmodel="clr-namespace:QuanLyCuaHangApp.ViewModel"
                     xmlns:local="clr-namespace:QuanLyCuaHangApp">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:UserViewModel x:Key="UserVM"></viewmodel:UserViewModel>
+    <viewmodel:InputVM x:Key="InputVM"></viewmodel:InputVM>
+    <viewmodel:CustomerVM x:Key="CustomerVM"></viewmodel:CustomerVM>
+    <viewmodel:OutputVM x:Key="OutputVM"></viewmodel:OutputVM>
+    <viewmodel:GoodVM x:Key="GoodVM"></viewmodel:GoodVM>
+    <viewmodel:SuplierVM x:Key = "SuplierVM"></viewmodel:SuplierVM>
+    <viewmodel:StaffVM x:Key = "StaffVM"></viewmodel:StaffVM>
+    <viewmodel:LoginVM x:Key = "LoginVM"></viewmodel:LoginVM>
+    <viewmodel:PasswordChangeVM x:Key="PasswordChangeVM"></viewmodel:PasswordChangeVM>
 </ResourceDictionary>

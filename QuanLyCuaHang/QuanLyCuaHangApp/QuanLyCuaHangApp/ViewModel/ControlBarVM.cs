@@ -26,20 +26,20 @@ namespace QuanLyCuaHangApp.ViewModel
                 if (w != null) w.Close(); 
             }) ;
             MinimizeWindowCommand = new RelayCommand<UserControl>((m) => { return m == null ? false : true; }, (m) => {
-                FrameworkElement window = getWindowParent(m);
-                var w = window as Window;
-                if (w != null) w.WindowState = WindowState.Minimized;
+                FrameworkElement window1 = getWindowParent(m);
+                var w1 = window1 as Window;
+                if (w1 != null) w1.WindowState = WindowState.Minimized;
             });
             MaximizeWindowCommand = new RelayCommand<UserControl>((c) => { return c == null ? false : true; }, (c) => {
-            FrameworkElement window = getWindowParent(c);
-            var w = window as Window;
-                if (w != null)
+            FrameworkElement window2 = getWindowParent(c);
+            var w2 = window2 as Window;
+                if (w2 != null)
                 {
-                    if (w.WindowState == WindowState.Maximized)
+                    if (w2.WindowState == WindowState.Maximized)
                     {
-                        w.WindowState = WindowState.Normal;
+                        w2.WindowState = WindowState.Normal;
                     }
-                    else w.WindowState = WindowState.Maximized;
+                    else w2.WindowState = WindowState.Maximized;
                 }
             });
             MousemoveWindowCommand = new RelayCommand<UserControl>((m) => { return m == null ? false : true; }, (m) => {

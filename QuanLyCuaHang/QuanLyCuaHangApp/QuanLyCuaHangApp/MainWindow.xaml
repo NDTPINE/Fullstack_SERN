@@ -27,7 +27,7 @@
     </Window.Background>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}"/>
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainwindow}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
@@ -41,10 +41,10 @@
         </Grid>
         <Grid  Grid.Row="1">
             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Button Margin="5 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                <Button Command="{Binding InputCommand}" Margin="0 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="50"
                     materialDesign:ButtonAssist.CornerRadius="5"
-                    ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                    ToolTip="Quản lý nhập hàng">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -58,10 +58,10 @@
                         </Grid>
                     </Grid>
                 </Button>
-                <Button Margin="5 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                <Button Command="{Binding OutputCommand}" Margin="0 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="50"
                     materialDesign:ButtonAssist.CornerRadius="5"
-                    ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                    ToolTip="Quản lý xuất hàng">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -75,10 +75,10 @@
                         </Grid>
                     </Grid>
                 </Button>
-                <Button Margin="5 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                <Button Command="{Binding GoodCommand}" Margin="0 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="50"
                     materialDesign:ButtonAssist.CornerRadius="5"
-                    ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                    ToolTip="Quản lý hàng hoá">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -92,10 +92,10 @@
                         </Grid>
                     </Grid>
                 </Button>
-                <Button Margin="5 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                <Button Command="{Binding CustomerCommand}" Margin="0 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="50"
                     materialDesign:ButtonAssist.CornerRadius="5"
-                    ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                    ToolTip="Quản lý khách hàng">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -109,10 +109,10 @@
                         </Grid>
                     </Grid>
                 </Button>
-                <Button Margin="5 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                <Button Command="{Binding SuplierCommand}" Margin="0 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="50"
                     materialDesign:ButtonAssist.CornerRadius="5"
-                    ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                    ToolTip="Quản lý nhà cung cấp">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -126,10 +126,27 @@
                         </Grid>
                     </Grid>
                 </Button>
-                <Button Margin="5 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                <Button Command="{Binding StaffCommand}" Margin="0 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
                     Height="50"
                     materialDesign:ButtonAssist.CornerRadius="5"
-                    ToolTip="MaterialDesignRaisedLightButton with Round Corners">
+                    ToolTip="Nhân viên">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock FontSize="15" Text="Nhân viên" ></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon Height="24" Width="30" Kind="User" HorizontalAlignment="Center" ></materialDesign:PackIcon>
+                        </Grid>
+                    </Grid>
+                </Button>
+                <Button Command="{Binding UserCommand}" Margin="0 10 5 5" Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    Height="50"
+                    materialDesign:ButtonAssist.CornerRadius="5"
+                    ToolTip="Quản lý tài khoản">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -159,31 +176,36 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0" Margin="10">
-                            <DatePicker materialDesign:HintAssist.Hint="Từ ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <DatePicker SelectedDate="{Binding DateTo, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Từ ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                         </Grid>
                         <Grid Grid.Column="1">
-                            <DatePicker materialDesign:HintAssist.Hint="Đến ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <DatePicker SelectedDate="{Binding DateFrom,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Đến ngày" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                         </Grid>
                         <Grid Grid.Column="2">
-                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <Button Margin="5" Height="30" Width="110" Content="Nhập hàng"></Button>
-                                <Button Margin="5" Height="30" Width="110" Content="Xuất hàng"></Button>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Margin="12,10,12,9">
+                                <Button Command="{Binding InputMainCommand}"  CommandParameter="{Binding ElementName=btnMainInput}"
+                                    x:Name="btnMainInput" Margin="5" Height="30" Width="110" Content="Nhập hàng"></Button>
+                                <Button Command="{Binding OutputMainCommand}" CommandParameter="{Binding ElementName=btnMainOutput}"
+                                    x:Name="btnMainOutput" Margin="5" Height="30" Width="110" Content="Xuất hàng"></Button>
                             </DockPanel>
                         </Grid>
                     </Grid>
                 </materialDesign:Card>
             </Grid>
             <Grid Grid.Row="1">
-                <ListView></ListView>
-                <ListView>
+                <ListView ItemsSource="{Binding ListMainWindow, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Width="Auto" Header="Mã Phiếu"></GridViewColumn>
-                            <GridViewColumn Width="Auto" Header="Tên hàng hóa"></GridViewColumn>
-                            <GridViewColumn Width="Auto" Header="Số lượng"></GridViewColumn>
-                            <GridViewColumn Width="Auto" Header="Giá"></GridViewColumn>
-                            <GridViewColumn Width="Auto" Header="Thuế"></GridViewColumn>
-                            <GridViewColumn Width="Auto" Header="Thành tiền"></GridViewColumn>
+                            <GridViewColumn Width="Auto" Header="Mã Phiếu" DisplayMemberBinding="{Binding Maphieu}"></GridViewColumn>
+                            <GridViewColumn Width="Auto" Header="Tên hàng hóa" DisplayMemberBinding="{Binding Tenhang}"></GridViewColumn>
+                            <GridViewColumn Width="Auto" Header="Số lượng" DisplayMemberBinding="{Binding Soluong}"></GridViewColumn>
+                            <GridViewColumn Width="Auto" Header="Giá" DisplayMemberBinding="{Binding Gia}"></GridViewColumn>
+                            <GridViewColumn Width="Auto" Header="Thuế" DisplayMemberBinding="{Binding Thue}"></GridViewColumn>
+                            <GridViewColumn Width="Auto" Header="Thành tiền" DisplayMemberBinding="{Binding Thanhtien}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

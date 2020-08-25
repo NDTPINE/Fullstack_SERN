@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace QuanLyCuaHangApp.View
 {
     /// <summary>
-    /// Interaction logic for UserView.xaml
+    /// Interaction logic for Input.xaml
     /// </summary>
-    public partial class UserView : Window
+    public partial class Input : Window
     {
-        public UserView()
+        public Input()
         {
             InitializeComponent();
         }
