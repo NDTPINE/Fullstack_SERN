@@ -42,7 +42,13 @@
             <materialDesign:Card Grid.Row="0" Margin="5">
                 <WrapPanel Margin="0 0 0 10">
                     <TextBox Text="{Binding Account, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Tên đăng nhập" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <PasswordBox x:Name="Password"  PasswordChar="*"  Margin="5 5 15 5" materialDesign:HintAssist.Hint="Mật khẩu"  materialDesign:TextFieldAssist.HasClearButton="True" />
+                    <PasswordBox x:Name="PasswordUserView"  PasswordChar="*"  Margin="5 5 15 5" materialDesign:HintAssist.Hint="Mật khẩu"  materialDesign:TextFieldAssist.HasClearButton="True">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction Command="{Binding PasswordChangeUserCommand}" CommandParameter="{Binding ElementName=PasswordUserView}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </PasswordBox>
                     <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Điện thoại" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding AddressUser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Địa chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
@@ -60,7 +66,7 @@
             
             <materialDesign:Card Grid.Row="2" Background="Transparent" Margin="5" VerticalAlignment="Stretch">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        <ListView ItemsSource="{Binding ListUser}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Header="Tên đăng nhập" DisplayMemberBinding="{Binding Account}"></GridViewColumn>

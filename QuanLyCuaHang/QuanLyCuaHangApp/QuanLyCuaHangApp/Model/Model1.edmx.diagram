@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="QLCuaHangAppModel.Output" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="QLCuaHangAppModel.Staff" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QLCuaHangAppModel.Suplier" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCuaHangAppModel.User" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCuaHangAppModel.User" Width="1.5" PointX="0.875" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QLCuaHangAppModel.v_ListInput" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QLCuaHangAppModel.v_ListOutput" Width="1.5" PointX="4.75" PointY="8.875" IsExpanded="true" />
         <AssociationConnector Association="QLCuaHangAppModel.FK__InputInfo__IdGoo__160F4887" ManuallyRouted="false" />
