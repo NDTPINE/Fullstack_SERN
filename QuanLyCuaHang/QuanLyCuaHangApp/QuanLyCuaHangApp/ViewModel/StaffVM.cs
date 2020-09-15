@@ -53,6 +53,8 @@ namespace QuanLyCuaHangApp.ViewModel
         public string Phone { get { return _Phone; } set { _Phone = value; OnPropertyChanged(); } }
         private string _Position;
         public string Position { get { return _Position; } set { _Position = value; OnPropertyChanged(); } }
+        private string _Email;
+        public string Email { get { return _Email; } set { _Email = value; OnPropertyChanged(); } }
         private int? _salary;
         public int? Salary { get { return _salary; } set { _salary = value; OnPropertyChanged(); } }
         public StaffVM()
@@ -61,12 +63,12 @@ namespace QuanLyCuaHangApp.ViewModel
 
             AddCommand = new RelayCommand<Object>((p) =>
             {
-                if (string.IsNullOrEmpty(Staff1) || string.IsNullOrEmpty(NameSta) || YearBirth > 0 || string.IsNullOrEmpty(Sex) || string.IsNullOrEmpty(Position) || Salary > 0 ) return false;
+                if (string.IsNullOrEmpty(Staff1) || string.IsNullOrEmpty(NameSta) || YearBirth < 0 || string.IsNullOrEmpty(Sex) || string.IsNullOrEmpty(Position) || Salary < 0 ) return false;
                 var staffList = DataProvider.Ins.DB.Staffs.Where(x => x.Staff1 == Staff1);
                 if (staffList == null || staffList.Count() != 0) return false;
                 return true;
             }, (p) => {
-                var staff = new Staff() { Staff1 = Staff1, NameSta = NameSta, YearBirth = YearBirth, Sex = Sex, AddressSta = AddressSta, Phone = Phone, Position = Position, Salary = Salary};
+                var staff = new Staff() { Staff1 = Staff1, NameSta = NameSta, YearBirth = YearBirth, Sex = Sex, AddressSta = AddressSta, Phone = Phone, Position = Position, Email = Email, Salary = Salary};
                 DataProvider.Ins.DB.Staffs.Add(staff);
                 DataProvider.Ins.DB.SaveChanges();
                 ListStaff.Add(staff);
@@ -76,7 +78,7 @@ namespace QuanLyCuaHangApp.ViewModel
                 if (SelectedItemSta == null) return false;
                 return true;
             }, (p) => {
-                DataProvider.Ins.DB.Sp_Update_Staff(ID, Staff1, NameSta, YearBirth, Sex, AddressSta, Phone, Position, Salary);
+                DataProvider.Ins.DB.Sp_Update_Staff(ID, Staff1, NameSta, YearBirth, Sex, AddressSta, Phone, Position,Email, Salary);
                 DataProvider.Ins.DB.SaveChanges();
                 SelectedItemSta.Id = ID;
             });
@@ -108,6 +110,7 @@ namespace QuanLyCuaHangApp.ViewModel
                 Phone = "";
                 Position = "";
                 Salary = 0;
+                Email = "";
             });
         }
 

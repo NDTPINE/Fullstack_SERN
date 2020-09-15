@@ -12,4 +12,5 @@
     <viewmodel:StaffVM x:Key = "StaffVM"></viewmodel:StaffVM>
     <viewmodel:LoginVM x:Key = "LoginVM"></viewmodel:LoginVM>
     <viewmodel:PasswordChangeVM x:Key="PasswordChangeVM"></viewmodel:PasswordChangeVM>
+    <viewmodel:ReportVM x:Key="ReportVM"></viewmodel:ReportVM>
 </ResourceDictionary>

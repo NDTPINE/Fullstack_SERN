@@ -6,11 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="087c7e9a87f54e649b28ba742256a6c5" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="QLCuaHangAppModel.Good" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCuaHangAppModel.InputInfo" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCuaHangAppModel.Input" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCuaHangAppModel.InputInfo" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCuaHangAppModel.Input" Width="1.5" PointX="3.375" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QLCuaHangAppModel.OutputInfo" Width="1.5" PointX="11.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCuaHangAppModel.Output" Width="1.5" PointX="6" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="QLCuaHangAppModel.Staff" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLCuaHangAppModel.Output" Width="1.5" PointX="9.125" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="QLCuaHangAppModel.Suplier" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="QLCuaHangAppModel.User" Width="1.5" PointX="0.875" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="QLCuaHangAppModel.v_ListInput" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
@@ -18,12 +17,13 @@
         <AssociationConnector Association="QLCuaHangAppModel.FK__InputInfo__IdGoo__160F4887" ManuallyRouted="false" />
         <AssociationConnector Association="QLCuaHangAppModel.FK__OutputInf__IdGoo__19DFD96B" ManuallyRouted="false" />
         <AssociationConnector Association="QLCuaHangAppModel.FK__InputInfo__IdInp__17036CC0" ManuallyRouted="false" />
-        <AssociationConnector Association="QLCuaHangAppModel.FK__Inputs__IdStaffs__6D0D32F4" ManuallyRouted="false" />
         <AssociationConnector Association="QLCuaHangAppModel.FK__Inputs__IdSuplie__6E01572D" ManuallyRouted="false" />
         <AssociationConnector Association="QLCuaHangAppModel.FK__OutputInf__IdOut__1AD3FDA4" ManuallyRouted="false" />
-        <AssociationConnector Association="QLCuaHangAppModel.FK__Outputs__IdStaff__74AE54BC" ManuallyRouted="false" />
         <EntityTypeShape EntityType="QLCuaHangAppModel.Customer" Width="1.5" PointX="8.375" PointY="1" />
         <AssociationConnector Association="QLCuaHangAppModel.FK__Outputs__IdCusto__75A278F5" />
+        <EntityTypeShape EntityType="QLCuaHangAppModel.Staff" Width="1.5" PointX="0.75" PointY="4.875" />
+        <AssociationConnector Association="QLCuaHangAppModel.FK__Inputs__IdStaffs__6D0D32F4" />
+        <AssociationConnector Association="QLCuaHangAppModel.FK__Outputs__IdStaff__74AE54BC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

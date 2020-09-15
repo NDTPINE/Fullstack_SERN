@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="VENCE" msprop:Generator_TableClassName="VENCEDataTable" msprop:Generator_TableVarName="tableVENCE" msprop:Generator_TablePropName="VENCE" msprop:Generator_RowDeletingName="VENCERowDeleting" msprop:Generator_RowChangingName="VENCERowChanging" msprop:Generator_RowEvHandlerName="VENCERowChangeEventHandler" msprop:Generator_RowDeletedName="VENCERowDeleted" msprop:Generator_UserTableName="VENCE" msprop:Generator_RowChangedName="VENCERowChanged" msprop:Generator_RowEvArgName="VENCERowChangeEvent" msprop:Generator_RowClassName="VENCERow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Maphieunhap" msprop:Generator_ColumnVarNameInTable="columnMaphieunhap" msprop:Generator_ColumnPropNameInRow="Maphieunhap" msprop:Generator_ColumnPropNameInTable="MaphieunhapColumn" msprop:Generator_UserColumnName="Maphieunhap" type="xs:string" />
+              <xs:element name="Ngaynhap" msprop:Generator_ColumnVarNameInTable="columnNgaynhap" msprop:Generator_ColumnPropNameInRow="Ngaynhap" msprop:Generator_ColumnPropNameInTable="NgaynhapColumn" msprop:Generator_UserColumnName="Ngaynhap" type="xs:string" minOccurs="0" />
+              <xs:element name="Mahang" msprop:Generator_ColumnVarNameInTable="columnMahang" msprop:Generator_ColumnPropNameInRow="Mahang" msprop:Generator_ColumnPropNameInTable="MahangColumn" msprop:Generator_UserColumnName="Mahang" type="xs:string" minOccurs="0" />
+              <xs:element name="Tenhang" msprop:Generator_ColumnVarNameInTable="columnTenhang" msprop:Generator_ColumnPropNameInRow="Tenhang" msprop:Generator_ColumnPropNameInTable="TenhangColumn" msprop:Generator_UserColumnName="Tenhang" type="xs:string" minOccurs="0" />
+              <xs:element name="Soluong" msprop:Generator_ColumnVarNameInTable="columnSoluong" msprop:Generator_ColumnPropNameInRow="Soluong" msprop:Generator_ColumnPropNameInTable="SoluongColumn" msprop:Generator_UserColumnName="Soluong" type="xs:int" minOccurs="0" />
+              <xs:element name="Dongia" msprop:Generator_ColumnVarNameInTable="columnDongia" msprop:Generator_ColumnPropNameInRow="Dongia" msprop:Generator_ColumnPropNameInTable="DongiaColumn" msprop:Generator_UserColumnName="Dongia" type="xs:double" minOccurs="0" />
+              <xs:element name="Thue" msprop:Generator_ColumnVarNameInTable="columnThue" msprop:Generator_ColumnPropNameInRow="Thue" msprop:Generator_ColumnPropNameInTable="ThueColumn" msprop:Generator_UserColumnName="Thue" type="xs:int" minOccurs="0" />
+              <xs:element name="Thanhtien" msprop:Generator_ColumnVarNameInTable="columnThanhtien" msprop:Generator_ColumnPropNameInRow="Thanhtien" msprop:Generator_ColumnPropNameInTable="ThanhtienColumn" msprop:Generator_UserColumnName="Thanhtien" type="xs:double" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

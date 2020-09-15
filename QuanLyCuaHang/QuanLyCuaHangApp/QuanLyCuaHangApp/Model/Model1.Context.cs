@@ -32,12 +32,12 @@ namespace QuanLyCuaHangApp.Model
         public virtual DbSet<Input> Inputs { get; set; }
         public virtual DbSet<OutputInfo> OutputInfoes { get; set; }
         public virtual DbSet<Output> Outputs { get; set; }
-        public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Suplier> Supliers { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<v_ListInput> v_ListInput { get; set; }
         public virtual DbSet<v_ListOutput> v_ListOutput { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Staff> Staffs { get; set; }
     
         public virtual int Sp_Delete_Customer(Nullable<int> id)
         {
@@ -281,7 +281,7 @@ namespace QuanLyCuaHangApp.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_Insert_OutputInfo", idParameter, idOutputParameter, idGoodParameter, numberOutputParameter, pricesOutputParameter, taxParameter);
         }
     
-        public virtual int Sp_Insert_Staff(Nullable<int> id, string staff, string nameSta, Nullable<int> yearBirth, string sex, string addressSta, string phone, string position, string salary)
+        public virtual int Sp_Insert_Staff(Nullable<int> id, string staff, string nameSta, Nullable<int> yearBirth, string sex, string addressSta, string phone, string position, string email, string salary)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -315,11 +315,15 @@ namespace QuanLyCuaHangApp.Model
                 new ObjectParameter("Position", position) :
                 new ObjectParameter("Position", typeof(string));
     
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
             var salaryParameter = salary != null ?
                 new ObjectParameter("Salary", salary) :
                 new ObjectParameter("Salary", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_Insert_Staff", idParameter, staffParameter, nameStaParameter, yearBirthParameter, sexParameter, addressStaParameter, phoneParameter, positionParameter, salaryParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_Insert_Staff", idParameter, staffParameter, nameStaParameter, yearBirthParameter, sexParameter, addressStaParameter, phoneParameter, positionParameter, emailParameter, salaryParameter);
         }
     
         public virtual int Sp_Update_Customer(Nullable<int> id, string customer, string nameCus, string adress, string phone, string email)
@@ -496,7 +500,7 @@ namespace QuanLyCuaHangApp.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_Update_OutputInfo", idParameter, idOutputParameter, idGoodParameter, numberOutputParameter, pricesOutputParameter, taxParameter);
         }
     
-        public virtual int Sp_Update_Staff(Nullable<int> id, string staff, string nameSta, Nullable<int> yearBirth, string sex, string addressSta, string phone, string position, Nullable<int> salary)
+        public virtual int Sp_Update_Staff(Nullable<int> id, string staff, string nameSta, Nullable<int> yearBirth, string sex, string addressSta, string phone, string position, string email, Nullable<int> salary)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("Id", id) :
@@ -530,11 +534,15 @@ namespace QuanLyCuaHangApp.Model
                 new ObjectParameter("Position", position) :
                 new ObjectParameter("Position", typeof(string));
     
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
             var salaryParameter = salary.HasValue ?
                 new ObjectParameter("Salary", salary) :
                 new ObjectParameter("Salary", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_Update_Staff", idParameter, staffParameter, nameStaParameter, yearBirthParameter, sexParameter, addressStaParameter, phoneParameter, positionParameter, salaryParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_Update_Staff", idParameter, staffParameter, nameStaParameter, yearBirthParameter, sexParameter, addressStaParameter, phoneParameter, positionParameter, emailParameter, salaryParameter);
         }
     
         public virtual int Sp_Update_Suplier(Nullable<int> id, string suplier, string nameSup, string addressSup, string phone, string email)

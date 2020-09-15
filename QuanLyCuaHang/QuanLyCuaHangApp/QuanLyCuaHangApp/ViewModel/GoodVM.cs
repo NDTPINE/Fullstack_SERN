@@ -16,6 +16,7 @@ namespace QuanLyCuaHangApp.ViewModel
     {
         private ObservableCollection<Good> _ListGood;
         public ObservableCollection<Good> ListGood { get { return _ListGood; } set { _ListGood = value; OnPropertyChanged(); } }
+
         private Good _SelectedItem;
         public Good SelectedItem
         {

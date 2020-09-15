@@ -41,37 +41,39 @@
             </Grid.RowDefinitions>
             <materialDesign:Card Grid.Row="0" Margin="5">
                 <WrapPanel Margin="0 0 0 10">
-                    <TextBox Text="{Binding Input1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Mã nhập hàng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding InputCode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Mã nhập hàng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <DatePicker Margin="5 5 15 -1" IsTodayHighlighted="True" SelectedDate="{Binding DateIn}" materialDesign:HintAssist.Hint="Ngày nhập" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                    <ComboBox Margin="5 5 15 1" DisplayMemberPath="{Binding Staff.NameSta}" ItemsSource="{Binding Staff}" SelectedItem="{Binding SelectedStaff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Nhân viên nhập" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
-                    <ComboBox Margin="5 5 15 1" DisplayMemberPath="{Binding Suplier.NameSup}" ItemsSource="{Binding Suplier}" SelectedItem="{Binding SelectedSuplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Nhà cung cấp" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
-                    <ComboBox Margin="5 5 15 1" DisplayMemberPath="{Binding Good.Good1}" ItemsSource="{Binding Good}" SelectedItem="{Binding SelectedGood, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Hàng hoá" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                    <ComboBox Margin="5 5 15 1" DisplayMemberPath="NameSta" ItemsSource="{Binding ListStaff,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedStaff, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Nhân viên nhập" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                    <ComboBox Margin="5 5 15 1" DisplayMemberPath="NameSup" ItemsSource="{Binding ListSuplier,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedSuplier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Nhà cung cấp" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                    <ComboBox Margin="5 5 15 1" DisplayMemberPath="NameGoo" ItemsSource="{Binding ListGood,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedGood, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Hàng hoá" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
                     <TextBox Text="{Binding NumberInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Số lượng nhập" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                    <TextBox Text="{Binding PricesInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Giá nhập" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding PriceInput, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Giá nhập" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding Tax, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Thuế nhập" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </WrapPanel>
             </materialDesign:Card>
-            <materialDesign:Card Grid.Row="1" Margin="5" Background="Transparent">
+            <materialDesign:Card Grid.Row="1" Margin="5" Background="Transparent" HorizontalAlignment="Center">
                 <WrapPanel>
                     <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="150"></Button>
                     <Button Command="{Binding EditCommand}" Content="Sửa" Margin="5" Width="150"></Button>
                     <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="5" Width="150"></Button>
+                    <Button Command="{Binding ResetCommand}" Content="Reset" Margin="5" Width="150"></Button>
+
                 </WrapPanel>
             </materialDesign:Card>
             <Grid Grid.Row="2">
                 <materialDesign:Card Grid.Row="2" Margin="5" VerticalAlignment="Stretch" Background="Transparent">
                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        <ListView ItemsSource="{Binding ListInputDetail}" SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Mã nhập hàng" DisplayMemberBinding="{Binding Input1}"></GridViewColumn>
-                                    <GridViewColumn Header="Ngày nhập" DisplayMemberBinding="{Binding DateIn}"></GridViewColumn>
-                                    <GridViewColumn Header="Nhân viên nhập" DisplayMemberBinding="{Binding Staff.NameSta}"></GridViewColumn>
-                                    <GridViewColumn Header="Nhà cung cấp" DisplayMemberBinding="{Binding Suplier.NameSup}"></GridViewColumn>
-                                    <GridViewColumn Header="Hàng hoá" DisplayMemberBinding="{Binding Good.NameGoo}"></GridViewColumn>
-                                    <GridViewColumn Header="Số lượng nhập" DisplayMemberBinding="{Binding InputInfo.NumberInput}"></GridViewColumn>
-                                    <GridViewColumn Header="Giá nhập" DisplayMemberBinding="{Binding InputInfo.PricesInput}"></GridViewColumn>
-                                    <GridViewColumn Header="Thuế" DisplayMemberBinding="{Binding InputInfo.Tax}"></GridViewColumn>
+                                    <GridViewColumn Header="Mã nhập hàng" DisplayMemberBinding="{Binding Inputs.InputCode}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày nhập" DisplayMemberBinding="{Binding Inputs.DateIn }"></GridViewColumn>
+                                    <GridViewColumn Header="Nhân viên nhập" DisplayMemberBinding="{Binding Staffs.NameSta}"></GridViewColumn>
+                                    <GridViewColumn Header="Nhà cung cấp" DisplayMemberBinding="{Binding Supliers.NameSup}"></GridViewColumn>
+                                    <GridViewColumn Header="Hàng hoá" DisplayMemberBinding="{Binding Goods.NameGoo}"></GridViewColumn>
+                                    <GridViewColumn Header="Số lượng nhập" DisplayMemberBinding="{Binding InputInfos.NumberInput}"></GridViewColumn>
+                                    <GridViewColumn Header="Giá nhập" DisplayMemberBinding="{Binding InputInfos.PricesInput}"></GridViewColumn>
+                                    <GridViewColumn Header="Thuế" DisplayMemberBinding="{Binding InputInfos.Tax}"></GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>

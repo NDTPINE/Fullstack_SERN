@@ -48,6 +48,7 @@
                     <TextBox Text="{Binding AddressSta, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Địa chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Phone" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding Position, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Position" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding Salary, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Lương" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </WrapPanel>
             </materialDesign:Card>
@@ -72,6 +73,7 @@
                                     <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding AddressSta,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     <GridViewColumn Header="Điện thoại" DisplayMemberBinding="{Binding Phone,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
+                                    <GridViewColumn Header="Chức vụ" DisplayMemberBinding="{Binding Position,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                     <GridViewColumn Header="Lương" DisplayMemberBinding="{Binding Salary,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></GridViewColumn>
                                 </GridView>
                             </ListView.View>

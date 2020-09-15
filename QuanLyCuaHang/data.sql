@@ -51,6 +51,7 @@ CREATE TABLE Staffs
     AddressSta NVARCHAR(50) NOT NULL,
     Phone NVARCHAR(20),
     Position NVARCHAR(50) NOT NULL,
+	 Email NVARCHAR(50),
     Salary INT NOT NULL
 );
 GO
@@ -235,12 +236,13 @@ CREATE PROC Sp_Insert_Staff
     @AddressSta NVARCHAR(50),
     @Phone NVARCHAR(20),
     @Position NVARCHAR(50),
+	@Email NVARCHAR(50),
     @Salary NVARCHAR(50)
 AS
 IF (NOT EXISTS (SELECT Staff FROM dbo.Staffs WHERE Id = @Id))
     INSERT INTO dbo.Staffs
     VALUES
-    (@Staff, @NameSta, @YearBirth, @Sex, @AddressSta, @Phone, @Position, @Salary);
+    (@Staff, @NameSta, @YearBirth, @Sex, @AddressSta, @Phone, @Position,@Email, @Salary);
 ELSE
     RAISERROR('Not Exists', 12, 1);
 GO
@@ -254,6 +256,7 @@ CREATE PROC Sp_Update_Staff
     @AddressSta NVARCHAR(50),
     @Phone NVARCHAR(20),
     @Position NVARCHAR(50),
+	@Email NVARCHAR(50),
     @Salary INT
 AS
 IF (NOT EXISTS (SELECT Staff FROM dbo.Staffs WHERE Id = @Id))
@@ -267,6 +270,7 @@ ELSE
         AddressSta = @AddressSta,
         Phone = @Phone,
         Position = @Position,
+		Email = @Email,
         Salary = @Salary
 	WHERE Id = @Id;
 GO

@@ -16,7 +16,7 @@
          TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         x:Name="customerwindow"
-        DataContext="{StaticResource UserVM}"
+        DataContext="{StaticResource CustomerVM}"
         Title="Quản lý khách hàng" Height="450" Width="800" WindowStyle="None" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
@@ -64,7 +64,7 @@
                                 <GridView>
                                     <GridViewColumn Header="Mã khách hàng" DisplayMemberBinding="{Binding Customer1}"></GridViewColumn>
                                     <GridViewColumn Header="Tên khách hàng" DisplayMemberBinding="{Binding NameCus}"></GridViewColumn>
-                                    <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding AddressCus}"></GridViewColumn>
+                                    <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding Adress}"></GridViewColumn>
                                     <GridViewColumn Header="Phone" DisplayMemberBinding="{Binding Phone}"></GridViewColumn>
                                     <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
                                 </GridView>

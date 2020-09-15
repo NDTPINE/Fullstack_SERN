@@ -84,6 +84,7 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
           <Property Name="Position" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Salary" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Supliers">
           <Key>
@@ -351,6 +352,7 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
           <Parameter Name="AddressSta" Type="nvarchar" Mode="In" />
           <Parameter Name="Phone" Type="nvarchar" Mode="In" />
           <Parameter Name="Position" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
           <Parameter Name="Salary" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="Sp_Update_Customer" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -410,6 +412,7 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
           <Parameter Name="AddressSta" Type="nvarchar" Mode="In" />
           <Parameter Name="Phone" Type="nvarchar" Mode="In" />
           <Parameter Name="Position" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
           <Parameter Name="Salary" Type="int" Mode="In" />
         </Function>
         <Function Name="Sp_Update_Suplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -535,8 +538,8 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
           <Property Name="IdStaffs" Type="Int32" Nullable="false" />
           <Property Name="IdSupliers" Type="Int32" Nullable="false" />
           <NavigationProperty Name="InputInfoes" Relationship="Self.FK__InputInfo__IdInp__17036CC0" FromRole="Inputs" ToRole="InputInfo" />
-          <NavigationProperty Name="Staff" Relationship="Self.FK__Inputs__IdStaffs__6D0D32F4" FromRole="Inputs" ToRole="Staffs" />
           <NavigationProperty Name="Suplier" Relationship="Self.FK__Inputs__IdSuplie__6E01572D" FromRole="Inputs" ToRole="Supliers" />
+          <NavigationProperty Name="Staff" Relationship="QLCuaHangAppModel.FK__Inputs__IdStaffs__6D0D32F4" FromRole="Input" ToRole="Staff" />
         </EntityType>
         <EntityType Name="OutputInfo">
           <Key>
@@ -561,24 +564,8 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
           <Property Name="IdStaffs" Type="Int32" Nullable="false" />
           <Property Name="IdCustomers" Type="Int32" Nullable="false" />
           <NavigationProperty Name="OutputInfoes" Relationship="Self.FK__OutputInf__IdOut__1AD3FDA4" FromRole="Outputs" ToRole="OutputInfo" />
-          <NavigationProperty Name="Staff" Relationship="Self.FK__Outputs__IdStaff__74AE54BC" FromRole="Outputs" ToRole="Staffs" />
           <NavigationProperty Name="Customer" Relationship="QLCuaHangAppModel.FK__Outputs__IdCusto__75A278F5" FromRole="Output" ToRole="Customer" />
-        </EntityType>
-        <EntityType Name="Staff">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Staff1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NameSta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="YearBirth" Type="Int32" Nullable="false" />
-          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="AddressSta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Salary" Type="Int32" />
-          <NavigationProperty Name="Inputs" Relationship="Self.FK__Inputs__IdStaffs__6D0D32F4" FromRole="Staffs" ToRole="Inputs" />
-          <NavigationProperty Name="Outputs" Relationship="Self.FK__Outputs__IdStaff__74AE54BC" FromRole="Staffs" ToRole="Outputs" />
+          <NavigationProperty Name="Staff" Relationship="QLCuaHangAppModel.FK__Outputs__IdStaff__74AE54BC" FromRole="Output" ToRole="Staff" />
         </EntityType>
         <EntityType Name="Suplier">
           <Key>
@@ -687,20 +674,6 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inputs__IdStaffs__6D0D32F4">
-          <End Role="Staffs" Type="Self.Staff" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Inputs" Type="Self.Input" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staffs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Inputs">
-              <PropertyRef Name="IdStaffs" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Inputs__IdSuplie__6E01572D">
           <End Role="Supliers" Type="Self.Suplier" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -729,27 +702,12 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Outputs__IdStaff__74AE54BC">
-          <End Role="Staffs" Type="Self.Staff" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Outputs" Type="Self.Output" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staffs">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Outputs">
-              <PropertyRef Name="IdStaffs" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="QLCuaHangAppEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Goods" EntityType="Self.Good" />
           <EntitySet Name="InputInfoes" EntityType="Self.InputInfo" />
           <EntitySet Name="Inputs" EntityType="Self.Input" />
           <EntitySet Name="OutputInfoes" EntityType="Self.OutputInfo" />
           <EntitySet Name="Outputs" EntityType="Self.Output" />
-          <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <EntitySet Name="Supliers" EntityType="Self.Suplier" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="v_ListInput" EntityType="Self.v_ListInput" />
@@ -766,10 +724,6 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
             <End Role="Inputs" EntitySet="Inputs" />
             <End Role="InputInfo" EntitySet="InputInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inputs__IdStaffs__6D0D32F4" Association="Self.FK__Inputs__IdStaffs__6D0D32F4">
-            <End Role="Staffs" EntitySet="Staffs" />
-            <End Role="Inputs" EntitySet="Inputs" />
-          </AssociationSet>
           <AssociationSet Name="FK__Inputs__IdSuplie__6E01572D" Association="Self.FK__Inputs__IdSuplie__6E01572D">
             <End Role="Supliers" EntitySet="Supliers" />
             <End Role="Inputs" EntitySet="Inputs" />
@@ -777,10 +731,6 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
           <AssociationSet Name="FK__OutputInf__IdOut__1AD3FDA4" Association="Self.FK__OutputInf__IdOut__1AD3FDA4">
             <End Role="Outputs" EntitySet="Outputs" />
             <End Role="OutputInfo" EntitySet="OutputInfoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Outputs__IdStaff__74AE54BC" Association="Self.FK__Outputs__IdStaff__74AE54BC">
-            <End Role="Staffs" EntitySet="Staffs" />
-            <End Role="Outputs" EntitySet="Outputs" />
           </AssociationSet>
           <FunctionImport Name="Sp_Delete_Customer">
           <Parameter Name="Id" Mode="In" Type="Int32" />
@@ -862,6 +812,7 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
             <Parameter Name="AddressSta" Mode="In" Type="String" />
             <Parameter Name="Phone" Mode="In" Type="String" />
             <Parameter Name="Position" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Salary" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sp_Update_Customer">
@@ -921,6 +872,7 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
             <Parameter Name="AddressSta" Mode="In" Type="String" />
             <Parameter Name="Phone" Mode="In" Type="String" />
             <Parameter Name="Position" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Salary" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="Sp_Update_Suplier">
@@ -942,6 +894,15 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
             <Parameter Name="RepeatPass" Mode="In" Type="String" />
             <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Staffs" EntityType="QLCuaHangAppModel.Staff" />
+          <AssociationSet Name="FK__Inputs__IdStaffs__6D0D32F4" Association="QLCuaHangAppModel.FK__Inputs__IdStaffs__6D0D32F4">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Input" EntitySet="Inputs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Outputs__IdStaff__74AE54BC" Association="QLCuaHangAppModel.FK__Outputs__IdStaff__74AE54BC">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Output" EntitySet="Outputs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
           <Key>
@@ -966,6 +927,51 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
             </Principal>
             <Dependent Role="Output">
               <PropertyRef Name="IdCustomers" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Staff1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NameSta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="YearBirth" Type="Int32" Nullable="false" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="AddressSta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Inputs" Relationship="QLCuaHangAppModel.FK__Inputs__IdStaffs__6D0D32F4" FromRole="Staff" ToRole="Input" />
+          <NavigationProperty Name="Outputs" Relationship="QLCuaHangAppModel.FK__Outputs__IdStaff__74AE54BC" FromRole="Staff" ToRole="Output" />
+        </EntityType>
+        <Association Name="FK__Inputs__IdStaffs__6D0D32F4">
+          <End Type="QLCuaHangAppModel.Staff" Role="Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="QLCuaHangAppModel.Input" Role="Input" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Input">
+              <PropertyRef Name="IdStaffs" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Outputs__IdStaff__74AE54BC">
+          <End Type="QLCuaHangAppModel.Staff" Role="Staff" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="QLCuaHangAppModel.Output" Role="Output" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Output">
+              <PropertyRef Name="IdStaffs" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1032,21 +1038,6 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
                 <ScalarProperty Name="DateOut" ColumnName="DateOut" />
                 <ScalarProperty Name="IdStaffs" ColumnName="IdStaffs" />
                 <ScalarProperty Name="IdCustomers" ColumnName="IdCustomers" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Staffs">
-            <EntityTypeMapping TypeName="QLCuaHangAppModel.Staff">
-              <MappingFragment StoreEntitySet="Staffs">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Staff1" ColumnName="Staff" />
-                <ScalarProperty Name="NameSta" ColumnName="NameSta" />
-                <ScalarProperty Name="YearBirth" ColumnName="YearBirth" />
-                <ScalarProperty Name="Sex" ColumnName="Sex" />
-                <ScalarProperty Name="AddressSta" ColumnName="AddressSta" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Salary" ColumnName="Salary" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1144,6 +1135,22 @@ warning 6002: The table/view 'QLCuaHangApp.dbo.v_ListOutput' does not have a pri
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Sp_ChangePass_User" FunctionName="QLCuaHangAppModel.Store.Sp_ChangePass_User" />
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="QLCuaHangAppModel.Staff">
+              <MappingFragment StoreEntitySet="Staffs">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="AddressSta" ColumnName="AddressSta" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="YearBirth" ColumnName="YearBirth" />
+                <ScalarProperty Name="NameSta" ColumnName="NameSta" />
+                <ScalarProperty Name="Staff1" ColumnName="Staff" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

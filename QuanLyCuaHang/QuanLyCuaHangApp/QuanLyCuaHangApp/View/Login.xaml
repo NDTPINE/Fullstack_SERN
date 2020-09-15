@@ -34,19 +34,28 @@
             <uc:ControlBarUC Tag="{Binding Title, ElementName=loginwindow}"></uc:ControlBarUC>
         </Grid>
         <Grid Grid.Row="1">
-            <Image Source="../Image/logo.png" Width="200" Height="200"></Image>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Image Source="../Image/logo.png" Width="200" Height="200"></Image>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock HorizontalAlignment="Center" FontSize="20" FontWeight="Bold" Foreground="Blue">Vững bước bền lâu</TextBlock>
+            </Grid>
         </Grid>
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBox Text="{Binding UserName}"
                 Height="30" Width="300" Margin="5" x:Name="UserName"
                 materialDesign:HintAssist.Hint="Username"
                 Style="{StaticResource MaterialDesignTextBox}"
-                VerticalAlignment ="Center" />
+                VerticalAlignment ="Center" TabIndex="0" />
             <PasswordBox 
                 Margin="5" Height="30" Width="300" x:Name="Password"
                          materialDesign:HintAssist.Hint="Password"  
                          materialDesign:TextFieldAssist.HasClearButton="True"
-                         materialDesign:HintAssist.HelperText="At least 8 characters">
+                         materialDesign:HintAssist.HelperText="At least 8 characters" TabIndex="1">
                 <i:Interaction.Triggers> 
                     <i:EventTrigger EventName="PasswordChanged">
                         <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=Password}" />
@@ -58,7 +67,7 @@
                         CommandParameter="{Binding ElementName=loginwindow}"
                         Margin="5 30 5 5" Width="120" Height="30"
                         Style="{DynamicResource MaterialDesignRaisedButton}"
-                        materialDesign:ShadowAssist.ShadowDepth="Depth4">
+                        materialDesign:ShadowAssist.ShadowDepth="Depth4" IsDefault="True">
                         Login
                 </Button>
                 <Button Command="{Binding CloseCommand}" 

@@ -41,7 +41,7 @@
             </Grid.RowDefinitions>
             <materialDesign:Card Grid.Row="0" Margin="5">
                 <WrapPanel Margin="0 0 0 10">
-                    <TextBox Text="{Binding Goods1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Mã hàng hoá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding Good1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Mã hàng hoá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding NameGoo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Tên hàng hoá" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding Producer, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Nhà sản xuất" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <TextBox Text="{Binding Numbers, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Số lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />

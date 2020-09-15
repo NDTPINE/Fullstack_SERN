@@ -24,7 +24,7 @@ namespace QuanLyCuaHangApp.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    ID = SelectedItem.Id;
+                    Id = SelectedItem.Id;
                     Customer1 = SelectedItem.Customer1;
                     NameCus = SelectedItem.NameCus;
                     AddressCus = SelectedItem.Adress;
@@ -35,7 +35,7 @@ namespace QuanLyCuaHangApp.ViewModel
         }
 
         private int _id;
-        public int ID { get { return _id; } set { _id = value; OnPropertyChanged(); } }
+        public int Id { get { return _id; } set { _id = value; OnPropertyChanged(); } }
         private string _Customer1;
         public string Customer1 { get { return _Customer1; } set { _Customer1 = value; OnPropertyChanged(); } }
         private string _NameCus;
@@ -53,8 +53,8 @@ namespace QuanLyCuaHangApp.ViewModel
             AddCommand = new RelayCommand<Object>((p) =>
             {
                 if (string.IsNullOrEmpty(Customer1) || string.IsNullOrEmpty(NameCus) || string.IsNullOrEmpty(AddressCus)) return false;
-                var suplierList = DataProvider.Ins.DB.Customers.Where(x => x.Customer1 == Customer1);
-                if (suplierList == null || suplierList.Count() != 0) return false;
+                var customerList = DataProvider.Ins.DB.Customers.Where(x => x.Customer1 == Customer1);
+                if (customerList == null || customerList.Count() != 0) return false;
                 return true;
             }, (p) => {
                 var customer = new Customer() { Customer1 = Customer1, NameCus = NameCus, Adress = AddressCus, Phone = Phone, Email = Email };
@@ -72,9 +72,10 @@ namespace QuanLyCuaHangApp.ViewModel
                 editCus.NameCus = NameCus;
                 editCus.Phone = Phone;
                 editCus.Email = Email;
-                editCus.Id = ID;
+                editCus.Adress = AddressCus;
+                editCus.Id = Id;
                 DataProvider.Ins.DB.SaveChanges();
-                SelectedItem.Id = ID;
+                SelectedItem.Id = Id;
             });
             //Command Detele IS OK
             DeleteCommand = new RelayCommand<Object>((p) =>

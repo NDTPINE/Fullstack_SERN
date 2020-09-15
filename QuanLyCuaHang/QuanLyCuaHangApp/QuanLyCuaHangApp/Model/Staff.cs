@@ -30,6 +30,7 @@ namespace QuanLyCuaHangApp.Model
         public string Phone { get; set; }
         public string Position { get; set; }
         public Nullable<int> Salary { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Input> Inputs { get; set; }

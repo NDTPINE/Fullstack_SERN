@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.Services.Users.Client;
+﻿using Microsoft.VisualStudio.Services.Commerce;
+using Microsoft.VisualStudio.Services.Location;
+using Microsoft.VisualStudio.Services.Users.Client;
 using QuanLyCuaHangApp.Model;
 using QuanLyCuaHangApp.View;
 using System;
@@ -18,9 +20,9 @@ namespace QuanLyCuaHangApp.ViewModel
     {
         private bool isLoaded;
         public bool IsLoaded { get { return false; } set { isLoaded = value; } }
-        private DateTime dateTo;
+        private DateTime dateTo = DateTime.Now;
         public DateTime DateTo { get { return dateTo; } set { dateTo = value; OnPropertyChanged(); } }
-        private DateTime dateFrom;
+        private DateTime dateFrom = DateTime.Now;
         public DateTime DateFrom { get { return dateFrom; } set { dateFrom = value; OnPropertyChanged(); } }
 
         private ObservableCollection<ListMain> listmainwindow;
@@ -35,6 +37,7 @@ namespace QuanLyCuaHangApp.ViewModel
         public ICommand GoodCommand { get; set; }
         public ICommand InputMainCommand { get; set; }
         public ICommand OutputMainCommand { get; set; }
+        public ICommand ReportCommand { get; set; }
 
         public MainViewModel()
         {
@@ -88,7 +91,7 @@ namespace QuanLyCuaHangApp.ViewModel
             });
             InputMainCommand = new RelayCommand<Button>((p) => { return true; }, (p) => {
                 ListMainWindow = new ObservableCollection<ListMain>();
-                var listmain = DataProvider.Ins.DB.v_ListInput.Where(x => x.Ngaynhap > dateTo && x.Ngaynhap < dateFrom);
+                var listmain = DataProvider.Ins.DB.v_ListInput.Where(x => x.Ngaynhap >= DateTo && x.Ngaynhap <= DateFrom);
                 foreach (var item in listmain)
                 {
                     ListMain lm = new ListMain();
@@ -103,7 +106,7 @@ namespace QuanLyCuaHangApp.ViewModel
             });
             OutputMainCommand = new RelayCommand<Button>((p) => { return true; }, (p) => {
                 ListMainWindow = new ObservableCollection<ListMain>();
-                var listmain = DataProvider.Ins.DB.v_ListOutput.Where(x => x.Ngayxuat > dateTo && x.Ngayxuat < dateFrom);
+                var listmain = DataProvider.Ins.DB.v_ListOutput.Where(x => x.Ngayxuat >= DateTo && x.Ngayxuat <= DateFrom);
                 foreach (var item2 in listmain)
                 {
                     ListMain lm = new ListMain();
@@ -115,6 +118,10 @@ namespace QuanLyCuaHangApp.ViewModel
                     lm.Thanhtien = item2.Thanhtien;
                     ListMainWindow.Add(lm);
                 }
+            });
+            ReportCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                ReportView tempReport = new ReportView();
+                tempReport.Show();
             });
 
         }

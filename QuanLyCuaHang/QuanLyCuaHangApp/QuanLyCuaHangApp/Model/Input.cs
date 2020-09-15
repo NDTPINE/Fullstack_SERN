@@ -28,7 +28,7 @@ namespace QuanLyCuaHangApp.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InputInfo> InputInfoes { get; set; }
-        public virtual Staff Staff { get; set; }
         public virtual Suplier Suplier { get; set; }
+        public virtual Staff Staff { get; set; }
     }
 }
