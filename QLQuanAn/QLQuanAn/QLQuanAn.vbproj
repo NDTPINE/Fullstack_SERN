@@ -11,8 +11,9 @@
     <AssemblyName>QLQuanAn</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,6 +24,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>QLQuanAn.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +35,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>QLQuanAn.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -45,6 +48,12 @@
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -77,6 +86,24 @@
     <Compile Include="frmDanhMuc.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmDanhSachDonHang.Designer.vb">
+      <DependentUpon>frmDanhSachDonHang.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDanhSachDonHang.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDonHang.Designer.vb">
+      <DependentUpon>frmDonHang.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmDonHang.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMenu.Designer.vb">
+      <DependentUpon>frmMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmMonAn.Designer.vb">
       <DependentUpon>frmMonAn.vb</DependentUpon>
     </Compile>
@@ -87,6 +114,12 @@
       <DependentUpon>frmChiNhanh.vb</DependentUpon>
     </Compile>
     <Compile Include="frmChiNhanh.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTaiKhoan.Designer.vb">
+      <DependentUpon>frmTaiKhoan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmTaiKhoan.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainWindow.vb">
@@ -100,6 +133,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -116,11 +150,23 @@
     <EmbeddedResource Include="frmDanhMuc.resx">
       <DependentUpon>frmDanhMuc.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmDanhSachDonHang.resx">
+      <DependentUpon>frmDanhSachDonHang.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDonHang.resx">
+      <DependentUpon>frmDonHang.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMenu.resx">
+      <DependentUpon>frmMenu.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMonAn.resx">
       <DependentUpon>frmMonAn.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmChiNhanh.resx">
       <DependentUpon>frmChiNhanh.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTaiKhoan.resx">
+      <DependentUpon>frmTaiKhoan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.vb</DependentUpon>
@@ -133,6 +179,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

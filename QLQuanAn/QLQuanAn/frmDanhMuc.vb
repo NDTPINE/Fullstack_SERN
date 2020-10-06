@@ -30,7 +30,7 @@
         frmDanhMuc_Load(sender, e)
     End Sub
 
-    Private Sub dtgvChiNhanh_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dtgvDanhMuc.CellClick
+    Private Sub dtgvDanhMuc_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dtgvDanhMuc.CellClick
         If dtgvDanhMuc.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvDanhMuc.SelectedCells(0).RowIndex
             Dim DanhMucView As DataRowView = dtgvDanhMuc.Rows(i).DataBoundItem
@@ -40,24 +40,24 @@
             txbNgayTaoDanhMuc.Text = DanhMuc("NgayTao")
             txbNgayCapNhatDanhMuc.Text = DanhMuc("NgayCapNhat")
         End If
-
     End Sub
 
-    Private Sub btnSuaChiNhanh_Click(sender As Object, e As EventArgs)
+
+
+    Private Sub btnSua_Click(sender As Object, e As EventArgs) Handles btnSua.Click
         If dtgvDanhMuc.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvDanhMuc.SelectedCells(0).RowIndex
             Dim DanhMucView As DataRowView = dtgvDanhMuc.Rows(i).DataBoundItem
             Dim DanhMuc As DataRow = DanhMucView.Row
 
             DanhMuc("Ten") = txbTenDanhMuc.Text
-
             DanhMuc("NgayCapNhat") = DateTime.Now
             DuLieu.GhiDuLieu("DanhMuc", dsdanhmuc)
         End If
         frmDanhMuc_Load(sender, e)
     End Sub
 
-    Private Sub btnXoaChiNhanh_Click(sender As Object, e As EventArgs)
+    Private Sub btnXoa_Click(sender As Object, e As EventArgs) Handles btnXoa.Click
         If dtgvDanhMuc.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvDanhMuc.SelectedCells(0).RowIndex
             Dim DanhMucView As DataRowView = dtgvDanhMuc.Rows(i).DataBoundItem
@@ -67,12 +67,18 @@
             DanhMuc("NgayCapNhat") = DateTime.Now
             DuLieu.GhiDuLieu("DanhMuc", dsdanhmuc)
 
-            dsdanhmuc.Rows.Remove(DanhMuc)
+            DanhMuc.Delete()
         End If
         frmDanhMuc_Load(sender, e)
     End Sub
 
-    Private Sub btnKhoiPhucChiNhanh_Click(sender As Object, e As EventArgs)
+    Private Sub btnTimKiem_Click_1(sender As Object, e As EventArgs) Handles btnTimKiem.Click
+        dsdanhmuc = DuLieu.DocDuLieu("Select * from DanhMuc where Ten Like N'%" + txbTenDanhMuc.Text + "%'" + "And Xoa = 0")
+        dtgvDanhMuc.DataSource = dsdanhmuc
+        dtgvDanhMuc.Columns("Xoa").Visible = False
+    End Sub
+
+    Private Sub btnKhoiPhucChiNhanh_Click(sender As Object, e As EventArgs) Handles btnKhoiPhucChiNhanh.Click
         If dtgvKhoiphuc.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvKhoiphuc.SelectedCells(0).RowIndex
             Dim DanhMucView As DataRowView = dtgvKhoiphuc.Rows(i).DataBoundItem
@@ -84,11 +90,5 @@
 
         End If
         frmDanhMuc_Load(sender, e)
-    End Sub
-
-    Private Sub btnTimKiem_Click(sender As Object, e As EventArgs)
-        dsdanhmuc = DuLieu.DocDuLieu("Select * from DanhMuc where Ten Like N'%" + txbTenDanhMuc.Text + "%'" + "And Xoa = 0")
-        dtgvDanhMuc.DataSource = dsdanhmuc
-        dtgvDanhMuc.Columns("Xoa").Visible = False
     End Sub
 End Class

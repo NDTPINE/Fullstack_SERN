@@ -1,0 +1,96 @@
+﻿
+@model PagedList.IPagedList<MakeWebByASP.Net.Models.User>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "Users", FormMethod.Get))
+{
+    <p>
+        LinkName: @Html.TextBox("SearchString", (string)ViewBag.searchValue) <input type="submit" value="Tìm kiếm" /> <input type="submit" name="Reset" value="Mặc định" />
+        @Html.Hidden("page", (object)ViewBag.page)
+        @Html.Hidden("sortProperty", (object)ViewBag.sortProperty)
+        @Html.Hidden("sortOrder", (object)ViewBag.sortOrder)
+        @Html.Hidden("size", (object)ViewBag.pageSize)
+    </p>
+}
+<table class="table">
+    <tr>
+        @Html.Raw(ViewBag.Headings)
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rules)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+        @using (Html.BeginForm("Index", "Link", FormMethod.Get))
+        {
+            <p>
+                Kích thước trang: @Html.DropDownList("size", (List<SelectListItem>)ViewBag.size, new { @onchange = "this.form.submit();" })
+            </p>
+
+            @Html.Hidden("page", (object)ViewBag.page)
+            @Html.Hidden("sortProperty", (object)ViewBag.sortProperty)
+            @Html.Hidden("sortOrder", (object)ViewBag.sortOrder)
+            @Html.Hidden("searchString", (object)ViewBag.searchValue)
+        }
+    </div>
+    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+        Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    </div>
+</div>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, size = ViewBag.currentSize, sortProperty = ViewBag.sortProperty, sortOrder = ViewBag.SortOrder, searchString = ViewBag.searchValue }))
+@*<br />
+    <div class="row">
+        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6">
+            @using (Html.BeginForm("Index", "Link", FormMethod.Get))
+            {
+                <p>
+                    Kích thước trang: @Html.DropDownList("size", (List<SelectListItem>)ViewBag.size, new { @onchange = "this.form.submit();" })
+                </p>
+            }
+        </div>
+        <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+            Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        </div>
+    </div>*@
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, size = ViewBag.currentSize }))
+@*<br />
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page }))*@

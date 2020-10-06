@@ -1,7 +1,7 @@
 ﻿Public Class frmMonAn
-    Dim dsmonan As DataTable
-    Dim dsmonankhoiphuc As DataTable
-    Dim dsdanhmuc As DataTable
+    Private dsmonan As DataTable
+    Private dsmonankhoiphuc As DataTable
+    Private dsdanhmuc As DataTable
     Private Sub frmMonAn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dsmonan = DuLieu.DocDuLieu("SELECT dbo.MonAn.*,dbo.DanhMuc.Ten AS TenDanhMuc FROM	dbo.MonAn, dbo.DanhMuc WHERE dbo.MonAn.Xoa = 0 AND MonAn.MaDanhMuc = dbo.DanhMuc.Ma")
         dsmonankhoiphuc = DuLieu.DocDuLieu("Select* from MonAn where Xoa = 1")
@@ -24,7 +24,7 @@
 
     End Sub
 
-    Private Sub btnThem_Click(sender As Object, e As EventArgs)
+    Private Sub btnThem_Click(sender As Object, e As EventArgs) Handles btnThem.Click
         If txbTenMonAn.Text = "" Then
             MessageBox.Show("Tên không được rỗng !", "Thông Báo", MessageBoxButtons.OK)
             txbTenMonAn.Select()
@@ -63,7 +63,7 @@
 
     End Sub
 
-    Private Sub btnSua_Click(sender As Object, e As EventArgs)
+    Private Sub btnSua_Click(sender As Object, e As EventArgs) Handles btnSua.Click
         If dtgvMonAn.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvMonAn.SelectedCells(0).RowIndex
             Dim MonAnView As DataRowView = dtgvMonAn.Rows(i).DataBoundItem
@@ -79,7 +79,7 @@
         frmMonAn_Load(sender, e)
     End Sub
 
-    Private Sub btnXoa_Click(sender As Object, e As EventArgs)
+    Private Sub btnXoa_Click(sender As Object, e As EventArgs) Handles btnXoa.Click
         If dtgvMonAn.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvMonAn.SelectedCells(0).RowIndex
             Dim MonAnView As DataRowView = dtgvMonAn.Rows(i).DataBoundItem
@@ -89,12 +89,12 @@
             MonAn("NgayCapNhat") = DateTime.Now
             DuLieu.GhiDuLieu("MonAn", dsmonan)
 
-            dsmonan.Rows.Remove(MonAn)
+            MonAn.Delete()
         End If
         frmMonAn_Load(sender, e)
     End Sub
 
-    Private Sub btnKhoiPhu_Click(sender As Object, e As EventArgs)
+    Private Sub btnKhoiPhu_Click(sender As Object, e As EventArgs) Handles btnKhoiPhuc.Click
         If dtgvKhoiphuc.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvKhoiphuc.SelectedCells(0).RowIndex
             Dim MonAnView As DataRowView = dtgvKhoiphuc.Rows(i).DataBoundItem
@@ -108,11 +108,10 @@
         frmMonAn_Load(sender, e)
     End Sub
 
-    Private Sub btnTimKiem_Click(sender As Object, e As EventArgs)
+    Private Sub btnTimKiem_Click(sender As Object, e As EventArgs) Handles btnTimKiem.Click
         dsmonan = DuLieu.DocDuLieu("Select * from MonAn where Ten Like N'%" + txbTenMonAn.Text + "%'")
         dtgvMonAn.DataSource = dsmonan
         dtgvMonAn.Columns("Xoa").Visible = False
     End Sub
-
 
 End Class

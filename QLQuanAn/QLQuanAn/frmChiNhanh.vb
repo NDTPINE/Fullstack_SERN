@@ -15,7 +15,23 @@
 
     End Sub
 
-    Private Sub btnThemChiNhanh_Click(sender As Object, e As EventArgs)
+
+    Private Sub dtgvChiNhanh_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dtgvChiNhanh.CellClick
+        If dtgvChiNhanh.SelectedCells.Count > 0 Then
+            Dim i As Integer = dtgvChiNhanh.SelectedCells(0).RowIndex
+            Dim ChiNhanhView As DataRowView = dtgvChiNhanh.Rows(i).DataBoundItem
+            Dim ChiNhanh As DataRow = ChiNhanhView.Row
+            txbIdChiNhanh.Text = ChiNhanh("Ma")
+            txbTenChiNhanh.Text = ChiNhanh("Ten")
+            txbDiaChiChiNhanh.Text = ChiNhanh("DiaChi")
+            txbNgayTaoChiNhanh.Text = ChiNhanh("NgayTao")
+            txbNgayCapNhatChiNhanh.Text = ChiNhanh("NgayCapNhat")
+        End If
+
+    End Sub
+
+
+    Private Sub btnThemChiNhanh_Click_1(sender As Object, e As EventArgs) Handles btnThemChiNhanh.Click
         If txbTenChiNhanh.Text = "" Then
             MessageBox.Show("Tên không được rỗng !", "Thông Báo", MessageBoxButtons.OK)
             txbTenChiNhanh.Select()
@@ -36,21 +52,7 @@
         frmChiNhanh_Load(sender, e)
     End Sub
 
-    Private Sub dtgvChiNhanh_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dtgvChiNhanh.CellClick
-        If dtgvChiNhanh.SelectedCells.Count > 0 Then
-            Dim i As Integer = dtgvChiNhanh.SelectedCells(0).RowIndex
-            Dim ChiNhanhView As DataRowView = dtgvChiNhanh.Rows(i).DataBoundItem
-            Dim ChiNhanh As DataRow = ChiNhanhView.Row
-            txbIdChiNhanh.Text = ChiNhanh("Ma")
-            txbTenChiNhanh.Text = ChiNhanh("Ten")
-            txbDiaChiChiNhanh.Text = ChiNhanh("DiaChi")
-            txbNgayTaoChiNhanh.Text = ChiNhanh("NgayTao")
-            txbNgayCapNhatChiNhanh.Text = ChiNhanh("NgayCapNhat")
-        End If
-
-    End Sub
-
-    Private Sub btnSuaChiNhanh_Click(sender As Object, e As EventArgs)
+    Private Sub btnSuaChiNhanh_Click_1(sender As Object, e As EventArgs) Handles btnSuaChiNhanh.Click
         If dtgvChiNhanh.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvChiNhanh.SelectedCells(0).RowIndex
             Dim ChiNhanhView As DataRowView = dtgvChiNhanh.Rows(i).DataBoundItem
@@ -64,7 +66,7 @@
         frmChiNhanh_Load(sender, e)
     End Sub
 
-    Private Sub btnXoaChiNhanh_Click(sender As Object, e As EventArgs)
+    Private Sub btnXoaChiNhanh_Click_1(sender As Object, e As EventArgs) Handles btnXoaChiNhanh.Click
         If dtgvChiNhanh.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvChiNhanh.SelectedCells(0).RowIndex
             Dim ChiNhanhView As DataRowView = dtgvChiNhanh.Rows(i).DataBoundItem
@@ -74,12 +76,18 @@
             ChiNhanh("NgayCapNhat") = DateTime.Now
             DuLieu.GhiDuLieu("ChiNhanh", dschinhanh)
 
-            dschinhanh.Rows.Remove(ChiNhanh)
+            ChiNhanh.Delete()
         End If
         frmChiNhanh_Load(sender, e)
     End Sub
 
-    Private Sub btnKhoiPhucChiNhanh_Click(sender As Object, e As EventArgs)
+    Private Sub btnTimKiem_Click_1(sender As Object, e As EventArgs) Handles btnTimKiem.Click
+        dschinhanh = DuLieu.DocDuLieu("Select * from ChiNhanh where Ten Like N'%" + txbTenChiNhanh.Text + "%'")
+        dtgvChiNhanh.DataSource = dschinhanh
+        dtgvChiNhanh.Columns("Xoa").Visible = False
+    End Sub
+
+    Private Sub btnKhoiPhucChiNhanh_Click_1(sender As Object, e As EventArgs) Handles btnKhoiPhucChiNhanh.Click
         If dtgvKhoiphuc.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvKhoiphuc.SelectedCells(0).RowIndex
             Dim ChiNhanhView As DataRowView = dtgvKhoiphuc.Rows(i).DataBoundItem
@@ -91,11 +99,5 @@
 
         End If
         frmChiNhanh_Load(sender, e)
-    End Sub
-
-    Private Sub btnTimKiem_Click(sender As Object, e As EventArgs)
-        dschinhanh = DuLieu.DocDuLieu("Select * from ChiNhanh where Ten Like N'%" + txbTenChiNhanh.Text + "%'")
-        dtgvChiNhanh.DataSource = dschinhanh
-        dtgvChiNhanh.Columns("Xoa").Visible = False
     End Sub
 End Class

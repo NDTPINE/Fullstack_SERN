@@ -26,6 +26,7 @@ Partial Class frmDanhMuc
         Me.dtgvDanhMuc = New System.Windows.Forms.DataGridView()
         Me.btnThem = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnKhoiPhucChiNhanh = New System.Windows.Forms.Button()
         Me.btnTimKiem = New System.Windows.Forms.Button()
         Me.dtgvKhoiphuc = New System.Windows.Forms.DataGridView()
         Me.btnXoa = New System.Windows.Forms.Button()
@@ -39,7 +40,6 @@ Partial Class frmDanhMuc
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnKhoiPhucChiNhanh = New System.Windows.Forms.Button()
         CType(Me.dtgvDanhMuc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.dtgvKhoiphuc, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,6 +88,15 @@ Partial Class frmDanhMuc
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(314, 450)
         Me.Panel1.TabIndex = 18
+        '
+        'btnKhoiPhucChiNhanh
+        '
+        Me.btnKhoiPhucChiNhanh.Location = New System.Drawing.Point(129, 420)
+        Me.btnKhoiPhucChiNhanh.Name = "btnKhoiPhucChiNhanh"
+        Me.btnKhoiPhucChiNhanh.Size = New System.Drawing.Size(75, 23)
+        Me.btnKhoiPhucChiNhanh.TabIndex = 31
+        Me.btnKhoiPhucChiNhanh.Text = "Khôi phục"
+        Me.btnKhoiPhucChiNhanh.UseVisualStyleBackColor = True
         '
         'btnTimKiem
         '
@@ -200,15 +209,6 @@ Partial Class frmDanhMuc
         Me.Label1.Size = New System.Drawing.Size(180, 24)
         Me.Label1.TabIndex = 19
         Me.Label1.Text = "Thông tin danh mục"
-        '
-        'btnKhoiPhucChiNhanh
-        '
-        Me.btnKhoiPhucChiNhanh.Location = New System.Drawing.Point(129, 420)
-        Me.btnKhoiPhucChiNhanh.Name = "btnKhoiPhucChiNhanh"
-        Me.btnKhoiPhucChiNhanh.Size = New System.Drawing.Size(75, 23)
-        Me.btnKhoiPhucChiNhanh.TabIndex = 31
-        Me.btnKhoiPhucChiNhanh.Text = "Khôi phục"
-        Me.btnKhoiPhucChiNhanh.UseVisualStyleBackColor = True
         '
         'frmDanhMuc
         '
