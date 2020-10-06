@@ -25,5 +25,6 @@
         Dim temp As DataRowView = cbDSChiNhanh.SelectedItem
         frm.KhoiTaoChiNhanh(temp.Row)
         frm.ShowDialog()
+        DocDSDonHang(Integer.Parse(cbDSChiNhanh.SelectedValue))
     End Sub
 End Class
