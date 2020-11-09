@@ -49,12 +49,10 @@ Partial Class frmChiNhanh
         '
         'dtgvChiNhanh
         '
-        Me.dtgvChiNhanh.AllowDrop = True
-        Me.dtgvChiNhanh.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
-        Me.dtgvChiNhanh.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         Me.dtgvChiNhanh.Dock = System.Windows.Forms.DockStyle.Fill
         Me.dtgvChiNhanh.Location = New System.Drawing.Point(0, 0)
         Me.dtgvChiNhanh.Name = "dtgvChiNhanh"
+        Me.dtgvChiNhanh.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dtgvChiNhanh.Size = New System.Drawing.Size(800, 450)
         Me.dtgvChiNhanh.TabIndex = 0
         '

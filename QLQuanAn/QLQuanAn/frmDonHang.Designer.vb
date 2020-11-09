@@ -44,12 +44,16 @@ Partial Class frmDonHang
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txbTongTien = New System.Windows.Forms.TextBox()
         Me.btnTaoDonHang = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.txbTrangThai = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnXoaTatCa = New System.Windows.Forms.Button()
         Me.lbChiNhanh = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txbGiamGiaMonAn = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txbTongGiamGia = New System.Windows.Forms.TextBox()
         CType(Me.dtgvDSMonAn, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.dtgvChiTietDonHang, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nmSoLuong, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,17 +61,24 @@ Partial Class frmDonHang
         '
         'dtgvDSMonAn
         '
+        Me.dtgvDSMonAn.AllowUserToAddRows = False
+        Me.dtgvDSMonAn.AllowUserToDeleteRows = False
         Me.dtgvDSMonAn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgvDSMonAn.Location = New System.Drawing.Point(12, 40)
+        Me.dtgvDSMonAn.MultiSelect = False
         Me.dtgvDSMonAn.Name = "dtgvDSMonAn"
+        Me.dtgvDSMonAn.ReadOnly = True
         Me.dtgvDSMonAn.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dtgvDSMonAn.Size = New System.Drawing.Size(248, 348)
+        Me.dtgvDSMonAn.Size = New System.Drawing.Size(248, 398)
         Me.dtgvDSMonAn.TabIndex = 0
         '
         'dtgvChiTietDonHang
         '
+        Me.dtgvChiTietDonHang.AllowUserToAddRows = False
+        Me.dtgvChiTietDonHang.AllowUserToDeleteRows = False
         Me.dtgvChiTietDonHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dtgvChiTietDonHang.Location = New System.Drawing.Point(378, 95)
+        Me.dtgvChiTietDonHang.MultiSelect = False
         Me.dtgvChiTietDonHang.Name = "dtgvChiTietDonHang"
         Me.dtgvChiTietDonHang.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dtgvChiTietDonHang.Size = New System.Drawing.Size(410, 269)
@@ -162,7 +173,7 @@ Partial Class frmDonHang
         '
         'btnTimKiem
         '
-        Me.btnTimKiem.Location = New System.Drawing.Point(185, 9)
+        Me.btnTimKiem.Location = New System.Drawing.Point(185, 10)
         Me.btnTimKiem.Name = "btnTimKiem"
         Me.btnTimKiem.Size = New System.Drawing.Size(75, 23)
         Me.btnTimKiem.TabIndex = 14
@@ -171,7 +182,7 @@ Partial Class frmDonHang
         '
         'txbPhuPhi
         '
-        Me.txbPhuPhi.Location = New System.Drawing.Point(436, 374)
+        Me.txbPhuPhi.Location = New System.Drawing.Point(472, 370)
         Me.txbPhuPhi.Name = "txbPhuPhi"
         Me.txbPhuPhi.Size = New System.Drawing.Size(114, 20)
         Me.txbPhuPhi.TabIndex = 15
@@ -206,15 +217,15 @@ Partial Class frmDonHang
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(598, 399)
+        Me.Label5.Location = New System.Drawing.Point(375, 403)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(48, 13)
+        Me.Label5.Size = New System.Drawing.Size(91, 13)
         Me.Label5.TabIndex = 20
-        Me.Label5.Text = "Giảm giá"
+        Me.Label5.Text = "Giảm giá hóa đơn"
         '
         'txbGiamGia
         '
-        Me.txbGiamGia.Location = New System.Drawing.Point(674, 396)
+        Me.txbGiamGia.Location = New System.Drawing.Point(472, 396)
         Me.txbGiamGia.Name = "txbGiamGia"
         Me.txbGiamGia.Size = New System.Drawing.Size(114, 20)
         Me.txbGiamGia.TabIndex = 19
@@ -223,7 +234,7 @@ Partial Class frmDonHang
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(613, 425)
+        Me.Label6.Location = New System.Drawing.Point(598, 425)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(52, 13)
         Me.Label6.TabIndex = 22
@@ -239,38 +250,37 @@ Partial Class frmDonHang
         '
         'btnTaoDonHang
         '
-        Me.btnTaoDonHang.Location = New System.Drawing.Point(378, 415)
+        Me.btnTaoDonHang.Location = New System.Drawing.Point(281, 285)
         Me.btnTaoDonHang.Name = "btnTaoDonHang"
         Me.btnTaoDonHang.Size = New System.Drawing.Size(75, 23)
         Me.btnTaoDonHang.TabIndex = 23
         Me.btnTaoDonHang.Text = "Tạo Đơn"
         Me.btnTaoDonHang.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnCancel
         '
-        Me.Button2.Location = New System.Drawing.Point(510, 415)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 24
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnCancel.Location = New System.Drawing.Point(281, 341)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 24
+        Me.btnCancel.Text = "Hủy"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
         'txbTrangThai
         '
         Me.txbTrangThai.Location = New System.Drawing.Point(433, 66)
         Me.txbTrangThai.Name = "txbTrangThai"
-        Me.txbTrangThai.Size = New System.Drawing.Size(200, 20)
+        Me.txbTrangThai.Size = New System.Drawing.Size(355, 20)
         Me.txbTrangThai.TabIndex = 26
-        Me.txbTrangThai.Text = "1"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Location = New System.Drawing.Point(373, 73)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(55, 13)
+        Me.Label7.Size = New System.Drawing.Size(44, 13)
         Me.Label7.TabIndex = 25
-        Me.Label7.Text = "Trạng thái"
+        Me.Label7.Text = "Ghi chú"
         '
         'btnXoaTatCa
         '
@@ -298,17 +308,56 @@ Partial Class frmDonHang
         Me.Label8.TabIndex = 29
         Me.Label8.Text = "Chi nhánh"
         '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(375, 429)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(86, 13)
+        Me.Label9.TabIndex = 31
+        Me.Label9.Text = "Giảm giá món ăn"
+        '
+        'txbGiamGiaMonAn
+        '
+        Me.txbGiamGiaMonAn.Location = New System.Drawing.Point(472, 422)
+        Me.txbGiamGiaMonAn.Name = "txbGiamGiaMonAn"
+        Me.txbGiamGiaMonAn.ReadOnly = True
+        Me.txbGiamGiaMonAn.Size = New System.Drawing.Size(114, 20)
+        Me.txbGiamGiaMonAn.TabIndex = 30
+        Me.txbGiamGiaMonAn.Text = "0"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(598, 399)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(74, 13)
+        Me.Label10.TabIndex = 33
+        Me.Label10.Text = "Tổng giảm giá"
+        '
+        'txbTongGiamGia
+        '
+        Me.txbTongGiamGia.Location = New System.Drawing.Point(674, 396)
+        Me.txbTongGiamGia.Name = "txbTongGiamGia"
+        Me.txbTongGiamGia.ReadOnly = True
+        Me.txbTongGiamGia.Size = New System.Drawing.Size(114, 20)
+        Me.txbTongGiamGia.TabIndex = 32
+        '
         'frmDonHang
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.Label10)
+        Me.Controls.Add(Me.txbTongGiamGia)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.txbGiamGiaMonAn)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.lbChiNhanh)
         Me.Controls.Add(Me.btnXoaTatCa)
         Me.Controls.Add(Me.txbTrangThai)
         Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnTaoDonHang)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.txbTongTien)
@@ -363,10 +412,14 @@ Partial Class frmDonHang
     Friend WithEvents Label6 As Label
     Friend WithEvents txbTongTien As TextBox
     Friend WithEvents btnTaoDonHang As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnCancel As Button
     Friend WithEvents txbTrangThai As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents btnXoaTatCa As Button
     Friend WithEvents lbChiNhanh As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents txbGiamGiaMonAn As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txbTongGiamGia As TextBox
 End Class
