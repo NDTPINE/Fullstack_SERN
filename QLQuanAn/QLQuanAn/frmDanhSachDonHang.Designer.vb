@@ -54,7 +54,7 @@ Partial Class frmDanhSachDonHang
         '
         'btnHuy
         '
-        Me.btnHuy.Location = New System.Drawing.Point(707, 7)
+        Me.btnHuy.Location = New System.Drawing.Point(705, 5)
         Me.btnHuy.Name = "btnHuy"
         Me.btnHuy.Size = New System.Drawing.Size(75, 23)
         Me.btnHuy.TabIndex = 13
@@ -72,7 +72,7 @@ Partial Class frmDanhSachDonHang
         '
         'btnCapNhat
         '
-        Me.btnCapNhat.Location = New System.Drawing.Point(547, 5)
+        Me.btnCapNhat.Location = New System.Drawing.Point(545, 5)
         Me.btnCapNhat.Name = "btnCapNhat"
         Me.btnCapNhat.Size = New System.Drawing.Size(75, 23)
         Me.btnCapNhat.TabIndex = 11
@@ -81,7 +81,7 @@ Partial Class frmDanhSachDonHang
         '
         'btnXem
         '
-        Me.btnXem.Location = New System.Drawing.Point(466, 5)
+        Me.btnXem.Location = New System.Drawing.Point(465, 5)
         Me.btnXem.Name = "btnXem"
         Me.btnXem.Size = New System.Drawing.Size(75, 23)
         Me.btnXem.TabIndex = 10
@@ -119,7 +119,7 @@ Partial Class frmDanhSachDonHang
         '
         'btnHoanTat
         '
-        Me.btnHoanTat.Location = New System.Drawing.Point(628, 6)
+        Me.btnHoanTat.Location = New System.Drawing.Point(625, 5)
         Me.btnHoanTat.Name = "btnHoanTat"
         Me.btnHoanTat.Size = New System.Drawing.Size(75, 23)
         Me.btnHoanTat.TabIndex = 6
@@ -128,7 +128,7 @@ Partial Class frmDanhSachDonHang
         '
         'btnThem
         '
-        Me.btnThem.Location = New System.Drawing.Point(385, 3)
+        Me.btnThem.Location = New System.Drawing.Point(385, 5)
         Me.btnThem.Name = "btnThem"
         Me.btnThem.Size = New System.Drawing.Size(75, 23)
         Me.btnThem.TabIndex = 5

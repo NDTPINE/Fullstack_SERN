@@ -25,9 +25,11 @@ Partial Class frmChiNhanh
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmChiNhanh))
         Me.dtgvChiNhanh = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnTimKiem = New System.Windows.Forms.Button()
-        Me.dtgvKhoiphuc = New System.Windows.Forms.DataGridView()
-        Me.btnKhoiPhucChiNhanh = New System.Windows.Forms.Button()
+        Me.chbXoa = New System.Windows.Forms.CheckBox()
+        Me.lbresult = New System.Windows.Forms.Label()
+        Me.txbSearch = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnSearch = New System.Windows.Forms.Button()
         Me.btnXoaChiNhanh = New System.Windows.Forms.Button()
         Me.btnSuaChiNhanh = New System.Windows.Forms.Button()
         Me.btnThemChiNhanh = New System.Windows.Forms.Button()
@@ -44,7 +46,6 @@ Partial Class frmChiNhanh
         Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.dtgvChiNhanh, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        CType(Me.dtgvKhoiphuc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'dtgvChiNhanh
@@ -58,9 +59,11 @@ Partial Class frmChiNhanh
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.btnTimKiem)
-        Me.Panel1.Controls.Add(Me.dtgvKhoiphuc)
-        Me.Panel1.Controls.Add(Me.btnKhoiPhucChiNhanh)
+        Me.Panel1.Controls.Add(Me.chbXoa)
+        Me.Panel1.Controls.Add(Me.lbresult)
+        Me.Panel1.Controls.Add(Me.txbSearch)
+        Me.Panel1.Controls.Add(Me.Label11)
+        Me.Panel1.Controls.Add(Me.btnSearch)
         Me.Panel1.Controls.Add(Me.btnXoaChiNhanh)
         Me.Panel1.Controls.Add(Me.btnSuaChiNhanh)
         Me.Panel1.Controls.Add(Me.btnThemChiNhanh)
@@ -81,35 +84,55 @@ Partial Class frmChiNhanh
         Me.Panel1.Size = New System.Drawing.Size(305, 450)
         Me.Panel1.TabIndex = 1
         '
-        'btnTimKiem
+        'chbXoa
         '
-        Me.btnTimKiem.Location = New System.Drawing.Point(233, 230)
-        Me.btnTimKiem.Name = "btnTimKiem"
-        Me.btnTimKiem.Size = New System.Drawing.Size(69, 23)
-        Me.btnTimKiem.TabIndex = 29
-        Me.btnTimKiem.Text = "Tìm kiếm"
-        Me.btnTimKiem.UseVisualStyleBackColor = True
+        Me.chbXoa.AutoSize = True
+        Me.chbXoa.Location = New System.Drawing.Point(233, 308)
+        Me.chbXoa.Name = "chbXoa"
+        Me.chbXoa.Size = New System.Drawing.Size(62, 17)
+        Me.chbXoa.TabIndex = 59
+        Me.chbXoa.Text = "Đã Xóa"
+        Me.chbXoa.UseVisualStyleBackColor = True
         '
-        'dtgvKhoiphuc
+        'lbresult
         '
-        Me.dtgvKhoiphuc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dtgvKhoiphuc.Location = New System.Drawing.Point(2, 259)
-        Me.dtgvKhoiphuc.Name = "dtgvKhoiphuc"
-        Me.dtgvKhoiphuc.Size = New System.Drawing.Size(300, 149)
-        Me.dtgvKhoiphuc.TabIndex = 34
+        Me.lbresult.AutoSize = True
+        Me.lbresult.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbresult.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.lbresult.Location = New System.Drawing.Point(26, 383)
+        Me.lbresult.Name = "lbresult"
+        Me.lbresult.Size = New System.Drawing.Size(0, 17)
+        Me.lbresult.TabIndex = 58
+        Me.lbresult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'btnKhoiPhucChiNhanh
+        'txbSearch
         '
-        Me.btnKhoiPhucChiNhanh.Location = New System.Drawing.Point(138, 414)
-        Me.btnKhoiPhucChiNhanh.Name = "btnKhoiPhucChiNhanh"
-        Me.btnKhoiPhucChiNhanh.Size = New System.Drawing.Size(69, 23)
-        Me.btnKhoiPhucChiNhanh.TabIndex = 30
-        Me.btnKhoiPhucChiNhanh.Text = "Khôi phục"
-        Me.btnKhoiPhucChiNhanh.UseVisualStyleBackColor = True
+        Me.txbSearch.Location = New System.Drawing.Point(58, 308)
+        Me.txbSearch.Name = "txbSearch"
+        Me.txbSearch.Size = New System.Drawing.Size(167, 20)
+        Me.txbSearch.TabIndex = 56
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(11, 311)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(41, 13)
+        Me.Label11.TabIndex = 57
+        Me.Label11.Text = "Search"
+        '
+        'btnSearch
+        '
+        Me.btnSearch.Location = New System.Drawing.Point(120, 349)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Size = New System.Drawing.Size(72, 23)
+        Me.btnSearch.TabIndex = 55
+        Me.btnSearch.Text = "Tìm kiếm"
+        Me.btnSearch.UseVisualStyleBackColor = True
         '
         'btnXoaChiNhanh
         '
-        Me.btnXoaChiNhanh.Location = New System.Drawing.Point(156, 230)
+        Me.btnXoaChiNhanh.Location = New System.Drawing.Point(229, 265)
         Me.btnXoaChiNhanh.Name = "btnXoaChiNhanh"
         Me.btnXoaChiNhanh.Size = New System.Drawing.Size(69, 23)
         Me.btnXoaChiNhanh.TabIndex = 27
@@ -118,7 +141,7 @@ Partial Class frmChiNhanh
         '
         'btnSuaChiNhanh
         '
-        Me.btnSuaChiNhanh.Location = New System.Drawing.Point(79, 230)
+        Me.btnSuaChiNhanh.Location = New System.Drawing.Point(118, 265)
         Me.btnSuaChiNhanh.Name = "btnSuaChiNhanh"
         Me.btnSuaChiNhanh.Size = New System.Drawing.Size(69, 23)
         Me.btnSuaChiNhanh.TabIndex = 24
@@ -127,7 +150,7 @@ Partial Class frmChiNhanh
         '
         'btnThemChiNhanh
         '
-        Me.btnThemChiNhanh.Location = New System.Drawing.Point(2, 230)
+        Me.btnThemChiNhanh.Location = New System.Drawing.Point(7, 265)
         Me.btnThemChiNhanh.Name = "btnThemChiNhanh"
         Me.btnThemChiNhanh.Size = New System.Drawing.Size(69, 23)
         Me.btnThemChiNhanh.TabIndex = 22
@@ -136,7 +159,7 @@ Partial Class frmChiNhanh
         '
         'txbNgayCapNhatChiNhanh
         '
-        Me.txbNgayCapNhatChiNhanh.Location = New System.Drawing.Point(126, 178)
+        Me.txbNgayCapNhatChiNhanh.Location = New System.Drawing.Point(126, 218)
         Me.txbNgayCapNhatChiNhanh.Name = "txbNgayCapNhatChiNhanh"
         Me.txbNgayCapNhatChiNhanh.ReadOnly = True
         Me.txbNgayCapNhatChiNhanh.Size = New System.Drawing.Size(172, 20)
@@ -144,7 +167,7 @@ Partial Class frmChiNhanh
         '
         'txbNgayTaoChiNhanh
         '
-        Me.txbNgayTaoChiNhanh.Location = New System.Drawing.Point(126, 146)
+        Me.txbNgayTaoChiNhanh.Location = New System.Drawing.Point(126, 176)
         Me.txbNgayTaoChiNhanh.Name = "txbNgayTaoChiNhanh"
         Me.txbNgayTaoChiNhanh.ReadOnly = True
         Me.txbNgayTaoChiNhanh.Size = New System.Drawing.Size(172, 20)
@@ -152,14 +175,14 @@ Partial Class frmChiNhanh
         '
         'txbDiaChiChiNhanh
         '
-        Me.txbDiaChiChiNhanh.Location = New System.Drawing.Point(126, 114)
+        Me.txbDiaChiChiNhanh.Location = New System.Drawing.Point(126, 134)
         Me.txbDiaChiChiNhanh.Name = "txbDiaChiChiNhanh"
         Me.txbDiaChiChiNhanh.Size = New System.Drawing.Size(172, 20)
         Me.txbDiaChiChiNhanh.TabIndex = 21
         '
         'txbTenChiNhanh
         '
-        Me.txbTenChiNhanh.Location = New System.Drawing.Point(126, 82)
+        Me.txbTenChiNhanh.Location = New System.Drawing.Point(126, 92)
         Me.txbTenChiNhanh.Name = "txbTenChiNhanh"
         Me.txbTenChiNhanh.Size = New System.Drawing.Size(172, 20)
         Me.txbTenChiNhanh.TabIndex = 19
@@ -175,7 +198,7 @@ Partial Class frmChiNhanh
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(41, 153)
+        Me.Label6.Location = New System.Drawing.Point(43, 179)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(50, 13)
         Me.Label6.TabIndex = 28
@@ -184,7 +207,7 @@ Partial Class frmChiNhanh
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(41, 185)
+        Me.Label5.Location = New System.Drawing.Point(43, 221)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(77, 13)
         Me.Label5.TabIndex = 26
@@ -193,7 +216,7 @@ Partial Class frmChiNhanh
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(41, 121)
+        Me.Label4.Location = New System.Drawing.Point(43, 137)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(41, 13)
         Me.Label4.TabIndex = 25
@@ -202,7 +225,7 @@ Partial Class frmChiNhanh
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(41, 89)
+        Me.Label3.Location = New System.Drawing.Point(43, 95)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(26, 13)
         Me.Label3.TabIndex = 23
@@ -211,7 +234,7 @@ Partial Class frmChiNhanh
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(41, 57)
+        Me.Label2.Location = New System.Drawing.Point(43, 53)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(18, 13)
         Me.Label2.TabIndex = 20
@@ -241,16 +264,12 @@ Partial Class frmChiNhanh
         CType(Me.dtgvChiNhanh, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.dtgvKhoiphuc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents dtgvChiNhanh As DataGridView
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents btnTimKiem As Button
-    Friend WithEvents dtgvKhoiphuc As DataGridView
-    Friend WithEvents btnKhoiPhucChiNhanh As Button
     Friend WithEvents btnXoaChiNhanh As Button
     Friend WithEvents btnSuaChiNhanh As Button
     Friend WithEvents btnThemChiNhanh As Button
@@ -265,4 +284,9 @@ Partial Class frmChiNhanh
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents chbXoa As CheckBox
+    Friend WithEvents lbresult As Label
+    Friend WithEvents txbSearch As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents btnSearch As Button
 End Class

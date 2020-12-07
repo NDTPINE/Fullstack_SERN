@@ -15,13 +15,13 @@
     End Sub
     Private Sub DocDSDonHang(ByVal machinhanh As Integer)
         dsDonHang = DuLieu.DocDuLieu("Select * from DonHang where TrangThai = 1 and MaChiNhanh = " + machinhanh.ToString())
-        dsDonHangView = New DataView(dsDonHang)
-        dtgvDanhSachDonHang.DataSource = dsDonHangView
+        'dsDonHangView = New DataView(dsDonHang)
+        dtgvDanhSachDonHang.DataSource = dsDonHang
     End Sub
     Private Sub DocDSTatCaDonHang(ByVal machinhanh As Integer)
         dsDonHang = DuLieu.DocDuLieu("Select * from DonHang where MaChiNhanh = " + machinhanh.ToString())
-        dsDonHangView = New DataView(dsDonHang)
-        dtgvDanhSachDonHang.DataSource = dsDonHangView
+        'dsDonHangView = New DataView(dsDonHang)
+        dtgvDanhSachDonHang.DataSource = dsDonHang
     End Sub
 
     Private Sub btnThem_Click(sender As Object, e As EventArgs) Handles btnThem.Click

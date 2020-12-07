@@ -56,10 +56,20 @@
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -80,6 +90,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DuLieu.vb" />
+    <Compile Include="Entity\ChiNhanh.vb" />
+    <Compile Include="Entity\ChiNhanhTaiKhoan.vb" />
+    <Compile Include="Entity\ChiTietDonHang.vb" />
+    <Compile Include="Entity\ChiTietPhieuNhap.vb" />
+    <Compile Include="Entity\DanhMuc.vb" />
+    <Compile Include="Entity\DonHang.vb" />
+    <Compile Include="Entity\LoaiTaiKhoan.vb" />
+    <Compile Include="Entity\Menu.vb" />
+    <Compile Include="Entity\Model1.vb" />
+    <Compile Include="Entity\MonAn.vb" />
+    <Compile Include="Entity\Nhanvien.vb" />
+    <Compile Include="Entity\PhieuNhap.vb" />
+    <Compile Include="Entity\TaiKhoan.vb" />
+    <Compile Include="Entity\TrangThaiDonHang.vb" />
     <Compile Include="frmDanhMuc.Designer.vb">
       <DependentUpon>frmDanhMuc.vb</DependentUpon>
     </Compile>
@@ -96,6 +120,12 @@
       <DependentUpon>frmDonHang.vb</DependentUpon>
     </Compile>
     <Compile Include="frmDonHang.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmKhuyenMai.Designer.vb">
+      <DependentUpon>FrmKhuyenMai.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmKhuyenMai.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMenu.Designer.vb">
@@ -122,6 +152,12 @@
     <Compile Include="frmTaiKhoan.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmThongKeNgay.Designer.vb">
+      <DependentUpon>FrmThongKeNgay.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmThongKeNgay.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MainWindow.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +181,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="frmThongKe.Designer.vb">
+      <DependentUpon>frmThongKe.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmThongKe.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="frmDanhMuc.resx">
@@ -155,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmDonHang.resx">
       <DependentUpon>frmDonHang.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmKhuyenMai.resx">
+      <DependentUpon>FrmKhuyenMai.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMenu.resx">
       <DependentUpon>frmMenu.vb</DependentUpon>
@@ -168,6 +213,9 @@
     <EmbeddedResource Include="frmTaiKhoan.resx">
       <DependentUpon>frmTaiKhoan.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmThongKeNgay.resx">
+      <DependentUpon>FrmThongKeNgay.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.vb</DependentUpon>
     </EmbeddedResource>
@@ -176,6 +224,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThongKe.resx">
+      <DependentUpon>frmThongKe.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +243,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="Resources\StarFishPorcelaine_Mac_Archigraphs_512x512.png" />
     <None Include="Resources\SheepPorcelaine_Mac_Archigraphs_512x512.png" />
     <None Include="Resources\RabbitPorcelaine_Mac_Archigraphs_512x512.png" />
@@ -211,6 +263,9 @@
     <None Include="Resources\CowBrownPorcelaine_Mac_Archigraphs_512x512.png" />
     <None Include="Resources\BullPorcelaine_Mac_Archigraphs_512x512.png" />
     <None Include="Resources\BearPorcelaine_Mac_Archigraphs_512x512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data SQL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

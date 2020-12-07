@@ -1,37 +1,79 @@
-﻿Imports System.Data.OleDb
+﻿Imports System.Data
 Imports System.Data.SqlClient
-Module DuLieu
+
+Module Dulieu
     Dim strConnect As String = "Data Source=DESKTOP-5KGL5VG\SQLEXPRESS;Initial Catalog=QLQuanAn;Integrated Security=True"
     Public Function DocDuLieu(sql As String) As DataTable
-        Dim connection As SqlConnection = New SqlConnection(strConnect)
-        Dim command As SqlCommand = New SqlCommand(sql, connection)
-        Dim dt As DataTable = New DataTable()
-        Dim adapter As SqlDataAdapter = New SqlDataAdapter(command)
-        adapter.Fill(dt)
-        Return dt
+        Try
+            Dim connection As SqlConnection = New SqlConnection(strConnect)
+            Dim conmand As SqlCommand = New SqlCommand(sql, connection)
+            Dim dt As DataTable = New DataTable()
+            Dim adapter As SqlDataAdapter = New SqlDataAdapter(conmand)
+            adapter.Fill(dt)
+            Return dt
+        Catch
+            Dim dt As DataTable = New DataTable()
+            Return dt
+        End Try
     End Function
     Public Function DocCauTruc(sql As String) As DataTable
         Dim connection As SqlConnection = New SqlConnection(strConnect)
-        Dim command As SqlCommand = New SqlCommand(sql, connection)
+        Dim conmand As SqlCommand = New SqlCommand(sql, connection)
         Dim dt As DataTable = New DataTable()
-        Dim adapter As SqlDataAdapter = New SqlDataAdapter(command)
+        Dim adapter As SqlDataAdapter = New SqlDataAdapter(conmand)
         adapter.FillSchema(dt, SchemaType.Source)
         Return dt
     End Function
-    Public Sub GhiDuLieu(table As String, dulieu As DataTable)
+
+    Public Sub GhiDuLieu(TenBang As String, DuLieu As DataTable)
         Dim connection As SqlConnection = New SqlConnection(strConnect)
-        Dim command As SqlCommand = New SqlCommand("select * from " + table, connection)
+        Dim sql As String = "Select * from " + TenBang.ToString()
+        Dim command As SqlCommand = New SqlCommand(sql, connection)
         Dim adapter As SqlDataAdapter = New SqlDataAdapter(command)
         Dim builder As SqlCommandBuilder = New SqlCommandBuilder(adapter)
+        adapter.Update(DuLieu)
+    End Sub
+    Public Function ExecuteNonQuery(ByVal query As String, ParamArray para As Object()) As Integer
+        Dim kq As Integer = 0
+        Dim connection As SqlConnection = New SqlConnection(strConnect)
+        connection.Open()
+        Dim command As SqlCommand = New SqlCommand(query, connection)
 
-        adapter.Update(dulieu)
-    End Sub
-    Private Sub CapNhatMaSo(ByVal sender As Object, ByVal e As SqlRowUpdatedEventArgs)
-        Dim Ket_noi As SqlConnection = e.Command.Connection
-        If e.StatementType = StatementType.Insert Then
-            Dim Lenh As SqlCommand = New SqlCommand("Select @@IDENTITY", Ket_noi)
-            Dim ma_so As Integer = Integer.Parse(Lenh.ExecuteScalar())
-            e.Row(0) = ma_so
+        If Not IsDBNull(para) Then
+            Dim listPara As String() = query.Split(" ")
+            Dim i As Integer = 0
+            Dim item As String
+            For Each item In listPara
+                If item.Contains("@") Then
+                    command.Parameters.AddWithValue(item, para(i))
+                    i = i + 1
+                End If
+            Next
         End If
-    End Sub
+        kq = command.ExecuteNonQuery()
+        connection.Close()
+        Return kq
+    End Function
+
+    Public Function ExecuteScalar(ByVal query As String, ParamArray para As Object()) As Object
+        Dim kq As Object
+        Dim connection As SqlConnection = New SqlConnection(strConnect)
+        connection.Open()
+        Dim command As SqlCommand = New SqlCommand(query, connection)
+        command.CommandType = CommandType.StoredProcedure
+        If Not IsDBNull(para) Then
+            Dim listPara As String() = query.Split(" ")
+            Dim i As Integer = 0
+            Dim item As String
+            For Each item In listPara
+                If item.Contains("@") Then
+                    command.Parameters.AddWithValue(item, para(i))
+                    i = i + 1
+                End If
+            Next
+        End If
+        kq = command.ExecuteScalar()
+        connection.Close()
+        Return kq
+    End Function
 End Module

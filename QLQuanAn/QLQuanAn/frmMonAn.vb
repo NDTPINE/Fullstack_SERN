@@ -1,10 +1,8 @@
 ﻿Public Class frmMonAn
     Private dsmonan As DataTable
-    Private dsmonankhoiphuc As DataTable
     Private dsdanhmuc As DataTable
     Private Sub frmMonAn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        dsmonan = DuLieu.DocDuLieu("SELECT dbo.MonAn.*,dbo.DanhMuc.Ten AS TenDanhMuc FROM	dbo.MonAn, dbo.DanhMuc WHERE dbo.MonAn.Xoa = 0 AND MonAn.MaDanhMuc = dbo.DanhMuc.Ma")
-        dsmonankhoiphuc = DuLieu.DocDuLieu("Select* from MonAn where Xoa = 1")
+        dsmonan = Dulieu.DocDuLieu("SELECT dbo.MonAn.*,dbo.DanhMuc.Ten AS TenDanhMuc FROM	dbo.MonAn, dbo.DanhMuc WHERE dbo.MonAn.Xoa = 0 AND MonAn.MaDanhMuc = dbo.DanhMuc.Ma")
         dsdanhmuc = DuLieu.DocDuLieu("Select* from DanhMuc where Xoa = 0")
         dtgvMonAn.DataSource = dsmonan
 
@@ -16,11 +14,7 @@
         dtgvMonAn.Columns("Ma").Visible = False
         dtgvMonAn.Columns("MaDanhMuc").Visible = False
 
-        dtgvKhoiphuc.DataSource = dsmonankhoiphuc
-        dtgvKhoiphuc.Columns("Xoa").Visible = False
-        dtgvKhoiphuc.Columns("Ma").Visible = False
-        dtgvKhoiphuc.Columns("NgayTao").Visible = False
-        dtgvKhoiphuc.Columns("NgayCapNhat").Visible = False
+
 
     End Sub
 
@@ -35,15 +29,12 @@
             txbGiaMonAn.Select()
             Return
         End If
+        Dim sql As String = "EXEC Sp_InSert_MonAn @MaDanhMuc , @Ten , @Gia , @MoTa , @Xoa"
+        Dim count As Integer = Dulieu.ExecuteNonQuery(sql, New Object() {cbDanhMucMonAn.SelectedValue, txbTenMonAn.Text, txbGiaMonAn.Text, txbMotaMonAn.Text, 0})
+        If count > 0 Then
+            lbresult.Text = $"Thêm thành công "
+        End If
 
-        Dim monan As DataRow = dsmonan.NewRow()
-        monan("Ten") = txbTenMonAn.Text
-        monan("Gia") = txbGiaMonAn.Text
-        monan("MoTa") = txbMotaMonAn.Text
-        monan("MaDanhMuc") = cbDanhMucMonAn.SelectedValue
-        dsmonan.Rows.Add(monan)
-
-        DuLieu.GhiDuLieu("MonAn", dsmonan)
         frmMonAn_Load(sender, e)
     End Sub
 
@@ -64,52 +55,43 @@
     End Sub
 
     Private Sub btnSua_Click(sender As Object, e As EventArgs) Handles btnSua.Click
+        Dim index As Integer = -1
         If dtgvMonAn.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvMonAn.SelectedCells(0).RowIndex
             Dim MonAnView As DataRowView = dtgvMonAn.Rows(i).DataBoundItem
             Dim MonAn As DataRow = MonAnView.Row
-
-            MonAn("Ten") = txbTenMonAn.Text
-            MonAn("Gia") = txbGiaMonAn.Text
-            MonAn("MaDanhMuc") = cbDanhMucMonAn.SelectedValue
-            MonAn("MoTa") = txbMotaMonAn.Text
-            MonAn("NgayCapNhat") = DateTime.Now
-            DuLieu.GhiDuLieu("MonAn", dsmonan)
+            Int32.TryParse(MonAn("Ma"), index)
+        End If
+        Dim sql As String = "EXEC Sp_Update_MonAn @Ma , @MaDanhMuc , @Ten , @Gia , @MoTa , @Xoa"
+        Dim count As Integer = Dulieu.ExecuteNonQuery(sql, New Object() {index, cbDanhMucMonAn.SelectedValue, txbTenMonAn.Text, txbGiaMonAn.Text, txbMotaMonAn.Text, 0})
+        If count > 0 Then
+            lbresult.Text = $"Sửa thành công "
         End If
         frmMonAn_Load(sender, e)
     End Sub
 
     Private Sub btnXoa_Click(sender As Object, e As EventArgs) Handles btnXoa.Click
+        Dim index As Integer = 0
         If dtgvMonAn.SelectedCells.Count > 0 Then
             Dim i As Integer = dtgvMonAn.SelectedCells(0).RowIndex
             Dim MonAnView As DataRowView = dtgvMonAn.Rows(i).DataBoundItem
             Dim MonAn As DataRow = MonAnView.Row
-
-            MonAn("Xoa") = 1
-            MonAn("NgayCapNhat") = DateTime.Now
-            DuLieu.GhiDuLieu("MonAn", dsmonan)
-
-            MonAn.Delete()
+            index = MonAn("Ma")
         End If
-        frmMonAn_Load(sender, e)
-    End Sub
-
-    Private Sub btnKhoiPhu_Click(sender As Object, e As EventArgs) Handles btnKhoiPhuc.Click
-        If dtgvKhoiphuc.SelectedCells.Count > 0 Then
-            Dim i As Integer = dtgvKhoiphuc.SelectedCells(0).RowIndex
-            Dim MonAnView As DataRowView = dtgvKhoiphuc.Rows(i).DataBoundItem
-            Dim MonAn As DataRow = MonAnView.Row
-
-            MonAn("Xoa") = 0
-            MonAn("NgayCapNhat") = DateTime.Now
-            DuLieu.GhiDuLieu("MonAn", dsmonankhoiphuc)
-
+        Dim sql As String = "EXEC Sp_Delete_MonAn @Ma"
+        Dim count As Integer = Dulieu.ExecuteNonQuery(sql, New Object() {index})
+        If count > 0 Then
+            lbresult.Text = $"Xóa thành công "
         End If
         frmMonAn_Load(sender, e)
     End Sub
 
     Private Sub btnTimKiem_Click(sender As Object, e As EventArgs) Handles btnTimKiem.Click
-        dsmonan = DuLieu.DocDuLieu("Select * from MonAn where Ten Like N'%" + txbTenMonAn.Text + "%'")
+        Dim check As Integer = 0
+        If chbXoa.Checked = True Then
+            check = 1
+        End If
+        dsmonan = Dulieu.DocDuLieu(String.Format($"Select * from MonAn where Ten Like N'%" + txbSearch.Text + "%' and Xoa =  {check}"))
         dtgvMonAn.DataSource = dsmonan
         dtgvMonAn.Columns("Xoa").Visible = False
     End Sub

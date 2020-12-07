@@ -23,21 +23,26 @@ Partial Class frmTaiKhoan
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.lbresult = New System.Windows.Forms.Label()
+        Me.txbSearch = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.dtpNgaySinh = New System.Windows.Forms.DateTimePicker()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txbActive = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.cbDanhMucMonAn = New System.Windows.Forms.ComboBox()
+        Me.cbTypeUser = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.txbMotaMonAn = New System.Windows.Forms.TextBox()
+        Me.txbName = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnTimKiem = New System.Windows.Forms.Button()
         Me.btnXoa = New System.Windows.Forms.Button()
         Me.btnSua = New System.Windows.Forms.Button()
         Me.btnThem = New System.Windows.Forms.Button()
-        Me.txbNgayCapNhatMonAn = New System.Windows.Forms.TextBox()
-        Me.txbNgayTaoMonAn = New System.Windows.Forms.TextBox()
-        Me.txbGiaMonAn = New System.Windows.Forms.TextBox()
-        Me.txbTenMonAn = New System.Windows.Forms.TextBox()
-        Me.txbIdMonAn = New System.Windows.Forms.TextBox()
+        Me.txbNgayCapNhat = New System.Windows.Forms.TextBox()
+        Me.txbNgayTao = New System.Windows.Forms.TextBox()
+        Me.txbPass = New System.Windows.Forms.TextBox()
+        Me.txbUser = New System.Windows.Forms.TextBox()
+        Me.txbIdTaikhoan = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -51,21 +56,26 @@ Partial Class frmTaiKhoan
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.TextBox1)
+        Me.Panel1.Controls.Add(Me.lbresult)
+        Me.Panel1.Controls.Add(Me.txbSearch)
+        Me.Panel1.Controls.Add(Me.Label11)
+        Me.Panel1.Controls.Add(Me.dtpNgaySinh)
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.txbActive)
         Me.Panel1.Controls.Add(Me.Label9)
-        Me.Panel1.Controls.Add(Me.cbDanhMucMonAn)
+        Me.Panel1.Controls.Add(Me.cbTypeUser)
         Me.Panel1.Controls.Add(Me.Label8)
-        Me.Panel1.Controls.Add(Me.txbMotaMonAn)
+        Me.Panel1.Controls.Add(Me.txbName)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.btnTimKiem)
         Me.Panel1.Controls.Add(Me.btnXoa)
         Me.Panel1.Controls.Add(Me.btnSua)
         Me.Panel1.Controls.Add(Me.btnThem)
-        Me.Panel1.Controls.Add(Me.txbNgayCapNhatMonAn)
-        Me.Panel1.Controls.Add(Me.txbNgayTaoMonAn)
-        Me.Panel1.Controls.Add(Me.txbGiaMonAn)
-        Me.Panel1.Controls.Add(Me.txbTenMonAn)
-        Me.Panel1.Controls.Add(Me.txbIdMonAn)
+        Me.Panel1.Controls.Add(Me.txbNgayCapNhat)
+        Me.Panel1.Controls.Add(Me.txbNgayTao)
+        Me.Panel1.Controls.Add(Me.txbPass)
+        Me.Panel1.Controls.Add(Me.txbUser)
+        Me.Panel1.Controls.Add(Me.txbIdTaikhoan)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label4)
@@ -78,12 +88,55 @@ Partial Class frmTaiKhoan
         Me.Panel1.Size = New System.Drawing.Size(313, 450)
         Me.Panel1.TabIndex = 3
         '
-        'TextBox1
+        'lbresult
         '
-        Me.TextBox1.Location = New System.Drawing.Point(124, 181)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(172, 20)
-        Me.TextBox1.TabIndex = 43
+        Me.lbresult.AutoSize = True
+        Me.lbresult.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbresult.ForeColor = System.Drawing.SystemColors.HotTrack
+        Me.lbresult.Location = New System.Drawing.Point(30, 392)
+        Me.lbresult.Name = "lbresult"
+        Me.lbresult.Size = New System.Drawing.Size(0, 17)
+        Me.lbresult.TabIndex = 49
+        Me.lbresult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'txbSearch
+        '
+        Me.txbSearch.Location = New System.Drawing.Point(59, 348)
+        Me.txbSearch.Name = "txbSearch"
+        Me.txbSearch.Size = New System.Drawing.Size(167, 20)
+        Me.txbSearch.TabIndex = 10
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(12, 351)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(41, 13)
+        Me.Label11.TabIndex = 48
+        Me.Label11.Text = "Search"
+        '
+        'dtpNgaySinh
+        '
+        Me.dtpNgaySinh.Location = New System.Drawing.Point(124, 210)
+        Me.dtpNgaySinh.Name = "dtpNgaySinh"
+        Me.dtpNgaySinh.Size = New System.Drawing.Size(171, 20)
+        Me.dtpNgaySinh.TabIndex = 6
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(39, 211)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(54, 13)
+        Me.Label10.TabIndex = 45
+        Me.Label10.Text = "Ngày sinh"
+        '
+        'txbActive
+        '
+        Me.txbActive.Location = New System.Drawing.Point(124, 181)
+        Me.txbActive.Name = "txbActive"
+        Me.txbActive.Size = New System.Drawing.Size(172, 20)
+        Me.txbActive.TabIndex = 5
         '
         'Label9
         '
@@ -94,13 +147,13 @@ Partial Class frmTaiKhoan
         Me.Label9.TabIndex = 44
         Me.Label9.Text = "Hoạt động"
         '
-        'cbDanhMucMonAn
+        'cbTypeUser
         '
-        Me.cbDanhMucMonAn.FormattingEnabled = True
-        Me.cbDanhMucMonAn.Location = New System.Drawing.Point(124, 124)
-        Me.cbDanhMucMonAn.Name = "cbDanhMucMonAn"
-        Me.cbDanhMucMonAn.Size = New System.Drawing.Size(172, 21)
-        Me.cbDanhMucMonAn.TabIndex = 27
+        Me.cbTypeUser.FormattingEnabled = True
+        Me.cbTypeUser.Location = New System.Drawing.Point(124, 124)
+        Me.cbTypeUser.Name = "cbTypeUser"
+        Me.cbTypeUser.Size = New System.Drawing.Size(172, 21)
+        Me.cbTypeUser.TabIndex = 3
         '
         'Label8
         '
@@ -111,12 +164,12 @@ Partial Class frmTaiKhoan
         Me.Label8.TabIndex = 42
         Me.Label8.Text = "Loại tài khoản"
         '
-        'txbMotaMonAn
+        'txbName
         '
-        Me.txbMotaMonAn.Location = New System.Drawing.Point(124, 153)
-        Me.txbMotaMonAn.Name = "txbMotaMonAn"
-        Me.txbMotaMonAn.Size = New System.Drawing.Size(172, 20)
-        Me.txbMotaMonAn.TabIndex = 28
+        Me.txbName.Location = New System.Drawing.Point(124, 153)
+        Me.txbName.Name = "txbName"
+        Me.txbName.Size = New System.Drawing.Size(172, 20)
+        Me.txbName.TabIndex = 4
         '
         'Label7
         '
@@ -129,84 +182,84 @@ Partial Class frmTaiKhoan
         '
         'btnTimKiem
         '
-        Me.btnTimKiem.Location = New System.Drawing.Point(238, 274)
+        Me.btnTimKiem.Location = New System.Drawing.Point(232, 348)
         Me.btnTimKiem.Name = "btnTimKiem"
         Me.btnTimKiem.Size = New System.Drawing.Size(72, 23)
-        Me.btnTimKiem.TabIndex = 36
+        Me.btnTimKiem.TabIndex = 11
         Me.btnTimKiem.Text = "Tìm kiếm"
         Me.btnTimKiem.UseVisualStyleBackColor = True
         '
         'btnXoa
         '
-        Me.btnXoa.Location = New System.Drawing.Point(160, 274)
+        Me.btnXoa.Location = New System.Drawing.Point(228, 302)
         Me.btnXoa.Name = "btnXoa"
         Me.btnXoa.Size = New System.Drawing.Size(72, 23)
-        Me.btnXoa.TabIndex = 34
+        Me.btnXoa.TabIndex = 9
         Me.btnXoa.Text = "Xoá"
         Me.btnXoa.UseVisualStyleBackColor = True
         '
         'btnSua
         '
-        Me.btnSua.Location = New System.Drawing.Point(82, 274)
+        Me.btnSua.Location = New System.Drawing.Point(116, 302)
         Me.btnSua.Name = "btnSua"
         Me.btnSua.Size = New System.Drawing.Size(72, 23)
-        Me.btnSua.TabIndex = 32
+        Me.btnSua.TabIndex = 8
         Me.btnSua.Text = "Sửa"
         Me.btnSua.UseVisualStyleBackColor = True
         '
         'btnThem
         '
-        Me.btnThem.Location = New System.Drawing.Point(4, 274)
+        Me.btnThem.Location = New System.Drawing.Point(4, 302)
         Me.btnThem.Name = "btnThem"
         Me.btnThem.Size = New System.Drawing.Size(72, 23)
-        Me.btnThem.TabIndex = 30
+        Me.btnThem.TabIndex = 7
         Me.btnThem.Text = "Thêm"
         Me.btnThem.UseVisualStyleBackColor = True
         '
-        'txbNgayCapNhatMonAn
+        'txbNgayCapNhat
         '
-        Me.txbNgayCapNhatMonAn.Location = New System.Drawing.Point(124, 237)
-        Me.txbNgayCapNhatMonAn.Name = "txbNgayCapNhatMonAn"
-        Me.txbNgayCapNhatMonAn.ReadOnly = True
-        Me.txbNgayCapNhatMonAn.Size = New System.Drawing.Size(172, 20)
-        Me.txbNgayCapNhatMonAn.TabIndex = 39
+        Me.txbNgayCapNhat.Location = New System.Drawing.Point(124, 265)
+        Me.txbNgayCapNhat.Name = "txbNgayCapNhat"
+        Me.txbNgayCapNhat.ReadOnly = True
+        Me.txbNgayCapNhat.Size = New System.Drawing.Size(172, 20)
+        Me.txbNgayCapNhat.TabIndex = 39
         '
-        'txbNgayTaoMonAn
+        'txbNgayTao
         '
-        Me.txbNgayTaoMonAn.Location = New System.Drawing.Point(124, 209)
-        Me.txbNgayTaoMonAn.Name = "txbNgayTaoMonAn"
-        Me.txbNgayTaoMonAn.ReadOnly = True
-        Me.txbNgayTaoMonAn.Size = New System.Drawing.Size(172, 20)
-        Me.txbNgayTaoMonAn.TabIndex = 38
+        Me.txbNgayTao.Location = New System.Drawing.Point(124, 237)
+        Me.txbNgayTao.Name = "txbNgayTao"
+        Me.txbNgayTao.ReadOnly = True
+        Me.txbNgayTao.Size = New System.Drawing.Size(172, 20)
+        Me.txbNgayTao.TabIndex = 38
         '
-        'txbGiaMonAn
+        'txbPass
         '
-        Me.txbGiaMonAn.Location = New System.Drawing.Point(124, 96)
-        Me.txbGiaMonAn.Name = "txbGiaMonAn"
-        Me.txbGiaMonAn.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-        Me.txbGiaMonAn.Size = New System.Drawing.Size(172, 20)
-        Me.txbGiaMonAn.TabIndex = 24
-        Me.txbGiaMonAn.UseSystemPasswordChar = True
+        Me.txbPass.Location = New System.Drawing.Point(124, 96)
+        Me.txbPass.Name = "txbPass"
+        Me.txbPass.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
+        Me.txbPass.Size = New System.Drawing.Size(172, 20)
+        Me.txbPass.TabIndex = 2
+        Me.txbPass.UseSystemPasswordChar = True
         '
-        'txbTenMonAn
+        'txbUser
         '
-        Me.txbTenMonAn.Location = New System.Drawing.Point(124, 68)
-        Me.txbTenMonAn.Name = "txbTenMonAn"
-        Me.txbTenMonAn.Size = New System.Drawing.Size(172, 20)
-        Me.txbTenMonAn.TabIndex = 23
+        Me.txbUser.Location = New System.Drawing.Point(124, 68)
+        Me.txbUser.Name = "txbUser"
+        Me.txbUser.Size = New System.Drawing.Size(172, 20)
+        Me.txbUser.TabIndex = 1
         '
-        'txbIdMonAn
+        'txbIdTaikhoan
         '
-        Me.txbIdMonAn.Location = New System.Drawing.Point(124, 40)
-        Me.txbIdMonAn.Name = "txbIdMonAn"
-        Me.txbIdMonAn.ReadOnly = True
-        Me.txbIdMonAn.Size = New System.Drawing.Size(172, 20)
-        Me.txbIdMonAn.TabIndex = 35
+        Me.txbIdTaikhoan.Location = New System.Drawing.Point(124, 40)
+        Me.txbIdTaikhoan.Name = "txbIdTaikhoan"
+        Me.txbIdTaikhoan.ReadOnly = True
+        Me.txbIdTaikhoan.Size = New System.Drawing.Size(172, 20)
+        Me.txbIdTaikhoan.TabIndex = 35
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(39, 211)
+        Me.Label6.Location = New System.Drawing.Point(39, 239)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(50, 13)
         Me.Label6.TabIndex = 33
@@ -215,7 +268,7 @@ Partial Class frmTaiKhoan
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(39, 239)
+        Me.Label5.Location = New System.Drawing.Point(39, 267)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(77, 13)
         Me.Label5.TabIndex = 31
@@ -287,17 +340,17 @@ Partial Class frmTaiKhoan
 
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label8 As Label
-    Friend WithEvents txbMotaMonAn As TextBox
+    Friend WithEvents txbName As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents btnTimKiem As Button
     Friend WithEvents btnXoa As Button
     Friend WithEvents btnSua As Button
     Friend WithEvents btnThem As Button
-    Friend WithEvents txbNgayCapNhatMonAn As TextBox
-    Friend WithEvents txbNgayTaoMonAn As TextBox
-    Friend WithEvents txbGiaMonAn As TextBox
-    Friend WithEvents txbTenMonAn As TextBox
-    Friend WithEvents txbIdMonAn As TextBox
+    Friend WithEvents txbNgayCapNhat As TextBox
+    Friend WithEvents txbNgayTao As TextBox
+    Friend WithEvents txbPass As TextBox
+    Friend WithEvents txbUser As TextBox
+    Friend WithEvents txbIdTaikhoan As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
@@ -305,7 +358,12 @@ Partial Class frmTaiKhoan
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents dtgvTaiKhoan As DataGridView
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txbActive As TextBox
     Friend WithEvents Label9 As Label
-    Friend WithEvents cbDanhMucMonAn As ComboBox
+    Friend WithEvents cbTypeUser As ComboBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents dtpNgaySinh As DateTimePicker
+    Friend WithEvents txbSearch As TextBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents lbresult As Label
 End Class

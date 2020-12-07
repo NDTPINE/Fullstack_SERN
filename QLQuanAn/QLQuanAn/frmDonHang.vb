@@ -3,10 +3,10 @@
     Public Shared type_Creat = 2
     Public Shared type_View = 3
 
-
     Private ChiNhanh As DataRow
     Private dsMonAn As DataTable
     Private dsMonAnView As DataView
+    Private dsKhuyenMai As DataTable
     Private dsChiTietDonHang As DataTable
     Public dsDonhang As DataTable
     Private TongMonAn As Integer = 0
@@ -25,6 +25,7 @@
     Private Sub frmDonHang_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lbChiNhanh.Text = ChiNhanh("Ten")
         DocDSMonAn()
+        DocdsKhuyenMai()
 
         If LoaiThaoTac = type_View Then
             DocThongTinDonHang()
@@ -45,8 +46,8 @@
             DocChiTietDonHang()
 
             btnTaoDonHang.Text = "Cập nhật"
-
         End If
+
     End Sub
     Public Sub DocDSMonAn()
         Dim str As String = String.Format("Select MonAn.Ma as Ma, MonAn.Ten as Ten, Menu.Gia from Menu, MonAn where Menu.MaChiNhanh = {0} and Menu.MaMon = MonAn.Ma", ChiNhanh(0))
@@ -82,9 +83,16 @@
             txbTen.Text = dsDonhang(0)("Ten").ToString()
             txbPhuPhi.Text = dsDonhang(0)("Phuphi").ToString()
             txbGiamGia.Text = dsDonhang(0)("GiamGia").ToString()
-            dtpNgay.Value = dsDonhang(0)("Ngay")
         End If
 
+    End Sub
+    Private Sub DocdsKhuyenMai()
+        Dim maChiNhanh As Integer = Int32.Parse(ChiNhanh("Ma"))
+        Dim sql As String = String.Format($"Select * from KhuyenMaiTheoChiNhanh where MaChiNhanh = {maChiNhanh} and NgayKetThuc > '{DateTime.Now}'")
+        dsKhuyenMai = Dulieu.DocDuLieu(sql)
+        cbKhuyenMai.DataSource = dsKhuyenMai
+        cbKhuyenMai.DisplayMember = "Code"
+        cbKhuyenMai.ValueMember = "Ma"
     End Sub
     Private Sub btnTimKiem_Click(sender As Object, e As EventArgs) Handles btnTimKiem.Click
         If txbTimKiem.Text = "" Then
@@ -129,6 +137,20 @@
         TongTien = TongMonAn - TongGiamGia
         TongTien = TongTien + phuphi
 
+        If cbKhuyenMai.SelectedIndex <> -1 Then
+            Dim km = dsKhuyenMai.Rows(cbKhuyenMai.SelectedIndex)
+            Dim sotienKM As Integer = 0
+            If TongTien > Int32.Parse(km("SoTienToiThieuApDung")) Then
+                If (Int32.Parse(km("PhanTram") * TongTien) / 100 > Int32.Parse(km("SoTienToiDa"))) Then
+                    sotienKM = Int32.Parse(km("SoTienToiDa"))
+                Else
+                    sotienKM = Int32.Parse(km("PhanTram") * TongTien) / 100
+                End If
+            End If
+            TongGiamGia = TongGiamGia + sotienKM
+            TongTien = TongMonAn - TongGiamGia
+            TongTien = TongTien + phuphi
+        End If
         txbTongGiamGia.Text = TongGiamGia.ToString()
         txbGiamGiaMonAn.Text = TongGiamGiaMonAn.ToString()
         txbTongMonAn.Text = TongMonAn.ToString()
@@ -187,7 +209,7 @@
     Private Sub btnTaoDonHang_Click(sender As Object, e As EventArgs) Handles btnTaoDonHang.Click
         If LoaiThaoTac = type_Creat Then
             Dim dh As DataRow = dsDonhang.NewRow()
-            dh("Ngay") = dtpNgay.Value
+            dh("Ngay") = DateTime.Now
             dh("Ten") = txbTen.Text
             dh("DienThoai") = txbDienThoai.Text
             dh("MaChiNhanh") = ChiNhanh("Ma")
@@ -204,14 +226,12 @@
             For i = 0 To dsChiTietDonHang.Rows.Count - 1
                 dsChiTietDonHang.Rows(i)("MaDonHang") = madonhang
             Next
-            DuLieu.GhiDuLieu("ChiTietDonHang", dsChiTietDonHang)
+            Dulieu.GhiDuLieu("ChiTietDonHang", dsChiTietDonHang)
 
             Dim frm = Me.Parent
-            frm.Refresh()
             Me.Close()
         ElseIf LoaiThaoTac = type_Update Then
             Dim dh As DataRow = dsDonhang.Rows(0)
-            dh("Ngay") = dtpNgay.Value
             dh("Ten") = txbTen.Text
             dh("DienThoai") = txbDienThoai.Text
             dh("MaChiNhanh") = ChiNhanh("Ma")
