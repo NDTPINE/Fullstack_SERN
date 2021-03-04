@@ -6,4 +6,4 @@ ENV ASPNETCORE_ENVIORONMENT Production
 
 EXPOSE 8000
 WORKDIR /SportStore
-ENTRYPOINT ["dotnet", "SportStore.dll", "--url=http://0.0.0.0:8000"]
+ENTRYPOINT ["dotnet", "SportStore.dll", "--urls=http://0.0.0.0:8000"]
