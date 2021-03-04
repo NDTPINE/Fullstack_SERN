@@ -1,0 +1,26 @@
+<!DOCTYPE html5>
+<html>
+<head>
+    <title>NDT Pine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <p>Phuong thuc POST</p>
+    <form action="http://localhost:8081/process" method="POST" class="form-group">
+        <label for="name">Nhập vào tên: </label>
+        <input type="text" name="name" id="name">
+        <input type="submit" class="btn btn-primary" value="Nhập">
+    </form>
+        <p>Phuong thuc GET</p>
+    <form action="http://localhost:8081/process" method="GET">
+        <label for="name2"> Nhap vao ten:</label>
+        <input type="text" name="name2" id="name2">
+        <input type="submit" class="btn btn-danger" value="Nhap">
+    </form>
+</body>
+</html>

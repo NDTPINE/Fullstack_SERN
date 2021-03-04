@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoOnDemand.UI", "VideoOnDemand.UI\VideoOnDemand.UI.csproj", "{6E10485A-CA59-40AA-BE2B-FCF7428696B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VideoOnDemand.Data", "VideoOnDemand.Data\VideoOnDemand.Data.csproj", "{7722D29E-A824-4EAB-9803-E941A06D0424}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E10485A-CA59-40AA-BE2B-FCF7428696B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E10485A-CA59-40AA-BE2B-FCF7428696B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E10485A-CA59-40AA-BE2B-FCF7428696B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E10485A-CA59-40AA-BE2B-FCF7428696B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7722D29E-A824-4EAB-9803-E941A06D0424}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7722D29E-A824-4EAB-9803-E941A06D0424}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7722D29E-A824-4EAB-9803-E941A06D0424}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7722D29E-A824-4EAB-9803-E941A06D0424}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD759F57-7CFC-4DCB-94AB-78B40295D666}
+	EndGlobalSection
+EndGlobal

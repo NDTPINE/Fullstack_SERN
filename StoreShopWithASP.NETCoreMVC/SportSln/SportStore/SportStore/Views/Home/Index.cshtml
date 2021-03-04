@@ -1,0 +1,24 @@
+﻿@model ProductsListViewModel
+@{ 
+    
+    ViewData["Title"] = "Home";
+}
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SportsStore</title>
+</head>
+<body>
+    @foreach (var p in Model.Products)
+    {
+        <partial name="ProductSummary" model="p" />
+    }
+    <div page-model="@Model.PagingInfos" page-action="Index" page-classes-enabled="true"
+        page-class="btn" page-class-normal="btn-outline-dark"
+        page-class-selected="btn-primary" page-url-category="@Model.CurrentCatogory"
+            class="btn-group pull-right m-1">
+    </div>
+</body>
+</html>
+    
+    
+
