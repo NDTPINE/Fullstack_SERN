@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -17,9 +18,13 @@ namespace Platform
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<MesageOptions>(options =>
+            //services.Configure<MesageOptions>(options =>
+            //{
+            //    options.CityName = "Albany";
+            //});
+            services.Configure<RouteOptions>(opts =>
             {
-                options.CityName = "Albany";
+                opts.ConstraintMap.Add("countrName", typeof(CountryRouteConstraint));
             });
         }
 
@@ -30,7 +35,7 @@ namespace Platform
             {
                 app.UseDeveloperExceptionPage();
             }
-
+        #region EXAMPLE
             // Defining Middleware Using a Class
             //app.UseMiddleware<QueryStringMiddleware>();
             // Creating Custom Middleware
@@ -80,16 +85,65 @@ namespace Platform
             //    else await next();
             //});
 
-            app.UseMiddleware<LocationMiddleware>();
-            app.UseRouting();
+            //app.UseMiddleware<LocaionMiddleware>();
+            //app.UseRouting();
 
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapGet("/", async context =>
+            //    {
+            //        await context.Response.WriteAsync("Hello World!");
+            //    });
+            //});
+
+            //app.UseMiddleware<Population>();
+            //app.UseMiddleware<Capital>();
+
+#endregion
+            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
+                endpoints.MapGet("{first}/{second}/{*catchall}", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync($"Request was routed\n");
+                    foreach (var kvp in context.Request.RouteValues)
+                    {
+                        await context.Response.WriteAsync($"{kvp.Key} : {kvp.Value} \n");
+                    }
                 });
+                endpoints.MapGet("{first:int}/{second:bool}", async context =>
+                {
+                    await context.Response.WriteAsync($"Request was routed\n");
+                    foreach (var kvp in context.Request.RouteValues)
+                    {
+                        await context.Response.WriteAsync($"{kvp.Key} : {kvp.Value} \n");
+                    }
+                });
+                endpoints.MapGet("capital/{country:countryName}", Capital.Endpoints);
+                endpoints.MapGet("files/{filename}.{ext}", async context =>
+                {
+                    await context.Response.WriteAsync($"Request was routed 2\n");
+                    foreach (var kvp in context.Request.RouteValues)
+                    {
+                        await context.Response.WriteAsync($"{kvp.Key} : {kvp.Value} \n");
+                    }
+                });
+                //endpoints.MapGet("capital/{country=France}", Capital.Endpoints);
+                endpoints.MapGet("capital/{country:regex(^uk|france|monaco$)}", Capital.Endpoints);
+                endpoints.MapGet("size/{city?}", Population.Endpoints).WithMetadata(new RouteNameMetadata("population"));
+
+                endpoints.MapFallback(async context =>
+                {
+                    await context.Response.WriteAsync("Routed to fallback endpoint");
+                });
+
             });
+
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("Temiral Middleware Reached");
+            });
+
         }
     }
 }
