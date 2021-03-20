@@ -1,0 +1,39 @@
+﻿@model Product
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body>
+    <h6 class="bg-primary text-white text-center p-2 m-2">Water Sports</h6>
+    <div class="m-2">
+        <table class="table table-sm table-striped table-bordered" data-id="@Model.ProductID">
+            <tbody>
+                <tr>
+                    
+                    <th>Name</th>
+                    <th>Price</th><th>Category ID</th>
+                    <th>Supplier ID</th><th>Tax</th>
+                </tr>
+                <tr>
+                    @if (Model.Price > 200)
+                    {
+                        <td>Luxury @Model.Name</td>
+                    }
+                    else
+                    {
+                        <td>Basic @Model.Name</td>
+                    }
+                    <td>@Model.Price.ToString("c")</td>
+                    <td>@Model.CategoryID</td>
+                    <td>@Model.SupplierID</td>
+                    <td>@(Model.Price * 0.2m)</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
