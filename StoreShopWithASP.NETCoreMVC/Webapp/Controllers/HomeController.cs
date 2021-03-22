@@ -22,5 +22,9 @@ namespace Webapp.Controllers
         {
             return View(context.Products);
         }
+        public IActionResult Html()
+        {
+            return View((Object)"This is a <h3><i>string</i><h3>");
+        }
     }
 }

@@ -1,37 +1,21 @@
 ﻿@model Product
 @{
-    Layout =  "_Layout";
-    ViewBag.Title = "Product Table";
+    Layout = "_Layout";
+    ViewBag.Title = ViewBag.Title ?? "Product Table";
 }
-@section Header{
+@section Header {
     Product Information
 }
-
+<tr><th>Name</th><td>@Model.Name</td></tr>
+<tr>
+    <th>Price</th>
+    <td>@Model.Price.ToString("c")</td>
+</tr>
+<tr><th>Category ID</th><td>@Model.CategoryID</td></tr>
 @section Footer {
     @(((Model.Price / ViewBag.AveragePrice)
         * 100).ToString("F2"))% of average price
 }
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <link href="/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-</head>
-<body>
-    <div class="m-2">
-        <table class="table table-sm table-striped table-bordered">
-            <tbody>
-                <tr><th>Name</th><th>Price</th><th>Category ID</th></tr>
-                <tr>
-                    <td>@Model.Name</td>
-                    <td>
-                        @Model.Price.ToString("c")
-                    (@(((Model.Price / ViewBag.AveragePrice) * 100).ToString("F2"))% of average price)
-                </td>
-                <td>@Model.CategoryID</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-</body>
-</html>
+@section Summary{ 
+    <div class="bg-info text-white m-2 p-2" >@Json.Serialize(Model)</div>
+}

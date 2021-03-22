@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Webapp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.OpenApi.Models;
 
 namespace Webapp
@@ -31,10 +32,15 @@ namespace Webapp
                 opt.EnableSensitiveDataLogging(true);
             });
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddDistributedMemoryCache();
             services.AddSession(op =>
             {
                 op.Cookie.IsEssential = true;
+            });
+            services.Configure<RazorPagesOptions>(opt =>
+            {
+                opt.Conventions.AddPageRoute("/Index", "/extra/page/{id:long?}");
             });
         }
 
@@ -51,6 +57,7 @@ namespace Webapp
             {
                 endpoints.MapControllers();
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapRazorPages();
 
             });
             SeedData.SeedDatabase(context); 
