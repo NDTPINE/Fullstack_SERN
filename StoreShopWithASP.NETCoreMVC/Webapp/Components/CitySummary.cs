@@ -12,13 +12,16 @@ namespace Webapp.Components
         private CitiesData data;
         public CitySummary(CitiesData ct) => data = ct;
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string themeName)
         {
+            ViewBag.Theme = themeName;
+
             return View(new CityViewModel
             {
                 Cities = data.Cities.Count(),
-                Population = data.Cities.Sum(c => c.Population)
+                Population = data.Cities.Sum(c =>c.Population)
             });
+
         }
     }
 }
