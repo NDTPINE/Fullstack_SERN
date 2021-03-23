@@ -1,4 +1,5 @@
 ﻿@model Product
+  
 @{
     Layout = "_Layout";
     ViewBag.Title = ViewBag.Title ?? "Product Table";
@@ -17,5 +18,5 @@
         * 100).ToString("F2"))% of average price
 }
 @section Summary{ 
-    <div class="bg-info text-white m-2 p-2" >@Json.Serialize(Model)</div>
+    <div class="bg-info text-white m-2 p-2" ><vc:city-summary></vc:city-summary></div>
 }
