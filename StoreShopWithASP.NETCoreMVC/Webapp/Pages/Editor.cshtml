@@ -13,8 +13,8 @@
     <div class="m-2">
         <table class="table table-bordered table-sm table table-striped">
             <tbody>
-                <tr><th>Name</th><th>Price</th></tr>
-                <tr><td>@Model.Product.Name</td><td>@Model.Product.Price</td></tr>
+                <tr for="Product.Name"/>
+                <tr for="Product.Price" format="c" />
             </tbody>
         </table>
         <form method="post">

@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Razor.TagHelpers;
+using Webapp.TagHelpers;
 
 namespace Webapp
 {
@@ -43,6 +45,8 @@ namespace Webapp
                 opt.Conventions.AddPageRoute("/Index", "/extra/page/{id:long?}");
             });
             services.AddSingleton<CitiesData>();
+            services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
+            services.AddTransient<ITagHelperComponent, TableFooterTagHelperComponent>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
