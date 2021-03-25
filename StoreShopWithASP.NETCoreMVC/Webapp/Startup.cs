@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Webapp.TagHelpers;
+using Microsoft.AspNetCore.Antiforgery;
 
 namespace Webapp
 {
@@ -23,7 +24,6 @@ namespace Webapp
         public Startup(IConfiguration config)
         {
             Configuration = config;
-
         }
         private IConfiguration Configuration { get; set; }
         public void ConfigureServices(IServiceCollection services)
@@ -35,32 +35,33 @@ namespace Webapp
             });
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddDistributedMemoryCache();
-            services.AddSession(op =>
-            {
-                op.Cookie.IsEssential = true;
-            });
-            services.Configure<RazorPagesOptions>(opt =>
-            {
-                opt.Conventions.AddPageRoute("/Index", "/extra/page/{id:long?}");
-            });
             services.AddSingleton<CitiesData>();
-            services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
-            services.AddTransient<ITagHelperComponent, TableFooterTagHelperComponent>();
+            services.Configure<AntiforgeryOptions>(opt =>
+            {
+                opt.HeaderName = "X-XSRF-TOKEN";
+            });
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IAntiforgery antiforgery, DataContext context)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             app.UseStaticFiles();
-            app.UseSession();
             app.UseRouting();
+            app.Use(async (context, next) =>
+            {
+                if (!context.Request.Path.StartsWithSegments("/api"))
+                {
+                    context.Response.Cookies.Append("XSRF-TOKEN", antiforgery.GetAndStoreTokens(context).RequestToken, new CookieOptions { HttpOnly = false });
+                }
+                await next();
+            });
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapControllerRoute("form", "controllers/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
 
@@ -70,7 +71,9 @@ namespace Webapp
     }
 }
 #region EXAMPLE
-/* //services.AddControllers().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
+/* 
+
+services.AddControllers().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 services.Configure<MvcNewtonsoftJsonOptions>(opt =>
 {
     opt.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
@@ -84,9 +87,21 @@ services.AddSwaggerGen(opt =>
 {
     opt.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApp", Version = "v1" });
 });
-//services.Configure<JsonOptions>(opt => { opt.JsonSerializerOptions.IgnoreNullValues = true; });
+services.Configure<JsonOptions>(opt => { opt.JsonSerializerOptions.IgnoreNullValues = true; });
+services.AddTransient<ITagHelperComponent, TimeTagHelperComponent>();
+services.AddTransient<ITagHelperComponent, TableFooterTagHelperComponent>();
+services.AddDistributedMemoryCache();
+            services.AddSession(op =>
+            {
+                op.Cookie.IsEssential = true;
+            });
+            services.Configure<RazorPagesOptions>(opt =>
+            {
+                opt.Conventions.AddPageRoute("/Index", "/extra/page/{id:long?}");
+            });
 
 app.UseMiddleware<TestMiddleware>();
+app.UseSession();
 
 app.UseEndpoints(endpoints =>
 {
@@ -94,7 +109,7 @@ app.UseEndpoints(endpoints =>
     {
         await context.Response.WriteAsync("Hello World!");
     });
-    //endpoints.MapWebService();
+    endpoints.MapWebService();
     endpoints.MapControllers();
 });
 app.UseSwagger();
