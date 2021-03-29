@@ -47,9 +47,18 @@
         }
         public IActionResult OnPost()
         {
-            TempData["product"] = System.Text.Json.JsonSerializer.Serialize(Product);
-            TempData["category"] = System.Text.Json.JsonSerializer.Serialize(Category);
-            return RedirectToPage("FormResults");
+            if (ModelState.IsValid)
+            {
+                TempData["name"] = Product.Name;
+                TempData["price"] = Product.Price.ToString();
+                TempData["categoryId"] = Product.CategoryID.ToString();
+                TempData["supplierId"] = Product.SupplierID.ToString();
+                return RedirectToPage("FormResults");
+            }
+            else
+            {
+                return Page();
+            }
         }
     }
 }

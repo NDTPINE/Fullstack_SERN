@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,17 +17,22 @@ namespace Webapp.Controllers
         public FormController(DataContext datacontext) => context = datacontext;
         public async Task<IActionResult> Index(long? id = 1)
         {
-            ViewBag.Categories = new SelectList(context.Categories, "CategoryID", "Name");
             return View("Form", await context.Products.Include(p => p.Category)
                 .Include(p => p.Supplier).FirstOrDefaultAsync(o => o.ProductID == id || id == null));
         }
         [HttpPost]
-        public IActionResult SubmitForm([Bind("Name", "Category")] Product product)
+        public IActionResult SubmitForm(Product product)
         {
-            TempData["name"] = product.Name;
-            TempData["price"] = product.Price.ToString();
-            TempData["category name"] = product.Category.Name;
-            return RedirectToAction(nameof(Results));
+            
+            if (ModelState.IsValid)
+            {
+                TempData["name"] = product.Name;
+                TempData["price"] = product.Price.ToString();
+                TempData["categoryId"] = product.CategoryID.ToString();
+                TempData["supplierId"] = product.SupplierID.ToString();
+                return RedirectToAction(nameof(Results));
+            }
+            else return View("Form");
         }
         public IActionResult Results()
         {

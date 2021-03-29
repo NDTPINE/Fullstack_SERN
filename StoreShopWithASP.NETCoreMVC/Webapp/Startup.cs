@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 using Webapp.TagHelpers;
 using Microsoft.AspNetCore.Antiforgery;
 
+
 namespace Webapp
 {
     public class Startup
@@ -40,6 +41,8 @@ namespace Webapp
             {
                 opt.HeaderName = "X-XSRF-TOKEN";
             });
+            services.Configure<MvcOptions>(opt => opt.ModelBindingMessageProvider
+                .SetValueMustNotBeNullAccessor(value => "Please enter a value"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IAntiforgery antiforgery, DataContext context)
