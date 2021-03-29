@@ -1,30 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Webapp.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace Webapp.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
-        private DataContext context;
-        public HomeController(DataContext ct) => context = ct;
-        public async Task<IActionResult> Index(long id = 1)
-        {
-            ViewBag.AveragePrice = await context.Products.AverageAsync(p => p.Price);
-            return View(await context.Products.FindAsync(id));
-        }
         
-        public IActionResult List()
+        public IActionResult Index()
         {
-            return View(context.Products);
+            return View("Message", "This is the Index action on the Home Controller");
         }
-        public IActionResult Html()
+        public IActionResult Secure()
         {
-            return View((Object)"This is a <h3><i>string</i><h3>");
+            return View("Message", "This is  the Secure action on the Home Controller");
         }
     }
 }
