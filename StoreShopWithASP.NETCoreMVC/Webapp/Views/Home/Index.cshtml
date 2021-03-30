@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Webapp.Models.Product>
+@{ Layout = "_Layout";}
+
+<h4 class="bg-primary text-white text-center p-2">Products</h4>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr><th>ID</th><th>Name</th><th>Price</th><th>Category</th></tr>
+    </thead>
+    <tbody>
+        @foreach (Webapp.Models.Product p in Model)
+        {
+        <tr>
+            <td>@p.ProductID</td>
+            <td>@p.Name</td>
+            <td>@p.Price</td>
+            <td>@p.Category.Name</td>
+            <td class="text-center">
+                <a asp-action="Details" asp-route-id="@p.ProductID"
+                   class="btn btn-sm btn-info">Details</a>
+                <a asp-action="Edit" asp-route-id="@p.ProductID"
+                   class="btn btn-sm btn-warning">Edit</a>
+                <a asp-action="Delete" asp-route-id="@p.ProductID"
+                   class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a asp-action="Create" class="btn btn-danger">Create</a>

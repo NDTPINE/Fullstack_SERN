@@ -44,11 +44,7 @@ namespace Webapp
             services.Configure<MvcOptions>(opt => opt.ModelBindingMessageProvider
                 .SetValueMustNotBeNullAccessor(value => "Please enter a value"));
             services.AddScoped<GuidResponseAttribute>();
-            services.Configure<MvcOptions>(opt =>
-            {
-                opt.Filters.Add<HttpsOnlyAttribute>();
-                opt.Filters.Add(new MessageAttribute("This is the globally-scoped fillter"));
-            });
+            
             
         }
 
@@ -108,6 +104,11 @@ services.AddDistributedMemoryCache();
             services.Configure<RazorPagesOptions>(opt =>
             {
                 opt.Conventions.AddPageRoute("/Index", "/extra/page/{id:long?}");
+            });
+services.Configure<MvcOptions>(opt =>
+            {
+                opt.Filters.Add<HttpsOnlyAttribute>();
+                opt.Filters.Add(new MessageAttribute("This is the globally-scoped fillter"));
             });
 
 app.UseMiddleware<TestMiddleware>();
