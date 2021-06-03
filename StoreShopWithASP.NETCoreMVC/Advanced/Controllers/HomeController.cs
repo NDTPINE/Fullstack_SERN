@@ -4,14 +4,18 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Advanced.Services;
 
 namespace Advanced.Controllers
 {
     public class HomeController : Controller
     {
         private DataContext context;
-        public HomeController(DataContext ct) => context = ct;
+        private ToggleService toggleService;
+        public HomeController(DataContext ct, ToggleService ts) {
+            context = ct;
+            toggleService = ts;
+        }
         public IActionResult Index([FromQuery] string selectedCity)
         {
             return View(new PeopleListViewModel
@@ -21,6 +25,7 @@ namespace Advanced.Controllers
                 SelectedCity = selectedCity
             }) ;
         }
+        public string Toggle() => $"Enabled: {toggleService.ToggleComponents()}";
     }
     public class PeopleListViewModel
     {

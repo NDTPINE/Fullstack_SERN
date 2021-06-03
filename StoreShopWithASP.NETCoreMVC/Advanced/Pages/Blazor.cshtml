@@ -1,6 +1,22 @@
 ﻿@page "/pages/blazor"
 
 
-<h4 class="bg-primary text-white text-center p-2">Class only</h4>
-
-<component type="typeof(Advanced.Blazor.CodeOnly)" render-mode="Server" /> 
+<h4 class="bg-primary text-white text-center p-2">Deparments</h4>
+<link rel="stylesheet" href="connectionErrors.css" />
+<div id="componentes-reconnect-modal" class="h4 bg-dark text-white text-center my-2 p-2 components-reconect-hide>
+    Blazor Connection Lost
+    <div class="reconnect">Trying to reconnect</div>
+    <div class="failed">
+        Reconnection Failed
+        <button class="btn btn-light" onclick="window.Blazor.reconnect()">Reconnect</button>
+    </div>
+    <div class="rejected">
+        Reconnection Rejected.
+        <button class="btn btn-light" onclick="location.reload()">Reload</button>
+    </div>
+</div>
+<div id="blazor-error-ui" class="text-center bg-danger h6 text-white p-2 fixed-top w-100" style="display:none">
+    An error has occurred. This application will not respond unstill reloaded.
+    <button class="btn btn-sm btn-primary" onclick="location.reload()">Reload</button>
+</div>
+<component type="typeof(Advanced.Blazor.DepartmentList)" render-mode="Server" /> 

@@ -1,38 +1,77 @@
-﻿<table class="table table-sm table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th><th>Name</th><th>Department</th><th>Location</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Advanced.Models.Person p in People)
-        {
-            <tr class="@GetClass(p.Location.City)">
+﻿@page "/"
+@page "/people" 
+
+<TableTemplate RowType="Person" RowData="People"
+               Highlight="@(p=> p.Location.City)" SortDirection="@(p => p.Surname)">
+    <Header>
+        <tr><th>ID</th><th>Name</th><th>Dept</th><th>Location</th></tr>
+        <td></td>
+    </Header>
+    <RowTemplate Context="p">
+        <td>@p.PersonId</td>
+        <td>@p.Surname, @p.Firstname</td>
+        <td>@p.Department.Name</td>
+        <td>@p.Location.City, @p.Location.State</td>
+        <td>
+            <NavLink class="btn btn-info btn-sm" href="@GetEditUrl(p.PersonId)">
+                Edit
+            </NavLink>
+        </td>
+    </RowTemplate>
+</TableTemplate>
+
+<NavLink class="btn btn-primary" href="/depts">Departments</NavLink>
+    @*<Header>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Location</th>
+                </tr>
+            </Header>
+            <RowTemplate Context="p">
                 <td>@p.PersonId</td>
                 <td>@p.Surname, @p.Firstname</td>
                 <td>@p.Department.Name</td>
                 <td>@p.Location.City, @p.Location.State</td>
-            </tr>
-        }
-    </tbody>
-</table>
+            </RowTemplate>
+        </TableTemplate>
+        <ThemeWrapper Theme="info" Title="Location Selector">
+            <SelectFilter values="@Cities" Title="@SelectTitle" @bind-SelectedValue="SelectedCity"></SelectFilter>
+            <button class="btn btn-primary" @onclick="@(() => SelectedCity = "San Jose")">Change</button>
+        </ThemeWrapper>*@
 
-<form class="form-group">
-    <label for="city">City</label>
-    <select name="city" class="form-control" @bind="SelectedCity">
-        <option disabled selected>Select City</option>
-        @foreach(string city in Cities)
-        {
-            <option value="@city" selected="@(city == SelectedCity)">@city</option>
-        }
-    </select>
-</form>
 
-@code{
-    [Inject]
-    public DataContext Context { get; set; }
-    public IEnumerable<Person> People => Context.People.Include(p => p.Department).Include(p => p.Location);
-    public IEnumerable<string> Cities => Context.Locations.Select(l => l.City);
-    public string SelectedCity { get; set; }
-    public string GetClass(string city) => SelectedCity == city ? "bg-info text-white" : "";
-}
+    @*<form class="form-group">
+            <label for="city">City</label>
+            <select name="city" class="form-control" @bind="SelectedCity">
+                <option disabled selected>Select City</option>
+                @foreach (string city in Cities)
+                {
+                    <option value="@city" selected="@(city == SelectedCity)">@city</option>
+                }
+            </select>
+        </form>*@
+
+    @code{
+        [Inject]
+        public DataContext Context { get; set; }
+
+        public IEnumerable<Person> People => Context.People
+            .Include(p => p.Department)
+            .Include(p => p.Location);
+
+        public string GetEditUrl(long id) => $"/person/{id}";
+        //public IEnumerable<Person> People => Context.People.Include(p => p.Department).Include(p => p.Location).Take(ItemCount);
+        //public IEnumerable<string> Cities => Context.Locations.Select(l => l.City);
+        //public string SelectedCity { get; set; }
+        //public string GetClass(string city) => SelectedCity == city ? "bg-info text-white" : "";
+        //[Parameter]
+        //public int ItemCount { get; set; } = 4;
+        //[Parameter]
+        //public string SelectTitle { get; set; }
+        ////public void HandleCustom(string newValue)
+        ////{
+        ////    SelectedCity = newValue;
+        ////}
+    }

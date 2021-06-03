@@ -32,6 +32,7 @@ namespace Advanced
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddServerSideBlazor();
+            services.AddSingleton<Services.ToggleService>();
 
         }
 
@@ -47,10 +48,11 @@ namespace Advanced
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("controllers", "controllers/{controller=Home}/{action=Index}/{id}");
+                endpoints.MapControllerRoute("controllers", "controllers/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
             });
             SeedData.SeedDatabase(context);
         }
