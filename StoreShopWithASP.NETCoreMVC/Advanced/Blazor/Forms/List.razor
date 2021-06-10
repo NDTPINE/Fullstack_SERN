@@ -1,6 +1,7 @@
 ﻿@page "/forms"
 @page "/forms/list"
 @layout EmptyLayout
+@inherits OwningComponentBase<DataContext>
 
 <h5 class="bg-primary text-white text-center p-2">People</h5>
 <table class="table table-sm table table-striped table-bordered ">
@@ -17,34 +18,59 @@
         @if (People.Count() == 0)
         {
             <tr><th colspan="5" class="p-4 text-center">Loading Data...</th></tr>
-        } else
+        }
+        else
         {
             @foreach (Person p in People)
             {
-            <tr>
-                <td>@p.PersonId</td>
-                <td>@p.Surname, @p.Firstname</td>
-                <td>@p.Department.Name</td>
-                <td>@p.Location.City</td>
-                <td>
-                    <NavLink class="btn btn-sm btn-warning"
-                             href="@GetEditUrl(p.PersonId)">
-                        Edit
-                    </NavLink>
-                </td>
-            </tr>
+    <tr>
+        <td>@p.PersonId</td>
+        <td>@p.Surname, @p.Firstname</td>
+        <td>@p.Department.Name</td>
+        <td>@p.Location.City</td>
+        <td class="text-center">
+            <NavLink class="btn btn-sm btn-info"
+                     href="@GetDetailsUrl(p.PersonId)">
+                Details
+            </NavLink>
+        </td>
+        <td class="text-center">
+            <NavLink class="btn btn-sm btn-warning"
+                     href="@GetEditUrl(p.PersonId)">
+                Edit
+            </NavLink>
+        </td>
+        <td class="text-center">
+            <NavLink class="btn btn-sm btn-danger"
+                     @onclick="@(() => HandleDelete(p))">
+                Delete
+            </NavLink>
+        </td>
+    </tr>
             }
         }
     </tbody>
 </table>
+<NavLink class="btn btn-primary" href="/forms/create">Create</NavLink>
 @code{
     [Inject]
     public DataContext Context { get; set; }
 
     public IEnumerable<Person> People { get; set; } = Enumerable.Empty<Person>();
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
-        People = Context.People.Include(o => o.Department).Include(p => p.Location);
+        await UpdateData();
     }
+    private IQueryable<Person> Query => Context.People.Include(o => o.Department).Include(p => p.Location);
+    private async Task UpdateData(IQueryable<Person> query = null) =>
+            People = await (query ?? Query).ToListAsync<Person>();
+
     string GetEditUrl(long id) => $"/forms/edit/{id}";
+    string GetDetailsUrl(long id) => $"/forms/details/{id}";
+    public async Task HandleDelete(Person p)
+    {
+        Context.Remove(p);
+        await Context.SaveChangesAsync();
+        await UpdateData();
+    }
 }
