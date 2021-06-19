@@ -1,6 +1,15 @@
-﻿<Router AppAssembly="typeof(Startup).Assembly">
+﻿@using Microsoft.AspNetCore.Components.Authorization 
+
+<Router AppAssembly="typeof(Startup).Assembly">
     <Found>
-        <RouteView RouteData="@context" DefaultLayout="typeof(NavLayout)"></RouteView>
+        <AuthorizeRouteView RouteData="@context" DefaultLayout="typeof(NavLayout)">
+            <NotAuthorized Context="authContext">
+                <h4 class="btn-danger text-center text-white p-2">Not Authorized</h4>
+                <div class="text-center ">
+                    You may need to login in as diffrent user
+                </div>
+            </NotAuthorized>
+        </AuthorizeRouteView>
     </Found>
     <NotFound>
         <h4 class="bg-danger text-white text-center p-2">
