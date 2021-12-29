@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SuperMarket2
+namespace Supermarket_Management_System
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace SuperMarket2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new ProductForm());
         }
     }
 }
