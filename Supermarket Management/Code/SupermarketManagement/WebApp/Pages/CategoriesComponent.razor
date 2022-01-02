@@ -39,7 +39,7 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-        categories = ViewCategoryUseCase.Excute().ToList();
+        categories = ViewCategoryUseCase.Execute().ToList();
     }
 
     private void OnClickAddCategory()
@@ -60,6 +60,6 @@
 
     private void LoadCategories()
     {
-        categories = ViewCategoryUseCase.Excute()?.ToList();
+        categories = ViewCategoryUseCase.Execute()?.ToList();
     }
 }

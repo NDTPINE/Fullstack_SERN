@@ -16,7 +16,7 @@ namespace UseCases
         {
             this.categoryRepository = categoryRepository;
         }
-        public Category Excute(int categoryId)
+        public Category Execute(int categoryId)
         {
             return categoryRepository.GetCategoryById(categoryId);
         }

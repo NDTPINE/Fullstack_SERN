@@ -38,7 +38,7 @@
         base.OnParametersSet();
         if (int.TryParse(this.categoryId, out int iCategoryId))
         {
-            var cate = GetCategoryByIdUseCase.Excute(iCategoryId);
+            var cate = GetCategoryByIdUseCase.Execute(iCategoryId);
             this.category = new Category { CategoryId = cate.CategoryId, Name = cate.Name, Description = cate.Description };
 
         }
