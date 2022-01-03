@@ -3,6 +3,7 @@
 @inject NavigationManager navigationManager
 @inject IViewProductsUseCase ViewProductsUseCase
 @inject IGetCategoryByIdUseCase GetCategoryByIdUseCase
+@inject IDeleteProductUseCase DeleteProductUseCase
 <h3>Products</h3>
 @if (products != null)
 {
@@ -46,10 +47,15 @@
     }
     private void OnClickEditProduct(Product product)
     {
-
+        navigationManager.NavigateTo($"/editproduct/{product.ProductId}");
     }
     private void OnClickDeleteProduct(int productId)
     {
-
+        DeleteProductUseCase.DeleteProduct(productId);
+        LoadProduct();
+    }
+    private void LoadProduct()
+    {
+        products = ViewProductsUseCase.Execute()?.ToList();
     }
 }
