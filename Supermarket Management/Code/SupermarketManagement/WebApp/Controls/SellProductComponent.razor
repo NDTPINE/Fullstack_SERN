@@ -1,0 +1,68 @@
+﻿@inject IGetProductByIdUseCase GetProductByIdUseCase
+
+
+@if (SelectedProduct != null)
+{
+    @if (!string.IsNullOrWhiteSpace(errorMessage))
+    {
+        <div class="alert alert-danger">@errorMessage</div>
+    }
+    <EditForm Model="productToSell" OnValidSubmit="SellProduct">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <div class="form-group">
+            <label for="name">Product Name</label>
+            <input type="text" readonly value="@productToSell.Name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input id="price" type="text" readonly value="@(string.Format("{0:c}", productToSell.Price))" class="form-control" />
+        </div><div class="form-group">
+            <label for="quantity">Quantity</label>
+            <InputNumber @bind-Value="@productToSell.Quantity" class="form-control" />
+        </div>
+              <button type="submit"class="btn btn-primary">Sell</button>
+    </EditForm>
+}
+
+@code {
+    private string errorMessage;
+    private Product productToSell;
+    [Parameter]
+    public Product SelectedProduct { get; set; }
+    [Parameter]
+    public EventCallback<Product> OnProductSold { get; set; }
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        if (SelectedProduct != null)
+        {
+
+            productToSell = new Product
+            {
+                Name = SelectedProduct.Name,
+                CategoryId = SelectedProduct.CategoryId,
+                Price = SelectedProduct.Price,
+                Quantity = 0,
+                ProductId = SelectedProduct.ProductId
+            };
+        }
+    }
+    private void SellProduct()
+    {
+        var product = GetProductByIdUseCase.Execute(productToSell.ProductId);
+        if (product.Quantity >= productToSell.Quantity)
+        {
+            OnProductSold.InvokeAsync(productToSell);
+            errorMessage = string.Empty;
+
+        }else if(product.Quantity <= 0)
+        {
+            errorMessage = "The quantity has to be greater than zero";
+        }
+        else
+        {
+            errorMessage = "It is not enough";
+        }
+    }
+}
