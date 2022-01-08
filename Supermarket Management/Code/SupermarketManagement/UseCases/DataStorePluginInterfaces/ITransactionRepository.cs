@@ -10,5 +10,6 @@ namespace UseCases
         public IEnumerable<Transaction> Get(string cashierName);
         public IEnumerable<Transaction> GetByDay(string cashierName, DateTime date);
         void Save(int productId,string productName, double? price, int Soldquantity, string cashierName, int beforeQuantity);
+        public IEnumerable<Transaction> Search(string cashierName, DateTime startDay, DateTime endDate);
     }
 }

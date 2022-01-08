@@ -35,6 +35,16 @@ namespace Plugins.DataStore.InMemory
 
         }
 
+        public IEnumerable<Transaction> Search(string cashierName, DateTime startDay, DateTime endDate)
+        {
+            if (string.IsNullOrWhiteSpace(cashierName))
+                return transactions.Where(x => x.TimeStamp.Date >= startDay.Date && x.TimeStamp.Date <= endDate.Date.AddDays(1).Date);
+            else
+                return transactions.Where(x =>
+                    string.Equals(x.CashierName, cashierName, StringComparison.OrdinalIgnoreCase) &&
+                    x.TimeStamp.Date >= startDay.Date && x.TimeStamp.Date <= endDate.Date.AddDays(1).Date);
+        }
+
         public void Save(int productId, string productName, double? price, int Soldquantity, string cashierName, int beforeQuantity)
         {
             int transactionId = 0;
