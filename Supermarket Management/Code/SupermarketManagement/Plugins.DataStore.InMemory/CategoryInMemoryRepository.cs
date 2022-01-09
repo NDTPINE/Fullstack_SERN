@@ -8,7 +8,7 @@ namespace Plugins.DataStore.InMemory
 {
     public class CategoryInMemoryRepository : ICategoryRepository
     {
-        private List<Category> categories;
+        private readonly List<Category> categories;
         public CategoryInMemoryRepository()
         {
             //Add some default categories

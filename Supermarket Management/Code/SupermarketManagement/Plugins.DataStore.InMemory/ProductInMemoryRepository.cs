@@ -10,7 +10,7 @@ namespace Plugins.DataStore.InMemory
 {
     public class ProductInMemoryRepository : IProductRepository
     {
-        private List<Product> products;
+        private readonly List<Product> products;
         public ProductInMemoryRepository()
         {
             //Init with default value
@@ -19,7 +19,7 @@ namespace Plugins.DataStore.InMemory
                 new Product{ProductId =1, CategoryId =1,Name="Iced Tea", Quantity =100, Price =1.99 },
                 new Product{ProductId =2, CategoryId =1,Name="Canada Dry", Quantity =100, Price =4.99 },
                 new Product{ProductId =3, CategoryId =2,Name="Cake", Quantity =100, Price =2.99 },
-                new Product{ProductId =4, CategoryId =3,Name="Beef", Quantity =100, Price =3.99 },
+                new Product{ProductId =4, CategoryId =3,Name="Beef", Quantity =100, Price =3.99 }
 
             };
         }
