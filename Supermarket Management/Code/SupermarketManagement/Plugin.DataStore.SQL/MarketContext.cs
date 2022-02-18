@@ -21,7 +21,7 @@ namespace Plugin.DataStore.SQL
                 .WithOne(p => p.Category)
                 .HasForeignKey(p => p.CategoryId);
 
-            //seed soem data
+            //Seed data
             modelBuilder.Entity<Category>().HasData(
                 new Category { CategoryId = 1, Name = "Beverage", Description = "beverage" },
                 new Category { CategoryId = 2, Name = "Bakery", Description = "Bakery" },

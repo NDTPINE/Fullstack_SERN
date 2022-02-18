@@ -1,15 +1,20 @@
 ﻿@page "/cashier"
-<div class="row">
-    <h3 class="col-7">Cashier's Console</h3>
-    <div class="col-2">
-        <label for="cashier">Cahsier Name</label>
-    </div>
-    <div class="col-3">
-        <div class="form-group">
-            <input type="text" id="cashier" class="form-control" @bind-value="cashierName" />
+@attribute [Authorize(Policy = "CashierOnly")]
+
+@if (!string.IsNullOrWhiteSpace(cashierName))
+{
+
+    <div class="row">
+        <h3 class="col-7">Cashier's Console</h3>
+        <div class="col-2">
+            <label for="cashier">Cahsier Name</label>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <input type="text" id="cashier" class="form-control" @bind-value="cashierName" />
+            </div>
         </div>
     </div>
-</div>
 
 <br />
 <div class="row">
@@ -24,12 +29,21 @@
         <TodayTransactionsComponent @ref="transactionComponent"></TodayTransactionsComponent>
     </div>
 </div>
+}
 @code {
     private TodayTransactionsComponent transactionComponent;
 
 
     private Product selectdProduct;
     private string cashierName;
+    [CascadingParameter]
+    private Task<AuthenticationState> _authState { get; set; }
+    private AuthenticationState authState;
+    protected override async Task  OnInitializedAsync()
+    {
+        authState = await _authState;
+        cashierName = authState.User.Identity.Name;
+    }
 
     protected override void OnInitialized()
     {

@@ -1,7 +1,10 @@
 ﻿@page "/transactions"
+@attribute [Authorize(Policy = "AdminOnly")]
+
+
 @inject IGetTransactionsUseCase GetTransactionsUseCase
 @inject IJSRuntime JSRuntime
-<div class="row form-group" >
+<div class="row form-group">
     <div class="col-4 ">
         <label for="cashierName">Cashier Name</label>
         <input type="text" id="cashier" class="form-control" @bind-value="cashierName" />
