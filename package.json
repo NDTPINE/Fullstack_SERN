@@ -1,12 +1,11 @@
 {
   "name": "fullstack_sern",
   "version": "1.0.0",
-  "description": "FrontEnd BackEnd fighting desigh web.",
+  "description": "FrontEnd BackEnd fighting design web.",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node src/server.js"
+    "start": "nodemon --exec @babel-node src/server.js"
   },
   "keywords": [
     "fullstack",
@@ -18,19 +17,25 @@
   "author": "NDTPINE",
   "license": "ISC",
   "dependencies": {
-    "@sequelize/core": "^7.0.0-alpha.10",
     "body-parser": "^1.19.2",
-    "dotenv": "^16.0.0",
-    "ejs": "^3.1.6",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
     "express": "^4.17.3",
     "mysql2": "^2.3.3",
+    "path": "^0.12.7",
     "sequelize": "^6.17.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.5",
+    "@babel/node": "^7.16.8",
+    "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
-    "nodemon": "^2.0.15",
+    "@babel/register": "^7.16.0",
+    "@babel/runtime": "^7.17.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "nodemon": "^2.0.7",
     "sequelize-cli": "^6.4.1"
   }
 }

@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import viewEngine from "./config/viewEngine.js"
 import initWebRoutes from "./route/web.js";
 import { connectDb } from "./config/connectDb.js"
-import db from "./models/index.js";
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -12,8 +12,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 viewEngine(app);
 initWebRoutes(app);
 
-//connectDb(); Test connect database mysql
-db.sequelize.sync();
+connectDb(); //Test connect database mysql
+
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {

@@ -1,6 +1,5 @@
 import express from "express";
-import pkg from "../controllers/homeController.cjs"
-const { getHomePage, getAboutPage } = pkg;
+import { getHomePage, getAboutPage } from "../controllers/homeController.js";
 
 const router = express.Router();
 let initWebRoutes = (app) => {

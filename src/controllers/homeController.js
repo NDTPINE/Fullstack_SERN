@@ -1,11 +1,10 @@
-const db = require("../models");
+import db from '../models/index';
 
 const getHomePage = async (req, res) => {
     try {
+        let data = await db.User.findAll();
         
-        let data = await db.Users.findAll();
-        console.log(data.JSON.parse()); 
-        return res.render('homepage.ejs');
+        return res.render('homepage.ejs', {data:JSON.stringify(data)});
     } catch (error) {
         console.log("ERROR LOAD USERS");
         console.log(error.stack);  
@@ -15,6 +14,6 @@ const getAboutPage = (req, res) => {
     return res.render('test/about.ejs');
 }
 
-exports = {getHomePage, getAboutPage}
+export {getHomePage, getAboutPage}
 
 
