@@ -20,6 +20,9 @@ module.exports = {
       timeType: {
         type: Sequelize.DATE
       },
+      doctorId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
