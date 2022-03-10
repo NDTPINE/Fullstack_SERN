@@ -25,7 +25,6 @@ const postCRUD =async (req, res) => {
 }
 const displayCRUD =async (req, res) => {
     let data = await getAllUsers();
-    console.log(data);
     return res.render('display-crud.ejs',{dataTable:data});
 }
 
