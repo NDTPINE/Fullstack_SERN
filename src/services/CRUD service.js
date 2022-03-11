@@ -48,4 +48,31 @@ const getAllUsers = () => {
         }
     })
 }
-export {CreateNewUser, getAllUsers}
+const getUserInfoById = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users =await db.User.findOne({
+                where: { id: userId },
+                raw: true
+            })
+            if (users) {
+                resolve(users);
+            }
+            else {
+                resolve([]);
+            }
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
+const editCRUD = () => {
+    
+}
+
+const deleteCRUD = () => {
+
+}
+
+
+export {CreateNewUser, getAllUsers,getUserInfoById,editCRUD,deleteCRUD}
