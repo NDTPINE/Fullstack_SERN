@@ -1,6 +1,5 @@
 import express from "express";
-import { getHomePage, getAboutPage, getCrud, postCRUD, displayCRUD, editCRUD, deleteCRUD }
-    from "../controllers/homeController.js";
+import { getHomePage, getAboutPage, getCrud, postCRUD, displayCRUD, editCRUD, deleteCRUD,putCRUD } from "../controllers/homeController.js";
 
 const router = express.Router();
 let initWebRoutes = (app) => {
@@ -11,6 +10,7 @@ let initWebRoutes = (app) => {
     router.post('/post-crud', postCRUD);
     router.get('/display', displayCRUD);
     router.get('/edit-crud', editCRUD);
+    router.post('/put-crud', putCRUD);
     router.get('/delete-crud', deleteCRUD);
     return app.use("/", router);
 }

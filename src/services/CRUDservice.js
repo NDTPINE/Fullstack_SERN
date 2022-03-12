@@ -66,13 +66,31 @@ const getUserInfoById = (userId) => {
         }
     })
 }
-const editCRUD = () => {
-    
+const updateUserData = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await db.User.findOne({
+                
+                where: { id: data.id }
+            });
+            user.set(
+                {
+                    firstName :data.firstName,
+                    lastName : data.lastName,
+                    address : data.address,
+                    phoneNumber : data.phoneNumber
+                }
+            )
+            await user.save();
+            let allUsers = await db.User.findAll();
+            resolve(allUsers);
+        } catch (error) {
+            reject(error);            
+        }
+    })
 }
 
-const deleteCRUD = () => {
-
-}
 
 
-export {CreateNewUser, getAllUsers,getUserInfoById,editCRUD,deleteCRUD}
+
+export {CreateNewUser, getAllUsers,getUserInfoById,updateUserData}

@@ -1,6 +1,5 @@
 import db from '../models/index';
-import { CreateNewUser, getAllUsers, getUserInfoById }
-    from '../services/CRUD service';
+import { CreateNewUser, getAllUsers, getUserInfoById,updateUserData } from '../services/CRUDservice';
 
 
 const getHomePage = async (req, res) => {
@@ -28,21 +27,28 @@ const displayCRUD =async (req, res) => {
     let data = await getAllUsers();
     return res.render('display-crud.ejs',{dataTable:data});
 }
-const editCRUD =async  (req, res) => {
+const editCRUD = async  (req, res) => {
     const userId = req.query.id;
     if (userId) {
         const userData = await getUserInfoById(userId);
-        console.log(userData);
-        return res.send("Found a user!");
+        //check user data not found
+        
+        return res.render('editCRUD.ejs', {
+            user:userData
+        })
     } else {
         return res.send("Error! Id is not exist! ");
     }
 }
-
+const putCRUD =async(req, res) => {
+    let data = req.body;
+    let allUsers = await updateUserData(data);
+    return res.render('display-CRUD.ejs',{dataTable:allUsers })
+}
 const deleteCRUD = (req, res) => {
     
 }
 
-export {getHomePage, getAboutPage,getCrud,postCRUD,displayCRUD, editCRUD, deleteCRUD}
+export {getHomePage, getAboutPage,getCrud,postCRUD,displayCRUD, editCRUD, deleteCRUD, putCRUD}
 
 
