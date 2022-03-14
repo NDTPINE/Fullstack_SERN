@@ -1,5 +1,5 @@
 import db from '../models/index';
-import { CreateNewUser, getAllUsers, getUserInfoById,updateUserData } from '../services/CRUDservice';
+import { CreateNewUser, getAllUsers, getUserInfoById,updateUserData, deleteUserData } from '../services/CRUDservice';
 
 
 const getHomePage = async (req, res) => {
@@ -21,7 +21,8 @@ const getCrud = (req, res) => {
 const postCRUD =async (req, res) => {
     let mes = await CreateNewUser(req.body);
     console.log(mes);
-    return res.send("post crud from server");
+    let data = await getAllUsers();
+    return res.render('display-crud.ejs',{dataTable:data});
 }
 const displayCRUD =async (req, res) => {
     let data = await getAllUsers();
@@ -45,7 +46,13 @@ const putCRUD =async(req, res) => {
     let allUsers = await updateUserData(data);
     return res.render('display-CRUD.ejs',{dataTable:allUsers })
 }
-const deleteCRUD = (req, res) => {
+const deleteCRUD = async (req, res) => {
+    let id = req.query.id;
+    if (id) {
+        let allUsers = await deleteUserData(id);
+        return res.render('display-crud.ejs', { dataTable: allUsers });
+    }
+    else throw error;
     
 }
 
